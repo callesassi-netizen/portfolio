@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carl-Johan Blomstrand · Portfölj 2026</title>
+  <meta name="description" content="Carl-Johan ”Calle” Blomstrand — digital innehållsproducent. Webb, kommunikation, e-handel & AI. Blomstrande Digitalt Innehåll." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,ital,wght@9..144,0,300..700;9..144,1,300..700&family=Instrument+Serif:ital@0;1&family=Caveat:wght@400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav" aria-label="huvudnavigation">
+    <a class="nav-brand" href="#hero" aria-label="Blomstrande Digitalt Innehåll — hem">
+      <img class="brand-logo" src="assets/logo.png" alt="Blomstrande Digitalt Innehåll" />
+    </a>
+    <ul class="nav-list">
+      <li><a href="#hero" data-nav data-section="hero">hero</a></li>
+      <li><a href="#projekt" data-nav data-section="projekt">projekt</a></li>
+      <li><a href="#om" data-nav data-section="om">om</a></li>
+      <li><a href="#kontakt" data-nav data-section="kontakt">kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============ HERO · scrubbed video pattern ============ -->
+  <!--
+    Hero använder scrubbed media-tekniken: hero-wrap är 250vh hög;
+    hero-sticky sitter "klistrad" i viewporten. Videons currentTime
+    (eller canvasens scrub-progress) drivs av scroll-progress 0..1.
+
+    När produktionsvideon finns: ta bort `hidden` på <video>, lägg in
+    <source>-taggar (mp4 + webm), och canvas blir automatiskt en fallback
+    (gömd när videon laddat metadata). Se app.js → heroScrub().
+  -->
+  <section id="hero" class="section section-hero" data-section>
+    <div class="hero-wrap">
+      <div class="hero-sticky">
+        <!-- Scrubbed video — test-källa inkopplad -->
+        <video class="hero-media" id="heroVideo"
+               muted playsinline preload="auto" hidden>
+          <source src="assets/nylaptop.mp4" type="video/mp4">
+        </video>
+
+        <!-- Canvas-placeholder: scrubbas mellan natt → gryning → soluppgång -->
+        <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+
+        <!-- Atmosfär-overlay ovanpå media -->
+        <div class="hero-vignette" aria-hidden="true"></div>
+        <div class="grain hero-grain" aria-hidden="true"></div>
+
+        <div class="hero-content">
+          <!-- 3 panels — varje pannels innehåll fadar in/ut baserat på scroll-progress 0..1.
+               data-from/data-to definierar intervallet då panelen är aktiv.
+               Överlapp = crossfade. -->
+          <div class="hero-panels">
+            <div class="hero-panel is-active" data-from="0" data-to="0.52">
+              <p class="eyebrow eyebrow-on-dark">portfölj · 2026</p>
+              <h1 class="display display-on-dark">Carl-Johan.</h1>
+              <p class="lede lede-on-dark"><em>Digital innehållsproducent</em> med hjärtat i kommunikation. Bygger webb, driver e-handel, vrider rätt på AI.</p>
+            </div>
+
+            <div class="hero-panel" data-from="0.46" data-to="1.0">
+              <p class="eyebrow eyebrow-on-dark">vad jag gör</p>
+              <h1 class="display display-on-dark">Digitalt innehåll — som <em>blomstrar</em>.</h1>
+              <p class="lede lede-on-dark">Webbutveckling, kommunikation, analys och AI-flöden. Från idé till levererat — på svenska eller engelska.</p>
+              <div class="cta-group">
+                <a href="#projekt" class="btn btn-primary btn-on-dark">se case <span aria-hidden="true">↓</span></a>
+                <a href="#kontakt" class="btn btn-secondary btn-ghost-light">kontakt</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll-hint" aria-hidden="true">
+          <span class="scroll-hint-text">scrolla för att spela</span>
+          <span class="scroll-hint-line"></span>
+        </div>
+
+        <!-- Progress-indikator (subtil, nere till vänster) -->
+        <div class="hero-progress" aria-hidden="true">
+          <span class="hero-progress-track"><span class="hero-progress-fill" id="heroProgressFill"></span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASE · sticky scroll-reveal ============ -->
+  <!--
+    Tvådelad layout: case-bild sticky till vänster, lista till höger.
+    Aktivt case = closest-to-viewport-center via scroll, hover överstyr.
+    Se cases-update/CASES_UPDATE.md.
+  -->
+  <section id="projekt" class="section section-cases" data-section>
+    <!-- Sticky bg-video som scrubbas via scroll-progress genom hela sektionen.
+         margin-bottom -100vh = visar 100vh men tar inte layout-utrymme. -->
+    <div class="cases-bg" aria-hidden="true">
+      <video class="cases-bg-video" id="casesBgVideo"
+             muted playsinline preload="auto">
+        <source src="assets/dust-rok-bg.mp4" type="video/mp4">
+      </video>
+      <div class="cases-bg-tint"></div>
+    </div>
+
+    <div class="cases-header reveal-group">
+      <h2 class="h2 h2-serif cases-typewriter">Projekt jag <em>pysslat</em> med</h2>
+    </div>
+
+    <div class="cases-split">
+      <div class="cases-image-col">
+        <div class="cases-image-stack" id="casesImageStack">
+          <div class="cases-ph c4 has-image active" data-idx="0" role="img" aria-label="Axer.fi — ledande inom skogsmaskiner">
+            <img class="cases-ph-image" src="assets/axer-portfolio.png" alt="" loading="lazy" decoding="async" />
+            <div class="cases-ph-overlay">case 01 · axer.fi</div>
+          </div>
+          <div class="cases-ph c2 has-image" data-idx="1" role="img" aria-label="Purrfect — kattprodukter med donationsfunktion">
+            <img class="cases-ph-image" src="assets/purrfect-portfolio.png" alt="" loading="lazy" decoding="async" />
+            <div class="cases-ph-overlay">case 02 · purrfect</div>
+          </div>
+          <div class="cases-ph c3 has-image" data-idx="2" role="img" aria-label="Billackering.eu — e-handel inom billack & vård">
+            <img class="cases-ph-image" src="assets/billackering-portfolio.png" alt="" loading="lazy" decoding="async" />
+            <div class="cases-ph-overlay">case 03 · billackering</div>
+          </div>
+          <div class="cases-ph c1 has-image" data-idx="3" role="img" aria-label="Strategisk marknadsföring via Meta">
+            <img class="cases-ph-image" src="assets/meta-portfolio.png" alt="" loading="lazy" decoding="async" />
+            <div class="cases-ph-overlay">case 04 · meta</div>
+          </div>
+          <div class="cases-ph c5 has-image" data-idx="4" role="img" aria-label="Automation & AI — n8n, Zapier, custom GPT">
+            <img class="cases-ph-image" src="assets/ai-floden-portfolio.png" alt="" loading="lazy" decoding="async" />
+            <div class="cases-ph-overlay">case 05 · ai & flöden</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cases-list-col" id="casesListCol">
+        <a class="cases-item active" data-idx="0" href="https://axer.fi" target="_blank" rel="noopener">
+          <div class="cases-num">01</div>
+          <h3 class="cases-title">Axer.fi — <em>skogsmaskiner</em></h3>
+          <div class="cases-yr">live ↗</div>
+          <div class="cases-desc">Komplett WordPress-hemsida för ledande företag inom skogsmaskiner — översatt till fem språk.</div>
+        </a>
+        <a class="cases-item" data-idx="1" href="https://purrfect.se" target="_blank" rel="noopener">
+          <div class="cases-num">02</div>
+          <h3 class="cases-title">Purrfect, <em>med Livbojen</em></h3>
+          <div class="cases-yr">live ↗</div>
+          <div class="cases-desc">Webbshop för kattleksaker och foder i samarbete med djurräddningen Livbojen — med inbyggd donationsfunktion.</div>
+        </a>
+        <a class="cases-item" data-idx="2" href="https://billackering.eu" target="_blank" rel="noopener">
+          <div class="cases-num">03</div>
+          <h3 class="cases-title">Billackering.eu — <em>kommunikatör</em></h3>
+          <div class="cases-yr">pågående</div>
+          <div class="cases-desc">Marknads- och kommunikationsansvar för e-handel inom billack och vårdprodukter — svenska och finska marknaderna.</div>
+        </a>
+        <a class="cases-item" data-idx="3" href="https://www.billackering.eu/" target="_blank" rel="noopener">
+          <div class="cases-num">04</div>
+          <h3 class="cases-title">Strategisk marknadsföring via <em>Meta</em></h3>
+          <div class="cases-yr">pågående</div>
+          <div class="cases-desc">Annonser och kampanjer via Meta för svenska och finska marknaden — strategi, målgrupper och kreativ.</div>
+        </a>
+        <div class="cases-item" data-idx="4" tabindex="0">
+          <div class="cases-num">05</div>
+          <h3 class="cases-title">Automation & <em>AI-flöden</em></h3>
+          <div class="cases-yr">2025</div>
+          <div class="cases-desc">Automationsflöden i n8n och Zapier, plus en custom GPT för kundkommunikation. Under utveckling.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ § 03 OM · Terminal ============ -->
+  <section class="section om" id="om" data-section data-screen-label="03 Om · Terminal">
+    <div class="om__fade-top" aria-hidden="true"></div>
+    <div class="section__inner">
+
+      <header class="om__header">
+        <h2 class="display om-typewriter">Hej, jag är <em>Calle</em>.</h2>
+      </header>
+
+      <div class="om__grid">
+        <aside class="om__bio reveal-group">
+          <p class="reveal">Carl-Johan i grunden — <strong>Calle</strong> till vardags. <em>Digital innehållsproducent</em> med hjärtat i kommunikation, webb och e-handel.</p>
+          <p class="reveal">Hellre snack än fluff. Letar du efter någon som bygger lite, skriver lite, och vänder &amp; vrider på AI tills den faktiskt gör nytta — säg till.</p>
+          <p class="verktyg-label reveal">// alltid öppen åt höger <span class="om-arrow" aria-hidden="true">→</span></p>
+        </aside>
+
+        <div class="terminal-wrap">
+
+          <div class="terminal" role="presentation" aria-label="Terminal med information om Calle">
+            <div class="terminal__bar">
+              <div class="terminal__dots">
+                <span class="terminal__dot" data-c="r"></span>
+                <span class="terminal__dot" data-c="y"></span>
+                <span class="terminal__dot" data-c="g"></span>
+              </div>
+              <div class="terminal__title">calle@blomstrande:~</div>
+              <div class="terminal__meta">bash · 80×24</div>
+            </div>
+            <div class="terminal__body" id="terminal-body" aria-live="polite">
+              <!-- typed in by sections.js -->
+            </div>
+          </div>
+
+          <figure class="polaroid" aria-hidden="true">
+            <div class="polaroid__tape"></div>
+            <div class="polaroid__img">
+              <img src="assets/calle-portrait.png" alt="" loading="lazy" />
+            </div>
+            <figcaption class="polaroid__caption">./calle.png</figcaption>
+          </figure>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="om__fade-bottom" aria-hidden="true"></div>
+  </section>
+
+  <!-- ============ § 04 KONTAKT · Brevkort ============ -->
+  <section class="section kontakt" id="kontakt" data-section data-screen-label="04 Kontakt · Brevkort">
+    <div class="kontakt__fade-top" aria-hidden="true"></div>
+    <div class="section__inner">
+
+      <header class="kontakt__header">
+        <h2 class="display">Skicka ett <em>brevkort</em>.</h2>
+        <p class="kontakt__sub">Fyll i. Frankera. Skicka. Det blir ett vanligt mail — kortet känns bara finare. Normalt svar inom 1–2 arbetsdagar.</p>
+      </header>
+
+      <div class="postcard-wrap">
+        <form class="postcard" id="postcard-form" novalidate>
+
+          <!-- LEFT side: message -->
+          <div class="postcard__left">
+            <p class="postcard__label">meddelande</p>
+            <div class="postcard__message">
+              <textarea
+                name="message"
+                placeholder="Hej Calle — vi behöver hjälp med…"
+                aria-label="Ditt meddelande"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="postcard__divider" aria-hidden="true"></div>
+
+          <!-- RIGHT side: address + stamp + sender -->
+          <div class="postcard__right">
+
+            <!-- Stamp (decorative, branded) -->
+            <div class="stamp" aria-hidden="true">
+              <div class="stamp__inner">
+                <span class="stamp__letter">B</span>
+                <span class="stamp__text">BLOMSTR.</span>
+                <span class="stamp__year">2026 · SE</span>
+              </div>
+            </div>
+
+            <!-- Postmark (overlaps stamp via mix-blend-mode) -->
+            <div class="postmark" aria-hidden="true">
+              <span>ESKIL-</span>
+              <span>STUNA</span>
+              <span>26·05</span>
+            </div>
+
+            <p class="postcard__to-label">till</p>
+            <h3 class="postcard__to">Calle<br/>Blomstrand</h3>
+            <p class="postcard__to-addr">calle.sassi@gmail.com</p>
+
+            <!-- Sender fields -->
+            <div class="sender">
+              <div>
+                <label class="sender__label" for="pc-name">avsändare</label>
+                <input id="pc-name" name="name" type="text" placeholder="ditt namn" autocomplete="name" required />
+              </div>
+              <div>
+                <label class="sender__label" for="pc-email">e-postadress</label>
+                <input id="pc-email" name="email" type="email" placeholder="du@företaget.se" autocomplete="email" required />
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+      <div class="kontakt__actions">
+        <button type="submit" form="postcard-form" class="btn-frank">
+          <span>frankera &amp; skicka</span>
+          <span aria-hidden="true">→</span>
+        </button>
+        <a class="kontakt__alt" href="mailto:calle.sassi@gmail.com">eller mejla direkt ↗</a>
+      </div>
+
+      <ul class="social">
+        <li><a href="https://blomstrande.net" target="_blank" rel="noopener">blomstrande.net ↗</a></li>
+        <li><a href="#" target="_blank" rel="noopener">linkedin ↗</a></li>
+      </ul>
+
+      <footer class="kontakt__footer">
+        <span>© 2026 · Carl-Johan Blomstrand · Blomstrande Digitalt Innehåll</span>
+        <span>postage paid · porto betalt</span>
+      </footer>
+
+    </div>
+    <div class="kontakt__fade-bottom" aria-hidden="true"></div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

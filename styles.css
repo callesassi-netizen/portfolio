@@ -45,7 +45,7 @@
   --pad-x:        clamp(20px, 4vw, 64px);
   --pad-y:        clamp(60px, 10vh, 110px);
   --col-text:     560px;
-  --nav-h:        96px;
+  --nav-h:        120px;
 
   /* radius / shadow */
   --r-pill:       999px;
@@ -109,7 +109,6 @@ body {
 .nav > * { pointer-events: auto; }
 
 /* Delad pill-stil: dark glass med subtil top-shine, fungerar på alla sektioner */
-.nav-brand,
 .nav-list {
   background:
     linear-gradient(180deg, rgba(245, 240, 227, 0.04) 0%, transparent 60%),
@@ -126,14 +125,11 @@ body {
 .nav-brand {
   display: inline-flex;
   align-items: center;
-  padding: 4px 22px;
   color: var(--cream);
-  transition: border-color .25s var(--ease);
 }
-.nav-brand:hover { border-color: rgba(200, 154, 62, 0.35); }
 
 .brand-logo {
-  height: 72px;
+  height: 100px;
   width: auto;
   display: block;
   user-select: none;
@@ -167,8 +163,7 @@ body {
 }
 
 @media (max-width: 640px) {
-  .nav-brand { padding: 3px 16px; }
-  .brand-logo { height: 52px; }
+  .brand-logo { height: 64px; }
   .nav-list { padding: 4px; }
   .nav-list a { padding: 7px 11px; font-size: 11px; }
 }

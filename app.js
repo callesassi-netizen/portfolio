@@ -688,7 +688,7 @@
         '│   └── rapportering\n' +
         '├── <span class="term-path">design/</span>\n' +
         '│   ├── canva\n' +
-        '│   ├── enklare grafik\n' +
+        '│   ├── grafisk produktion\n' +
         '│   └── visuell känsla\n' +
         '├── <span class="term-path">ai/</span>                  <span class="term-hot"># obsession</span>\n' +
         '│   ├── claude code\n' +
@@ -705,8 +705,7 @@
         '└── <span class="term-path">personligt/</span>\n' +
         '    ├── natur\n' +
         '    ├── hundar\n' +
-        '    ├── tecknande\n' +
-        '    └── loppisfynd'
+        '    └── träning'
     },
     { type: 'blank' },
 

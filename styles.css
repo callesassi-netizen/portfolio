@@ -428,7 +428,7 @@ body {
   transform: translateY(-50%);
   padding: 0 var(--pad-x);
   width: 100%;
-  max-width: var(--container);
+  max-width: 1600px;
   margin: 0 auto;
   /* fade in/ut styrs av app.js via CSS-variabel (end-fade ut innan projekt-sektion) */
   opacity: var(--hero-content-opacity, 1);

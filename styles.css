@@ -465,6 +465,8 @@ body {
 .hero-panel.is-active > *:nth-child(3) { transition-delay: .30s; }
 .hero-panel.is-active > *:nth-child(4) { transition-delay: .46s; }
 .hero-panel .display { max-width: 14ch; margin-bottom: 24px; }
+.hero-panel:nth-child(2) { max-width: 880px; }
+.hero-panel:nth-child(2) .display { max-width: 18ch; }
 
 /* Accent-em inom hero (Space Grotesk italic + guld) */
 .hero-panel .display em {

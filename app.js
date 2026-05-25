@@ -665,49 +665,53 @@
 
   const SCRIPT = [
     { type: 'cmd', text: 'whoami' },
-    { type: 'out', html: '<span class="term-h">Carl-Johan "Calle" Blomstrand</span>\n<span class="term-dim">└─ digital innehållsproducent · Eskilstuna → Jämtland</span>' },
-    { type: 'blank' },
-
-    { type: 'cmd', text: 'cat ./bio.md' },
-    { type: 'out', html:
-        '<span class="term-key"># Hej.</span>\n' +
-        '\n' +
-        'Carl-Johan i grunden — <span class="term-em">Calle</span> till vardags.\n' +
-        'Digital innehållsproducent med hjärtat i\n' +
-        'kommunikation, webb och e-handel.\n' +
-        '\n' +
-        'Till vardags: kommunikatör för ett e-handels-\n' +
-        'bolag inom billack — svensk och finsk marknad.\n' +
-        'Vid sidan av driver jag <span class="term-em">Blomstrande Digitalt</span>\n' +
-        '<span class="term-em">Innehåll</span>.\n' +
-        '\n' +
-        'Strukturerad, lösningsorienterad och lite för\n' +
-        'intresserad av nya verktyg.'
-    },
+    { type: 'out', html: '<span class="term-h">Carl-Johan "Calle" Blomstrand</span>\n<span class="term-dim">└─ digital innehållsproducent · kommunikatör · WordPress-byggare · e-handel · AI-nyfiken problemlösare</span>' },
     { type: 'blank' },
 
     { type: 'cmd', text: 'tree ./verktyg/' },
     { type: 'out', html:
         '<span class="term-path">verktyg/</span>\n' +
         '├── <span class="term-path">webb/</span>\n' +
-        '│   ├── cms          <span class="term-comment"># wordpress mest</span>\n' +
-        '│   └── e-handel\n' +
+        '│   ├── wordpress       <span class="term-comment"># hemsidor åt kunder</span>\n' +
+        '│   ├── cms\n' +
+        '│   ├── e-handel\n' +
+        '│   ├── struktur\n' +
+        '│   └── innehåll\n' +
         '├── <span class="term-path">kommunikation/</span>\n' +
         '│   ├── content\n' +
-        '│   └── copy         <span class="term-comment"># sv + en</span>\n' +
+        '│   ├── copy            <span class="term-comment"># sv + en</span>\n' +
+        '│   ├── kampanjer\n' +
+        '│   └── kundkommunikation\n' +
         '├── <span class="term-path">analys/</span>\n' +
-        '│   └── webbanalys\n' +
+        '│   ├── webbanalys\n' +
+        '│   ├── kampanjdata\n' +
+        '│   └── rapportering\n' +
         '├── <span class="term-path">design/</span>\n' +
-        '│   └── canva\n' +
-        '└── <span class="term-path">ai/</span>\n' +
-        '    ├── n8n\n' +
-        '    ├── zapier\n' +
-        '    └── gpt          <span class="term-hot"># obsession</span>'
+        '│   ├── canva\n' +
+        '│   ├── enklare grafik\n' +
+        '│   └── visuell känsla\n' +
+        '├── <span class="term-path">ai/</span>                  <span class="term-hot"># obsession</span>\n' +
+        '│   ├── claude code\n' +
+        '│   ├── chatgpt\n' +
+        '│   ├── hermes\n' +
+        '│   ├── n8n\n' +
+        '│   ├── zapier\n' +
+        '│   └── smarta flöden\n' +
+        '├── <span class="term-path">projekt/</span>\n' +
+        '│   ├── purrfect\n' +
+        '│   ├── wordpress-hemsidor\n' +
+        '│   ├── kundhemsidor\n' +
+        '│   └── egna idéer\n' +
+        '└── <span class="term-path">personligt/</span>\n' +
+        '    ├── natur\n' +
+        '    ├── hundar\n' +
+        '    ├── tecknande\n' +
+        '    └── loppisfynd'
     },
     { type: 'blank' },
 
     { type: 'cmd', text: 'echo $STATUS' },
-    { type: 'out', html: '<span class="term-mag">öppen för nya projekt</span> · <span class="term-dim">svar inom 1-2 arb.dagar</span>' },
+    { type: 'out', html: '<span class="term-mag">öppen för nya webbprojekt</span> · WordPress-hemsidor · innehåll · <span class="term-em">Purrfect</span> · smarta digitala lösningar\n<span class="term-dim">svarar oftast inom 1–2 arbetsdagar</span>' },
     { type: 'blank' },
 
     { type: 'prompt-only' },

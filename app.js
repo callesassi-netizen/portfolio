@@ -362,112 +362,96 @@
   }
 
   // ==========================================================
-  // CASES · bg video scrub
-  // Driver currentTime via scroll-progress genom cases-sektionen,
-  // samma smooth-lerp som hero så vi inte snap:ar mellan keyframes.
+  // CASES · kort längs en S-bana
+  // .ps__pin fastnar (sticky) i 100vh; scroll-läget (0..1) översätts till en
+  // position på banan. Korten är absolut centrerade och styrs enbart av
+  // transform längs en S-kurva (sin). Mitten-kortet blir störst + visar titel.
+  // Self-contained: paint körs i den delade tick-loopen längre ner.
+  // Vid prefers-reduced-motion lämnas sektionen i sin staplade fallback.
   // ==========================================================
-  const casesBgVideo = $('#casesBgVideo');
-  let casesBgTarget  = 0;
-  let casesBgCurrent = 0;
-  let casesBgRAF     = null;
+  const FS_CONFIG = {
+    scrubLen:     0.7,   // skärmhöjder scroll per projekt
+    spreadFactor: 0.94,  // horisontellt avstånd mellan kort (× kortets bredd)
+    arcAmp:       0.12,  // S-kurvans höjd (andel av höjd)
+    sWaves:       0.9,   // S-kurvans frekvens (lägre = mjukare båge)
+    maxScale:     1.0,   // storlek i mitten
+    minScale:     0.56,  // storlek längst ut
+    falloff:      0.46,  // hur snabbt korten krymper bort från mitten
+    tilt:         4,     // graders lutning längs banan
+    tail:         0.10,  // sista andelen där vyn tonar ut mjukt
+  };
+  let fsPaint     = () => {};
+  let fsSetHeight = () => {};
 
-  function updateCasesBg() {
-    if (!casesBgVideo || !casesBgVideo.duration || REDUCED) return;
-    const sec = document.getElementById('projekt');
-    if (!sec) return;
-    const r = sec.getBoundingClientRect();
-    const vh = window.innerHeight;
-    // Progress: 0 när sektionens top når viewport-bottom, 1 när bottom passerat top
-    const total    = r.height + vh;
-    const scrolled = vh - r.top;
-    const p = clamp(scrolled / total, 0, 1);
-    casesBgTarget = p * casesBgVideo.duration;
-    ensureCasesBgLoop();
-  }
-  function casesBgLoop() {
-    if (casesBgVideo && casesBgVideo.duration) {
-      casesBgCurrent += (casesBgTarget - casesBgCurrent) * 0.18;
-      if (Math.abs(casesBgCurrent - casesBgVideo.currentTime) > 0.012) {
-        try { casesBgVideo.currentTime = casesBgCurrent; } catch (_) {}
-      }
-    }
-    const sec = document.getElementById('projekt');
-    const r = sec ? sec.getBoundingClientRect() : null;
-    const inView = r && r.bottom > 0 && r.top < window.innerHeight;
-    const gap = Math.abs(casesBgTarget - casesBgCurrent);
-    if (inView && gap > 0.006) {
-      casesBgRAF = requestAnimationFrame(casesBgLoop);
-    } else {
-      casesBgRAF = null;
-    }
-  }
-  function ensureCasesBgLoop() {
-    if (!casesBgRAF && casesBgVideo && casesBgVideo.duration) {
-      casesBgRAF = requestAnimationFrame(casesBgLoop);
-    }
-  }
-  if (casesBgVideo) {
-    const onCasesBgMeta = () => {
-      // Snap till rätt position direkt vid metadata-load
-      const sec = document.getElementById('projekt');
-      if (sec) {
-        const r = sec.getBoundingClientRect();
-        const total = r.height + window.innerHeight;
-        const scrolled = window.innerHeight - r.top;
-        const p = clamp(scrolled / total, 0, 1);
-        casesBgTarget = p * casesBgVideo.duration;
-        casesBgCurrent = casesBgTarget;
-        try { casesBgVideo.currentTime = casesBgCurrent; } catch (_) {}
-      }
+  (function setupSpline() {
+    const section = $('.ps');
+    if (!section || REDUCED) return;
+
+    const wrap  = $('[data-ps-wrap]', section);
+    const pin   = $('[data-ps-pin]', section);
+    const stage = $('[data-ps-track]', section);
+    const fill  = $('[data-ps-fill]', section);
+    const cards = stage ? Array.from(stage.children) : [];
+    if (!wrap || !pin || !stage || !cards.length) return;
+
+    section.setAttribute('data-ps-ready', '');
+
+    fsSetHeight = () => {
+      // total scroll-sträcka ≈ antal kort × scrubLen skärmar (+ marginal)
+      wrap.style.height = (cards.length * FS_CONFIG.scrubLen + 0.6) * 100 + 'vh';
     };
-    casesBgVideo.addEventListener('loadedmetadata', onCasesBgMeta);
-    if (casesBgVideo.readyState >= 1 && !isNaN(casesBgVideo.duration)) onCasesBgMeta();
-  }
 
-  // (Om-sektionens bg-video scrub ersatt av terminal-design — se sections-IIFE nederst)
+    const progress = () => {
+      const total = wrap.offsetHeight - window.innerHeight;
+      const scrolled = clamp(-wrap.getBoundingClientRect().top, 0, total);
+      return total > 0 ? scrolled / total : 0;
+    };
 
-  // ==========================================================
-  // CASES · sticky scroll-reveal
-  // Aktivt case = listobjekt närmast viewportens mitt.
-  // Hover/focus överstyr direkt.
-  // ==========================================================
-  const casesSection = $('#projekt.section-cases');
-  const casesItems   = casesSection ? $$('.cases-item', casesSection) : [];
-  const casesPhs     = casesSection ? $$('.cases-image-stack .cases-ph', casesSection) : [];
-  let casesActive    = 0;
+    fsPaint = () => {
+      const wr = wrap.getBoundingClientRect();
+      if (wr.bottom < 0 || wr.top > window.innerHeight) return; // utanför view
+      const p = progress();
+      const H = pin.clientHeight;
+      const last = cards.length - 1;
+      const f = p * last;                 // position på banan
+      const spreadX = cards[0].offsetWidth * FS_CONFIG.spreadFactor; // nära kortets bredd
+      const amp = FS_CONFIG.arcAmp * H;
+      const active = clamp(Math.round(f), 0, last);
 
-  function setCaseActive(idx) {
-    if (idx === casesActive) return;
-    casesActive = idx;
-    for (let i = 0; i < casesItems.length; i++) {
-      casesItems[i].classList.toggle('active', i === idx);
-    }
-    for (let i = 0; i < casesPhs.length; i++) {
-      casesPhs[i].classList.toggle('active', i === idx);
-    }
-  }
+      for (let i = 0; i < cards.length; i++) {
+        const c = cards[i];
+        const d = i - f;                  // avstånd från mitten i "steg"
+        const ad = Math.abs(d);
+        const dd = clamp(d, -2.4, 2.4);
 
-  if (casesItems.length && casesPhs.length) {
-    casesItems.forEach((item, idx) => {
-      item.addEventListener('mouseenter', () => setCaseActive(idx));
-      item.addEventListener('focus',      () => setCaseActive(idx));
-    });
-  }
+        const x = dd * spreadX;                                   // sidled längs banan
+        const y = Math.sin(dd * FS_CONFIG.sWaves) * amp;          // S-kurvans höjdled
+        const scale = clamp(FS_CONFIG.maxScale - ad * FS_CONFIG.falloff, FS_CONFIG.minScale, FS_CONFIG.maxScale);
+        const rot = dd * FS_CONFIG.tilt * -0.5;                   // lätt lutning längs kurvan
+        const op = clamp(1.2 - Math.max(ad - 0.6, 0) * 0.85, 0.05, 1);
+        const z = 120 - Math.round(ad * 12);
 
-  function updateCases() {
-    if (!casesItems.length) return;
-    const center = window.innerHeight / 2;
-    let best = 0, bestDist = Infinity;
-    for (let i = 0; i < casesItems.length; i++) {
-      const r = casesItems[i].getBoundingClientRect();
-      const dist = Math.abs((r.top + r.height / 2) - center);
-      if (dist < bestDist) { bestDist = dist; best = i; }
-    }
-    // Bara uppdatera när sektionen är minst delvis i view
-    const sec = casesSection.getBoundingClientRect();
-    if (sec.bottom < 0 || sec.top > window.innerHeight) return;
-    setCaseActive(best);
-  }
+        c.style.transform =
+          'translate3d(calc(-50% + ' + x.toFixed(1) + 'px), calc(-50% + ' + y.toFixed(1) + 'px), 0)' +
+          ' rotate(' + rot.toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
+        c.style.opacity = op.toFixed(3);
+        c.style.zIndex = z;
+        c.classList.toggle('is-hero', i === active && ad < 0.5);
+
+        // subtil inre parallax: mitten-kortet = scale 1.0 → hela bilden syns
+        const inner = c.querySelector('.ps__media-inner');
+        if (inner) inner.style.transform = 'scale(' + (1 + Math.min(ad, 1) * 0.04).toFixed(3) + ')';
+      }
+
+      if (fill) fill.style.width = (p * 100).toFixed(2) + '%';
+
+      // mjuk exit nära slutet
+      const t = clamp((p - (1 - FS_CONFIG.tail)) / FS_CONFIG.tail, 0, 1);
+      pin.style.opacity = (1 - t * 0.3).toFixed(3);
+    };
+
+    fsSetHeight();
+  })();
 
   // ==========================================================
   // TYPEWRITER · scroll-driven char reveal
@@ -542,8 +526,7 @@
   function tick() {
     updateHero();
     updateParallax();
-    updateCases();
-    updateCasesBg();
+    fsPaint();
     updateTypewriter();
     ticking = false;
   }
@@ -555,7 +538,7 @@
   }
 
   window.addEventListener('scroll',  requestTick, { passive: true });
-  window.addEventListener('resize', () => { resizeCanvas(); requestTick(); }, { passive: true });
+  window.addEventListener('resize', () => { resizeCanvas(); fsSetHeight(); requestTick(); }, { passive: true });
 
   // ==========================================================
   // INIT
@@ -665,7 +648,7 @@
 
   const SCRIPT = [
     { type: 'cmd', text: 'whoami' },
-    { type: 'out', html: '<span class="term-h">Carl-Johan "Calle" Blomstrand</span>\n<span class="term-dim">└─ digital innehållsproducent · kommunikatör · WordPress-byggare · e-handel · AI-nyfiken problemlösare</span>' },
+    { type: 'out', html: '<span class="term-h">Carl-Johan "Calle" Blomstrand</span>\n<span class="term-dim">└─ digital innehållsproducent · kommunikatör · WordPress-byggare · webbhotell/cPanel · e-handel · AI-nyfiken problemlösare</span>' },
     { type: 'blank' },
 
     { type: 'cmd', text: 'tree ./verktyg/' },
@@ -675,6 +658,7 @@
         '│   ├── wordpress       <span class="term-comment"># hemsidor åt kunder</span>\n' +
         '│   ├── cms\n' +
         '│   ├── e-handel\n' +
+        '│   ├── webbhotell      <span class="term-comment"># cPanel · DNS · e-post · SSL</span>\n' +
         '│   ├── struktur\n' +
         '│   └── innehåll\n' +
         '├── <span class="term-path">kommunikation/</span>\n' +

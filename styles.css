@@ -590,9 +590,9 @@ body {
   padding: 0;
   min-height: 0;
   overflow: visible;
-  background: var(--paper);
-  color: var(--ink);
-  position: relative;  /* för ::before-fade */
+  background: #0a0807;
+  color: var(--cream);
+  position: relative;  /* för ::before/::after-fade */
 }
 
 /* Svart fade i toppen av cases — möter heroens nederfade */
@@ -626,292 +626,162 @@ body {
   );
 }
 
-/* Sticky bg-video för cases-sektionen — scrubbas via JS från scroll-position */
-.cases-bg {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  margin-bottom: -100vh;  /* visar 100vh men tar inte layout-utrymme */
-  overflow: hidden;
-  z-index: 0;
-  pointer-events: none;
-}
-.cases-bg-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  z-index: 0;
-}
-.cases-bg-tint {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: rgba(0, 0, 0, 0.72);
-  pointer-events: none;
-}
+/* ==========================================================
+   CASES · kort längs en S-bana  (allt scopat under .ps)
+   Korten är absolut centrerade och drivs enbart av transform
+   längs en S-kurva. Mitten-kortet är störst och visar sin titel.
+   Tokens mappade mot sidans globala tokens (--cream, --accent-gold …).
+   ========================================================== */
+.ps {
+  --ps-bg:        #0a0807;
+  --ps-ink:       var(--cream);
+  --ps-ink-soft:  rgba(245, 240, 227, 0.78);
+  --ps-ink-mute:  rgba(245, 240, 227, 0.45);
+  --ps-line:      rgba(245, 240, 227, 0.18);
+  --ps-gold:      var(--accent-gold);
+  --ps-gold-soft: #e6c061;
 
-/* Säkerställ att allt innehåll sitter ovanför parallax-bg:n */
-.section-cases > .cases-header,
-.section-cases > .cases-split {
+  --ps-font-display: 'Fraunces', 'Times New Roman', serif;
+  --ps-font-mono:    var(--font-mono);
+
   position: relative;
-  z-index: 1;
+  background: var(--ps-bg);
+  color: var(--ps-ink);
+  font-family: var(--ps-font-display);
 }
 
-/* === Cases · dark-bg variant ===
-   Aktiv när marmor-bg körs på full opacity. Revertera till mörk text
-   om du sätter marmor tillbaka till opacity 0.18 + multiply. */
-.section-cases { background: #1a1714; color: var(--cream); }
-.section-cases .h2,
-.section-cases .h2 em,
-.section-cases .cases-title,
-.section-cases .cases-title em { color: var(--cream); }
-.section-cases .eyebrow { color: var(--accent-gold); }
-.section-cases .cases-header { border-bottom-color: rgba(245, 240, 227, 0.18); }
-.section-cases .cases-item { border-top-color: rgba(245, 240, 227, 0.18); opacity: 0.5; }
-.section-cases .cases-item:last-child { border-bottom-color: rgba(245, 240, 227, 0.18); }
-.section-cases .cases-item.active,
-.section-cases .cases-item:hover,
-.section-cases .cases-item:focus-visible { opacity: 1; }
-.section-cases .cases-num,
-.section-cases .cases-yr { color: rgba(245, 240, 227, 0.55); }
-.section-cases .cases-desc { color: rgba(245, 240, 227, 0.72); }
-
-/* Brand gold-accent — em-ord och aktivt case-nummer */
-.section-cases .h2-serif em,
-.section-cases .cases-title em {
-  color: var(--accent-gold);
-}
-.section-cases .cases-item.active .cases-num {
-  color: var(--accent-gold);
+/* svagt rutnät + subtil varm glöd bakom korten */
+.ps__atmos {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 75% 24%, rgba(200, 154, 62, 0.06), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 12% 82%, rgba(150, 80, 40, 0.05), transparent 60%),
+    linear-gradient(rgba(245, 240, 227, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 240, 227, 0.035) 1px, transparent 1px);
+  background-size: auto, auto, 64px 64px, 64px 64px;
+  /* tona ut rutnätet mot kanterna så det inte möter sektionens fade hårt */
+  -webkit-mask-image: radial-gradient(ellipse 100% 85% at 50% 45%, #000 55%, transparent 100%);
+          mask-image: radial-gradient(ellipse 100% 85% at 50% 45%, #000 55%, transparent 100%);
 }
 
-/* Header — sitter ovanför split */
-.cases-header {
-  padding: clamp(80px, 12vh, 140px) var(--pad-x) clamp(40px, 6vh, 56px);
-  border-bottom: 1px solid var(--line);
-}
-.cases-header > * {
-  max-width: var(--container);
-  margin-left: auto;
-  margin-right: auto;
-}
-.cases-header .eyebrow { margin-bottom: 18px; }
+/* tall wrapper ger scroll-sträckan; höjden sätts av app.js */
+.ps__wrap { position: relative; z-index: 1; }
 
-/* Split-grid */
-.cases-split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
-  max-width: var(--container);
-  margin: 0 auto;
+/* den pinnade vyn */
+.ps__pin {
+  position: sticky; top: 0; height: 100vh; overflow: hidden;
+  will-change: opacity, transform;
 }
 
-/* Image column — sticky inom split */
-.cases-image-col {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  padding: clamp(40px, 6vh, 60px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.cases-image-stack {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  max-width: 480px;
-}
-.cases-ph {
+/* rubrik (ligger ovanpå, alltid överst) */
+.ps__head {
   position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity .6s var(--ease);
-  border: none;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #14110d;
-  /* Mjuk fadad ljus-skugga bakom kortet, åt vänster */
-  box-shadow:
-    -35px 20px 100px -25px rgba(245, 240, 227, 0.20),
-    -15px 10px 55px -15px rgba(245, 240, 227, 0.12);
+  top: clamp(92px, 12vh, 132px);
+  left: clamp(28px, 6vw, 96px);
+  right: clamp(28px, 6vw, 96px);
+  z-index: 200;
+  display: flex; align-items: flex-end; gap: 24px; pointer-events: none;
 }
-.cases-ph.active { opacity: 1; }
-
-/* Case-specifika gradient-placeholders (byts mot riktiga foton) */
-.cases-ph.c1 { background: linear-gradient(135deg, #c9512f 0%, #8b3a2a 60%, #4a1f12 100%); }
-.cases-ph.c2 { background: linear-gradient(135deg, #5a8a99 0%, #2c4d5e 70%, #11242e 100%); }
-.cases-ph.c3 { background: linear-gradient(135deg, #5a3a72 0%, #2a1d3a 70%, #110a1d 100%); }
-.cases-ph.c4 { background: linear-gradient(135deg, #6b9d7f 0%, #2a4a3a 70%, #102018 100%); }
-.cases-ph.c5 { background: linear-gradient(135deg, #8a7050 0%, #4a3a2a 70%, #211810 100%); }
-
-/* Diagonal stripe-texture (premium-känsla, byts mot foto) */
-.cases-ph::after {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 8px);
-  pointer-events: none;
-}
-
-/* När case-kortet har en riktig bild: göm placeholder-element */
-.cases-ph.has-image::after { display: none; }
-.cases-ph.has-image .cases-mock-ui { display: none; }
-.cases-ph .cases-ph-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  z-index: 0;
-}
-
-/* Mock UI-fragment inuti case-bilden */
-.cases-mock-ui {
-  position: absolute;
-  bottom: 32px; left: 24px; right: 24px;
-  height: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 4px;
-  padding: 14px;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-.cases-mock-ui::before {
-  content: ''; display: block;
-  width: 40%; height: 8px;
-  background: rgba(255, 255, 255, 0.4);
-  margin-bottom: 8px;
-}
-.cases-mock-ui::after {
-  content: ''; display: block;
-  width: 70%; height: 4px;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Mono-overlay i hörnet av bilden */
-.cases-ph-overlay {
-  position: absolute; inset: 0;
-  display: flex; align-items: flex-end;
-  padding: 20px;
-  color: rgba(255, 255, 255, 0.85);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
-  z-index: 1;
-}
-
-/* List column */
-.cases-list-col {
-  padding: clamp(40px, 6vh, 60px) clamp(20px, 4vw, 60px) clamp(40px, 6vh, 60px) 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.cases-item {
-  padding: 32px 0;
-  border-top: 1px solid rgba(20, 18, 12, 0.15);
-  display: grid;
-  grid-template-columns: 60px 1fr auto;
-  gap: 20px;
-  align-items: center;
-  cursor: pointer;
-  opacity: 0.4;
-  outline: none;
-  transition:
-    padding-left .35s var(--ease),
-    opacity .35s var(--ease);
-}
-.cases-item:last-child { border-bottom: 1px solid rgba(20, 18, 12, 0.15); }
-.cases-item.active,
-.cases-item:hover,
-.cases-item:focus-visible { opacity: 1; }
-.cases-item.active { padding-left: 16px; }
-.cases-item:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 6px;
-  border-radius: 2px;
-}
-
-.cases-num {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  align-self: start;
-  padding-top: 6px;
-}
-.cases-title {
-  font-family: 'Fraunces', 'Times New Roman', serif;
-  font-weight: 300;
-  font-size: clamp(24px, 2.6vw, 32px);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+.ps__head h2 {
   margin: 0;
-  color: var(--ink);
-  font-variation-settings: 'opsz' 36, 'SOFT' 50;
+  font-size: clamp(30px, 5vw, 64px);
+  line-height: 0.96; color: var(--ps-ink);
 }
-.cases-title em {
-  font-style: italic;
-  font-family: 'Instrument Serif', 'Fraunces', serif;
-  font-weight: 400;
-  letter-spacing: -0.005em;
+.ps__head h2 em { color: var(--ps-gold); }
+
+/* S-banans scen: korten absolut centrerade, styrs helt av transform i app.js */
+.ps__stage { position: absolute; inset: 0; }
+.ps__card {
+  position: absolute; left: 50%; top: 50%;
+  height: min(52vh, 470px); width: auto;
+  aspect-ratio: 1122 / 1402; /* stående 4:5 — matchar originalbilderna */
+  margin: 0; transform-origin: center center;
+  will-change: transform, opacity;
+  text-decoration: none; color: inherit;
 }
-.cases-yr {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  align-self: start;
-  padding-top: 6px;
-}
-.cases-desc {
-  grid-column: 2;
-  grid-row: 2;
-  max-height: 0;
-  overflow: hidden;
-  margin-top: 0;
-  color: var(--ink-2);
-  font-size: 15px;
-  line-height: 1.55;
-  max-width: 52ch;
-  transition: max-height .45s var(--ease), margin-top .45s var(--ease);
-}
-.cases-item.active .cases-desc {
-  max-height: 90px;
-  margin-top: 10px;
+.ps__card:focus-visible {
+  outline: 2px solid var(--ps-gold); outline-offset: 8px; border-radius: var(--r-card);
 }
 
-/* Mobil-fallback per spec: stäng av sticky och show-all */
-@media (max-width: 768px) {
-  .cases-header { padding-left: 20px; padding-right: 20px; }
-  .cases-split { grid-template-columns: 1fr; min-height: 0; }
-  .cases-image-col {
-    position: static;
-    height: auto;
-    padding: 32px 20px 8px;
-  }
-  .cases-image-stack { max-width: 360px; aspect-ratio: 4/5; }
-  .cases-list-col { padding: 8px 20px 48px; }
-  .cases-item { padding-left: 0 !important; opacity: 1 !important; }
-  .cases-item .cases-desc { max-height: none !important; margin-top: 10px !important; }
+/* media + parallax-lager */
+.ps__media {
+  position: relative; width: 100%; height: 100%;
+  border-radius: var(--r-card); overflow: hidden;
+  box-shadow:
+    0 50px 100px rgba(0,0,0,0.6),
+    0 16px 36px rgba(0,0,0,0.42),
+    inset 0 0 0 1px rgba(245,240,227,0.06);
+}
+.ps__media-inner { position: absolute; inset: 0; will-change: transform; transform-origin: center; }
+.ps__img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+
+/* bildtext — ligger helt under kortet (på mörk bakgrund), tonar in bara
+   när kortet är i mitten → alltid läsbar oavsett bildens innehåll */
+.ps__meta {
+  position: absolute; left: 50%; top: calc(100% + 18px);
+  transform: translateX(-50%);
+  width: min(92vw, 600px); text-align: center;
+  opacity: 0; transition: opacity 0.35s ease; pointer-events: none;
+}
+.ps__card.is-hero .ps__meta { opacity: 1; }
+.ps__meta-top {
+  display: flex; align-items: baseline; justify-content: center; gap: 14px; flex-wrap: wrap;
+}
+.ps__title {
+  margin: 0; font-family: var(--ps-font-display); font-weight: 400;
+  font-size: clamp(24px, 2.6vw, 38px);
+  line-height: 1.02; letter-spacing: -0.01em; color: var(--cream);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+}
+.ps__title em {
+  font-style: italic; font-family: 'Instrument Serif', 'Fraunces', serif;
+  color: var(--ps-gold-soft); font-weight: 400;
+}
+.ps__tag {
+  font-family: var(--ps-font-mono); font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ps-ink-soft);
+  padding: 4px 9px; border: 1px solid rgba(245, 240, 227, 0.3);
+  border-radius: var(--r-pill); white-space: nowrap;
+}
+.ps__desc {
+  margin: 11px auto 0; max-width: 58ch;
+  font-family: var(--font-body); font-size: 14.5px; line-height: 1.55;
+  color: rgba(245, 240, 227, 0.92);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 
-/* Reduced motion: byt content direkt, ingen crossfade */
+/* progress-rail */
+.ps__rail {
+  position: absolute; left: clamp(28px, 6vw, 96px); right: clamp(28px, 6vw, 96px);
+  bottom: 40px; height: 2px; background: var(--ps-line); z-index: 200;
+}
+.ps__rail-fill {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 0%;
+  background: linear-gradient(90deg, var(--ps-gold), var(--ps-gold-soft));
+}
+
+/* fallback utan aktiv JS (även reduced-motion): stapla korten */
+.ps:not([data-ps-ready]) .ps__wrap { height: auto !important; }
+.ps:not([data-ps-ready]) .ps__pin { position: static; height: auto; padding: 140px 0; }
+.ps:not([data-ps-ready]) .ps__head {
+  position: static; margin: 0 auto clamp(56px, 8vh, 90px);
+  max-width: var(--container); padding: 0 var(--pad-x);
+}
+.ps:not([data-ps-ready]) .ps__stage { position: static; display: flex; flex-wrap: wrap; justify-content: center; gap: 64px 30px; }
+.ps:not([data-ps-ready]) .ps__card { position: static; transform: none !important; opacity: 1 !important; }
+.ps:not([data-ps-ready]) .ps__meta {
+  position: static; transform: none; opacity: 1 !important; width: auto; margin-top: 16px;
+}
+
+@media (max-width: 860px) {
+  .ps__card { height: min(48vh, 400px); }
+  .ps__head h2 { font-size: clamp(26px, 8vw, 40px); }
+  .ps__title { font-size: clamp(22px, 6vw, 30px); }
+  .ps__desc { font-size: 13px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .cases-ph { transition: none; }
-  .cases-item, .cases-desc { transition: none; }
+  .ps__media-inner { transform: none !important; }
 }
 
 /* ==========================================================
@@ -1344,6 +1214,7 @@ body {
   flex-direction: column;
   gap: 18px;
   padding-top: 12px;
+  align-self: stretch; /* matcha radens höjd så avataren kan tryckas ner */
 }
 .om__bio p { margin: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
 .om__bio p strong { color: var(--ink); font-weight: 500; }
@@ -1355,6 +1226,16 @@ body {
   letter-spacing: 0.18em;
   font-size: 10px;
   color: var(--ink-mute);
+}
+/* Illustrerad Calle — fyller tomrummet under bion, tryckt mot kolumnens botten */
+.om__avatar {
+  align-self: flex-start;
+  margin-top: auto;          /* skjut ner mot botten när kolumnen är stretchad */
+  padding-top: 32px;
+  width: clamp(200px, 62%, 300px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 24px 50px rgba(0, 0, 0, 0.55));
 }
 /* Subtil arrow-pulse — leder ögat mot terminalen åt höger */
 .om-arrow {

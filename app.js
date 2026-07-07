@@ -59,16 +59,13 @@
     useVideo = true;
     heroVideo.hidden = false;
     heroCanvas.style.display = 'none';
-    // På touch: varken loop-spelning eller scrub (iOS scrubbar hackigt).
-    // Frys en representativ bildruta som stillbild — panelerna sköter scroll-känslan.
+    // På touch: autoplay-loop (iOS kan inte scrubba mjukt via currentTime).
+    // Texten hålls läsbar av en förstärkt scrim bakom hero-innehållet
+    // (se .hero-vignette @max-width:768px).
     if (IS_TOUCH) {
-      heroVideo.removeAttribute('loop');
-      heroVideo.pause();
-      const freezeFrame = () => {
-        try { heroVideo.currentTime = Math.min(2.4, (heroVideo.duration || 8) * 0.3); } catch (_) {}
-      };
-      if (heroVideo.readyState >= 1) freezeFrame();
-      else heroVideo.addEventListener('loadedmetadata', freezeFrame, { once: true });
+      heroVideo.loop = true;
+      heroVideo.muted = true;
+      heroVideo.play().catch(() => {});
     }
   }
 
@@ -560,6 +557,7 @@
       paintHero(0);
     }
     if (useVideo && !IS_TOUCH) {
+      // (På touch spelas videon i loop — ingen scroll-scrub att seeda.)
       const onMeta = () => {
         // Hoppa direkt till rätt scroll-position så vi inte får en lång catch-up
         const r = heroWrap.getBoundingClientRect();

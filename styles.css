@@ -384,6 +384,15 @@ body {
     radial-gradient(120% 80% at 50% 100%, rgba(0, 0, 0, 0.45), transparent 60%),
     radial-gradient(80% 60% at 50% 0%,   rgba(0, 0, 0, 0.25), transparent 60%);
 }
+/* Mobil: videon loop-spelas — förstärk toningen där texten ligger så den
+   garanterat är läsbar, men låt videon synas på övrig yta. */
+@media (max-width: 768px) {
+  .hero-vignette {
+    background:
+      radial-gradient(150% 78% at 30% 46%, rgba(0, 0, 0, 0.62), transparent 76%),
+      radial-gradient(120% 80% at 50% 100%, rgba(0, 0, 0, 0.5), transparent 62%);
+  }
+}
 .hero-grain { z-index: 2; opacity: 0.14; mix-blend-mode: overlay; }
 
 /* Svart fade i nederkant av hero — möter cases-sektionens topp-fade i pure black */

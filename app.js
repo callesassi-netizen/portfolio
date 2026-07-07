@@ -59,10 +59,16 @@
     useVideo = true;
     heroVideo.hidden = false;
     heroCanvas.style.display = 'none';
-    // På touch: autoplay-loop istället för scrub (iOS Safari kan inte scrubba mjukt)
+    // På touch: varken loop-spelning eller scrub (iOS scrubbar hackigt).
+    // Frys en representativ bildruta som stillbild — panelerna sköter scroll-känslan.
     if (IS_TOUCH) {
-      heroVideo.loop = true;
-      heroVideo.play().catch(() => {});
+      heroVideo.removeAttribute('loop');
+      heroVideo.pause();
+      const freezeFrame = () => {
+        try { heroVideo.currentTime = Math.min(2.4, (heroVideo.duration || 8) * 0.3); } catch (_) {}
+      };
+      if (heroVideo.readyState >= 1) freezeFrame();
+      else heroVideo.addEventListener('loadedmetadata', freezeFrame, { once: true });
     }
   }
 
@@ -383,9 +389,14 @@
   let fsPaint     = () => {};
   let fsSetHeight = () => {};
 
+  // Mobil (och touch-surfplattor i porträtt): kör INTE den scroll-drivna S-banan —
+  // den hackar på svagare GPU:er och överflödar layouten. Sektionen faller då
+  // tillbaka på en ren, native-scrollad lodrät stapel (se CSS).
+  const CARDS_STATIC = REDUCED || matchMedia('(max-width: 820px)').matches;
+
   (function setupSpline() {
     const section = $('.ps');
-    if (!section || REDUCED) return;
+    if (!section || CARDS_STATIC) return;
 
     const wrap  = $('[data-ps-wrap]', section);
     const pin   = $('[data-ps-pin]', section);
@@ -548,7 +559,7 @@
       resizeCanvas();
       paintHero(0);
     }
-    if (useVideo) {
+    if (useVideo && !IS_TOUCH) {
       const onMeta = () => {
         // Hoppa direkt till rätt scroll-position så vi inte får en lång catch-up
         const r = heroWrap.getBoundingClientRect();

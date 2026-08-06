@@ -939,7 +939,10 @@ html.js.anim [data-reveal]{transition:opacity 1s var(--ease),transform 1s var(--
 
 @media (max-width:760px){
   body{font-size:16.5px;}
-  .hero{min-height:88svh;padding-top:calc(var(--nav-h) + 54px);padding-bottom:70px;}
+  /* Layouten bars av .hero__stage sedan hero blev en scrollstracka. */
+  .hero__stage{min-height:88svh;padding-top:calc(var(--nav-h) + 54px);padding-bottom:70px;}
+  html.heroseq .hero__track{height:200svh;}
+  html.heroseq .hero__stage{height:100svh;}
   .hero__media img{object-position:80% 50%;}
   .hero__scrim{background:
     linear-gradient(180deg,rgba(11,13,16,.90) 0%,rgba(11,13,16,.62) 40%,rgba(11,13,16,.86) 100%),

@@ -191,13 +191,21 @@
     if (!cv || !track || !stage || !hero) return;
 
     var conn = navigator.connection || {};
-    if (reduce || innerWidth < 1000 || conn.saveData ||
+    if (reduce || conn.saveData || (navigator.deviceMemory && navigator.deviceMemory < 2) ||
         /2g|slow-2g/.test(conn.effectiveType || '')) { cv.remove(); return; }
 
-    var N = 121, POS_X = 0.90, POS_Y = 0.5;
+    /* Smala skarmar far en lattare uppsattning: halften sa manga bildrutor i
+       900 px bredd (0,66 MB) i stallet for 121 i 1280 (2,1 MB). Beskarningen
+       maste folja CSS:ens object-position, annars glappar stillbilden och
+       canvasen mot varandra i overgangen. */
+    var smal = matchMedia('(max-width:760px)').matches;
+    var MAPP = smal ? 'assets/hero-seq-sm/' : 'assets/hero-seq/';
+    var N = smal ? 61 : 121;
+    var POS_X = smal ? 0.80 : 0.90, POS_Y = 0.5;
     /* Blommans tyngdpunkt i kallbilden, matt pa de sista bildrutorna.
        Den star still dar genom hela slutet, sa en konstant racker. */
-    var SRC_W = 1280, SRC_H = 720, BLOM_X = 0.725, BLOM_Y = 0.445;
+    var SRC_W = smal ? 900 : 1280, SRC_H = smal ? 506 : 720;
+    var BLOM_X = 0.725, BLOM_Y = 0.445;
     /* Forloppet ligger sent med flit: texten ska finnas kvar anda tills
        hero borjar slappa och nasta sektion kommer underifran. */
     var SUG_START = 0.74, SUG_SLUT = 1.0, SUG_STEG = 0.04;
@@ -442,7 +450,7 @@
         if (sedan) sedan();
       };
       bilder[i] = im;
-      im.src = 'assets/hero-seq/' + pad(i + 1) + '.webp';
+      im.src = MAPP + pad(i + 1) + '.webp';
     }
 
     /* Tva svep: forst var femte bildruta sa hela forloppet gar att scrolla

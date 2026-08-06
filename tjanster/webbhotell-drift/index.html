@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="sv" data-title-sv="Webbhotell & drift utan att du behöver bry dig. — Blomstrande" data-title-en="Hosting & maintenance you never have to think about. — Blomstrande">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Webbhotell & drift utan att du behöver bry dig. — Blomstrande</title>
+<meta name="description" content="DNS, e-post, SSL, databaser och uppdateringar. När något krånglar felsöker jag i stället för att hänvisa vidare.">
+<meta name="theme-color" content="#FDF9F3">
+<link rel="canonical" href="https://blomstrande.net/tjanster/webbhotell-drift/">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Webbhotell & drift utan att du behöver bry dig. — Blomstrande">
+<meta property="og:description" content="DNS, e-post, SSL, databaser och uppdateringar. När något krånglar felsöker jag i stället för att hänvisa vidare.">
+<meta property="og:url" content="https://blomstrande.net/tjanster/webbhotell-drift/">
+<meta property="og:image" content="https://blomstrande.net/assets/sub-drift.jpg">
+<meta property="og:site_name" content="Blomstrande">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blomstrande.net/assets/sub-drift.jpg">
+
+<link rel="icon" href="../../assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../styles.css">
+
+<script>
+  document.documentElement.className += ' js';
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.className += ' reduce';
+  }
+  try {
+    var l = localStorage.getItem('bl-lang');
+    if (l === 'en' || l === 'sv') document.documentElement.lang = l;
+  } catch (e) {}
+</script>
+</head>
+
+<body class="sub">
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<a class="skip" href="#innehall" data-i18n="skip">Hoppa till innehållet</a>
+
+<header class="nav" id="nav">
+  <div class="nav__in wrap">
+    <a class="brand" href="../../index.html" aria-label="Blomstrande — Digitalt innehåll">
+      <img class="brand__mark" src="../../assets/logo-mark.png" alt="" width="200" height="191" aria-hidden="true">
+      <span class="brand__txt"><b>Blomstrande</b><i data-i18n="brandSub">Digitalt innehåll</i></span>
+    </a>
+    <nav class="nav__links" aria-label="Huvudmeny">
+      <a href="../../index.html#tjanster"><span data-i18n="navServices">tjänster</span></a>
+      <a href="../../index.html#case"><span data-i18n="navWork">case</span></a>
+      <a href="../../index.html#om"><span data-i18n="navAbout">om</span></a>
+      <a href="../../index.html#kontakt"><span data-i18n="navContact">kontakt</span></a>
+    </nav>
+    <div class="nav__side">
+      <div class="lang" id="lang">
+        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" id="langBtn">
+          <span id="langCur">SV</span>
+          <svg viewBox="0 0 10 10" width="9" height="9" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="lang__menu" role="menu">
+          <button type="button" data-lang="sv" role="menuitem"><b>SV</b> Svenska</button>
+          <button type="button" data-lang="en" role="menuitem"><b>EN</b> English</button>
+        </div>
+      </div>
+      <a class="btn btn--gold" href="../../index.html#kontakt" data-magnetic>
+        <span data-i18n="navCta">Begär offert</span>
+        <svg class="btn__arw" viewBox="0 0 14 14" width="13" height="13" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="burger" id="burger" type="button" aria-label="Meny" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile" id="mobile">
+  <nav class="mobile__nav">
+    <a href="../../index.html#tjanster"><em>01</em> <span data-i18n="navServices">tjänster</span></a>
+    <a href="../../index.html#case"><em>02</em> <span data-i18n="navWork">case</span></a>
+    <a href="../../index.html#om"><em>03</em> <span data-i18n="navAbout">om</span></a>
+    <a href="../../index.html#kontakt"><em>04</em> <span data-i18n="navContact">kontakt</span></a>
+  </nav>
+  <div class="mobile__foot">
+    <a href="mailto:Calle@blomstrande.net">Calle@blomstrande.net</a>
+    <span>Eskilstuna · SE</span>
+  </div>
+</div>
+
+<main id="innehall">
+
+<section class="subhero" data-spotlight>
+  <div class="subhero__media" aria-hidden="true">
+    <img src="../../assets/sub-drift.jpg" alt="" width="1920" height="1080" fetchpriority="high">
+  </div>
+  <div class="subhero__scrim" aria-hidden="true"></div>
+  <div class="wrap subhero__in">
+    <a class="tillbaka" href="../../index.html#tjanster">
+      <svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M13 7H2M6.5 2.5 2 7l4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span data-i18n="allaTjanster">Alla tjänster</span>
+    </a>
+    <p class="eyebrow" data-i18n="p6eyebrow">Tjänst 06</p>
+    <h1 class="h1 subhero__h1" data-i18n="p6h1">Webbhotell &amp; drift utan att du behöver bry dig.</h1>
+    <p class="subhero__lead" data-i18n="p6lead">DNS, e-post, SSL, databaser och uppdateringar. När något krånglar felsöker jag i stället för att hänvisa vidare.</p>
+    <div class="subhero__cta">
+      <a class="btn btn--gold btn--lg" href="../../index.html#kontakt" data-magnetic><span data-i18n="subCta">Beskriv ditt läge</span></a>
+      <a class="btn btn--ghost btn--lg" href="#far" data-magnetic><span data-i18n="subCta2">Vad du får</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sektion">
+  <div class="wrap intro">
+    <figure class="intro__bild" data-reveal>
+      <img src="../../assets/sub-webbhotell-drift-detalj.jpg" alt="" loading="lazy" width="1200" height="1600">
+    </figure>
+    <div class="intro__text">
+      <p class="eyebrow" data-reveal><span data-i18n="omTjansten">Om tjänsten</span></p>
+        <p data-reveal data-i18n="p6p0">Drift är den tjänst ingen vill betala för och alla saknar den dagen sidan ligger nere. Det mesta av arbetet syns aldrig: certifikat som förnyas, uppdateringar som körs, säkerhetskopior som tas och faktiskt testas genom att läggas tillbaka.</p>
+        <p data-reveal data-i18n="p6p1">Jag jobbar i cPanel och kan den delen ordentligt — DNS-poster, e-post som inte hamnar i skräpkorgen, databaser, SSL. Det är sällan glamoröst, men det är det som avgör om din e-post kommer fram och om sidan svarar när någon googlar dig på en söndag.</p>
+        <p data-reveal data-i18n="p6p2">Och när det ändå krånglar: du hör av dig till mig, inte till en supportkö. Jag tittar på vad som faktiskt hänt och säger det rakt ut, även när svaret är att jag själv råkat ställa till det. Det är den delen som gör att folk stannar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Bandet: bilden nålas fast och meningen tänds ord för ord med scrollen.
+     Klippningen ligger i __pin, aldrig på sektionen — overflow:hidden på en
+     förälder skapar en scroll-container och dödar position:sticky. -->
+<section class="tband">
+  <div class="tband__bg" aria-hidden="true">
+    <div class="tband__pin"><img src="../../assets/sub-webbhotell-drift-band.jpg" alt="" loading="lazy" width="2560" height="1097"></div>
+  </div>
+  <div class="tband__track" data-scrub-track>
+    <div class="tband__sticky">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--light"><span data-i18n="p6eyebrow">Tjänst 06</span></p>
+        <p class="scrub" data-scrub-text data-i18n="p6band">Man märker aldrig driften när den fungerar. Det är hela poängen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sektion sektion--band" id="far">
+  <div class="wrap">
+    <div class="sub__head">
+      <p class="eyebrow" data-reveal><span data-i18n="duFar">Vad du får</span></p>
+      <h2 class="h2" data-reveal data-i18n="duFarTitel">Det här ingår.</h2>
+    </div>
+    <ol class="far" data-reveal-group>
+        <li data-reveal>
+          <h3 data-i18n="p6f0t">Webbhotell</h3>
+          <p data-i18n="p6f0b">Uppsatt, konfigurerat och med rimliga gränser för vad du behöver.</p>
+        </li>
+        <li data-reveal>
+          <h3 data-i18n="p6f1t">DNS och domäner</h3>
+          <p data-i18n="p6f1b">Flyttar, pekningar och det som får e-post att komma fram.</p>
+        </li>
+        <li data-reveal>
+          <h3 data-i18n="p6f2t">SSL</h3>
+          <p data-i18n="p6f2b">Certifikat som förnyas innan de går ut, inte efter.</p>
+        </li>
+        <li data-reveal>
+          <h3 data-i18n="p6f3t">Uppdateringar</h3>
+          <p data-i18n="p6f3b">Kärna, tillägg och teman — testat innan det läggs ut.</p>
+        </li>
+        <li data-reveal>
+          <h3 data-i18n="p6f4t">Säkerhetskopior</h3>
+          <p data-i18n="p6f4b">Tagna regelbundet och provade genom att läggas tillbaka.</p>
+        </li>
+        <li data-reveal>
+          <h3 data-i18n="p6f5t">Felsökning</h3>
+          <p data-i18n="p6f5b">Du frågar mig. Jag hänvisar dig inte vidare.</p>
+        </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sektion">
+  <div class="wrap casebox" data-reveal>
+    <figure class="casebox__media"><img src="../../assets/cpanel-case.jpg" alt="Webbhotell & cPanel" loading="lazy" width="1200" height="800"></figure>
+    <div class="casebox__body">
+      <p class="eyebrow"><span data-i18n="uttag">Ur portföljen</span></p>
+      <h2 class="h3">Webbhotell & cPanel</h2>
+      <p data-i18n="p6caseb">Löpande drift i cPanel för flera hemsidor i Finland — DNS, e-post, SSL, databaser och uppdateringar.</p>
+      <div class="casebox__cta"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sektion sektion--band">
+  <div class="wrap sub__grid">
+    <div class="sub__aside">
+      <p class="eyebrow" data-reveal><span data-i18n="vanliga">Vanliga frågor</span></p>
+    </div>
+    <div class="sub__prose">
+        <details class="fq" data-reveal>
+          <summary><span data-i18n="p6q0f">Måste jag byta webbhotell?</span></summary>
+          <p data-i18n="p6q0s">Inte nödvändigtvis. Ligger du någonstans som fungerar kan jag sköta driften där. Är det ett hotell där ingenting går att felsöka säger jag det, och då är flytten oftast värd besväret.</p>
+        </details>
+        <details class="fq" data-reveal>
+          <summary><span data-i18n="p6q1f">Vad händer om sidan går ner mitt i natten?</span></summary>
+          <p data-i18n="p6q1s">Jag har övervakning som larmar. Är det något jag kan rätta gör jag det. Är det leverantören som ligger nere talar jag om vad som gäller i stället för att du ska sitta och gissa.</p>
+        </details>
+        <details class="fq" data-reveal>
+          <summary><span data-i18n="p6q2f">Ingår uppdateringar av WordPress?</span></summary>
+          <p data-i18n="p6q2s">Ja, i löpande drift. Det viktiga är inte att klicka uppdatera utan att veta att sidan fortfarande fungerar efteråt — därför testas det innan det läggs ut skarpt.</p>
+        </details>
+        <details class="fq" data-reveal>
+          <summary><span data-i18n="p6q3f">Kan du ta över driften av en sida någon annan byggt?</span></summary>
+          <p data-i18n="p6q3s">Ofta ja. Jag börjar med en genomgång av vad som finns och säger vad som behöver rättas innan jag tar ansvar för det.</p>
+        </details>
+    </div>
+  </div>
+</section>
+
+<section class="sektion vidare">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal><span data-i18n="andraTjanster">Andra tjänster</span></p>
+    <div class="vidare__rad" data-reveal>
+        <a class="vidare__i" href="../hemsidor/index.html"><span>Hemsidor</span><svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="vidare__i" href="../e-handel/index.html"><span>E-handel</span><svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="vidare__i" href="../seo-innehall/index.html"><span>SEO & innehåll</span><svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="vidare__i" href="../annonsering-analys/index.html"><span>Annonsering</span><svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="vidare__i" href="../automation-ai/index.html"><span>Automation & AI</span><svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="subslut">
+  <div class="wrap subslut__in" data-reveal>
+    <h2 class="h2" data-i18n="subSlutTitel">Beskriv läget så säger jag vad jag skulle göra först.</h2>
+    <p data-i18n="subSlutText">Det kostar ingenting och binder dig inte till något. Oftast räcker ett par meningar om vad du säljer och vad som skaver.</p>
+    <a class="btn btn--gold btn--lg" href="../../index.html#kontakt" data-magnetic>
+      <span data-i18n="subSlutCta">Ta kontakt</span>
+      <svg class="btn__arw" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <a class="brand" href="../../index.html" aria-label="Blomstrande">
+      <img class="brand__mark" src="../../assets/logo-mark.png" alt="" width="200" height="191" aria-hidden="true">
+      <span class="brand__txt"><b>Blomstrande</b><i data-i18n="footTag">Digitalt innehåll som blomstrar</i></span>
+    </a>
+    <p class="foot__mail"><a href="mailto:Calle@blomstrande.net">Calle@blomstrande.net</a></p>
+    <p class="foot__ort">Eskilstuna · SE &amp; FI</p>
+  </div>
+</footer>
+
+<script src="../../i18n.js"></script>
+<script src="../../assets/i18n-tjanster.js"></script>
+<script src="../../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="sv" data-title-sv="E-handel du orkar sköta själv. — Blomstrande" data-title-en="E-commerce you can actually run yourself. — Blomstrande">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>E-handel du orkar sköta själv. — Blomstrande</title>
+<meta name="description" content="Webbshoppar där produkter, betalning och frakt hänger ihop — och där du kan lägga upp en ny artikel utan att öppna en manual.">
+<meta name="theme-color" content="#FDF9F3">
+<link rel="canonical" href="https://blomstrande.net/tjanster/e-handel/">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="E-handel du orkar sköta själv. — Blomstrande">
+<meta property="og:description" content="Webbshoppar där produkter, betalning och frakt hänger ihop — och där du kan lägga upp en ny artikel utan att öppna en manual.">
+<meta property="og:url" content="https://blomstrande.net/tjanster/e-handel/">
+<meta property="og:image" content="https://blomstrande.net/assets/sub-ehandel.jpg">
+<meta property="og:site_name" content="Blomstrande">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blomstrande.net/assets/sub-ehandel.jpg">
+
+<link rel="icon" href="../../assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../styles.css">
+
+<script>
+  document.documentElement.className += ' js';
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.className += ' reduce';
+  }
+  try {
+    var l = localStorage.getItem('bl-lang');
+    if (l === 'en' || l === 'sv') document.documentElement.lang = l;
+  } catch (e) {}
+</script>
+</head>
+
+<body class="sub">
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<a class="skip" href="#innehall" data-i18n="skip">Hoppa till innehållet</a>
+
+<header class="nav" id="nav">
+  <div class="nav__in wrap">
+    <a class="brand" href="../../index.html" aria-label="Blomstrande — Digitalt innehåll">
+      <img class="brand__mark" src="../../assets/logo-mark.png" alt="" width="200" height="191" aria-hidden="true">
+      <span class="brand__txt"><b>Blomstrande</b><i data-i18n="brandSub">Digitalt innehåll</i></span>
+    </a>
+    <nav class="nav__links" aria-label="Huvudmeny">
+      <a href="../../index.html#tjanster"><span data-i18n="navServices">tjänster</span></a>
+      <a href="../../index.html#case"><span data-i18n="navWork">case</span></a>
+      <a href="../../index.html#om"><span data-i18n="navAbout">om</span></a>
+      <a href="../../index.html#kontakt"><span data-i18n="navContact">kontakt</span></a>
+    </nav>
+    <div class="nav__side">
+      <div class="lang" id="lang">
+        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" id="langBtn">
+          <span id="langCur">SV</span>
+          <svg viewBox="0 0 10 10" width="9" height="9" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="lang__menu" role="menu">
+          <button type="button" data-lang="sv" role="menuitem"><b>SV</b> Svenska</button>
+          <button type="button" data-lang="en" role="menuitem"><b>EN</b> English</button>
+        </div>
+      </div>
+      <a class="btn btn--gold" href="../../index.html#kontakt" data-magnetic>
+        <span data-i18n="navCta">Begär offert</span>
+        <svg class="btn__arw" viewBox="0 0 14 14" width="13" height="13" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="burger" id="burger" type="button" aria-label="Meny" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile" id="mobile">
+  <nav class="mobile__nav">
+    <a href="../../index.html#tjanster"><em>01</em> <span data-i18n="navServices">tjänster</span></a>
+    <a href="../../index.html#case"><em>02</em> <span data-i18n="navWork">case</span></a>
+    <a href="../../index.html#om"><em>03</em> <span data-i18n="navAbout">om</span></a>
+    <a href="../../index.html#kontakt"><em>04</em> <span data-i18n="navContact">kontakt</span></a>
+  </nav>
+  <div class="mobile__foot">
+    <a href="mailto:Calle@blomstrande.net">Calle@blomstrande.net</a>
+    <span>Eskilstuna · SE</span>
+  </div>
+</div>
+
+<main id="innehall">
+
+<section class="subhero" data-spotlight>
+  <div class="subhero__media" aria-hidden="true">
+    <img src="../../assets/sub-ehandel.jpg" alt="" width="1920" height="1080" fetchpriority="high">
+  </div>
+  <div class="subhero__scrim" aria-hidden="true"></div>
+  <div class="wrap subhero__in">
+    <a class="tillbaka" href="../../index.html#tjanster">
+      <svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M13 7H2M6.5 2.5 2 7l4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span data-i18n="allaTjanster">Alla tjänster</span>
+    </a>
+    <p class="eyebrow" data-i18n="p2eyebrow">Tjänst 02</p>
+    <h1 class="h1 subhero__h1" data-i18n="p2h1">E-handel du orkar sköta själv.</h1>
+    <p class="subhero__lead" data-i18n="p2lead">Webbshoppar där produkter, betalning och frakt hänger ihop — och där du kan lägga upp en ny artikel utan att öppna en manual.</p>
+    <div class="subhero__cta">
+      <a class="btn btn--gold btn--lg" href="../../index.html#kontakt" data-magnetic><span data-i18n="subCta">Beskriv ditt läge</span></a>
+      <a class="btn btn--ghost btn--lg" href="#far" data-magnetic><span data-i18n="subCta2">Vad du får</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sektion">
+  <div class="wrap intro">
+    <figure class="intro__bild" data-reveal>
+      <img src="../../assets/sub-e-handel-detalj.jpg" alt="" loading="lazy" width="1200" height="1600">
+    </figure>
+    <div class="intro__text">
+      <p class="eyebrow" data-reveal><span data-i18n="omTjansten">Om tjänsten</span></p>
+        <p data-reveal data-i18n="p2p0">En webbshop är inte en hemsida med en köpknapp. Det är ett lager, en kassa, ett fraktavtal och en kundtjänst som råkar bo i samma system. Går något av det snett märks det direkt i siffrorna, och nästan alltid i kassan.</p>
+        <p data-reveal data-i18n="p2p1">Därför bygger jag bakifrån. Först hur produkterna ska beskrivas och grupperas, sedan hur betalning och frakt ska fungera, och sist hur det ser ut. Det är tråkigare i den ordningen men det ger en shop som fortfarande är begriplig när sortimentet dubblats.</p>
+        <p data-reveal data-i18n="p2p2">Texterna räknas som en del av bygget. En produktbeskrivning som svarar på det kunden faktiskt undrar sänker både antalet mejl och antalet returer. Det är den billigaste konverteringsoptimering som finns.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Bandet: bilden nålas fast och meningen tänds ord för ord med scrollen.
+     Klippningen ligger i __pin, aldrig på sektionen — overflow:hidden på en
+     förälder skapar en scroll-container och dödar position:sticky. -->
+<section class="tband">
+  <div class="tband__bg" aria-hidden="true">
+    <div class="tband__pin"><img src="../../assets/sub-e-handel-band.jpg" alt="" loading="lazy" width="2560" height="1097"></div>
+  </div>
+  <div class="tband__track" data-scrub-track>
+    <div class="tband__sticky">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--light"><span data-i18n="p2eyebrow">Tjänst 02</span></p>
+        <p class="scrub" data-scrub-text data-i18n="p2band">Kunden lämnar sällan för att priset var fel. De lämnar för att något kändes osäkert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sektion sektion--band" id="far">
+  <div class="wrap">
+    <div class="sub__head">
+      <p class="eyebrow" data-reveal><span data-i18n="duFar">Vad du får</span></p>
+      <h2 class="h2" data-reveal data-i18n="duFarTitel">Det här ingår.</h2>
+    </div>
+    <ol class="far" data-reveal-group>
+        <li data-reveal>
+          <h3 data-i18n="p2f0t">Produkter och kategorier</h3>
+          <p data-i18n="p2f0b">En struktur som håller när sortimentet växer.</p>
+        </li>
+        <li data-reveal>
+          <h3 data-i18n="p2f1t">Betalning och frakt</h3>
+          <p data-i18n="p2f1b">Swish, kort och faktura kopplat till dina fraktavtal.</p>
+        </li>
+        <li data-reveal>
+          <h3 data-i18n="p2f2t">Produkttexter</h3>
+          <p data-i18n="p2f2b">Beskrivningar som svarar på frågan innan den mejlas.</p>
+        </li>
+        <li data-reveal>
+          <h3 data-i18n="p2f3t">Kassa utan krångel</h3>
+          <p data-i18n="p2f3b">Så få steg som möjligt mellan varukorg och tack-sida.</p>
+        </li>
+        <li data-reveal>
+          <h3 data-i18n="p2f4t">Lager och orderflöde</h3>
+          <p data-i18n="p2f4b">Så att du ser vad som ska packas utan att leta.</p>
+        </li>
+        <li data-reveal>
+          <h3 data-i18n="p2f5t">Upplärning</h3>
+          <p data-i18n="p2f5b">En genomgång inspelad, så du kan titta igen om ett halvår.</p>
+        </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sektion">
+  <div class="wrap casebox" data-reveal>
+    <figure class="casebox__media"><img src="../../assets/purrfect-case.jpg" alt="Purrfect" loading="lazy" width="1200" height="800"></figure>
+    <div class="casebox__body">
+      <p class="eyebrow"><span data-i18n="uttag">Ur portföljen</span></p>
+      <h2 class="h3">Purrfect</h2>
+      <p data-i18n="p2caseb">Webbshop för kattleksaker och foder, byggd i samarbete med kattorganisationer som räddar hemlösa katter — med inbyggd donationsfunktion.</p>
+      <div class="casebox__cta"><a class="btn btn--ghost" href="https://purrfect.se" target="_blank" rel="noopener"><span data-i18n="caseOpen">Öppna sajten</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sektion sektion--band">
+  <div class="wrap sub__grid">
+    <div class="sub__aside">
+      <p class="eyebrow" data-reveal><span data-i18n="vanliga">Vanliga frågor</span></p>
+    </div>
+    <div class="sub__prose">
+        <details class="fq" data-reveal>
+          <summary><span data-i18n="p2q0f">WooCommerce eller något annat?</span></summary>
+          <p data-i18n="p2q0s">WooCommerce för de flesta — det sitter i WordPress, kostar inget i månaden och går att bygga ut. Har du hundratals ordrar i veckan eller ovanliga krav på lager tittar vi på annat först.</p>
+        </details>
+        <details class="fq" data-reveal>
+          <summary><span data-i18n="p2q1f">Kan jag flytta in en shop jag redan har?</span></summary>
+          <p data-i18n="p2q1s">Ja. Produkter, kunder och ordrar går oftast att flytta med. Det som kräver mest omsorg är adresserna, så att gamla länkar och Googles register inte pekar i tomma luften.</p>
+        </details>
+        <details class="fq" data-reveal>
+          <summary><span data-i18n="p2q2f">Hur gör vi med moms och frakt till Finland?</span></summary>
+          <p data-i18n="p2q2s">Det ställs in i shoppen och följer var kunden bor. Jag sätter upp det, och skriver ner hur det fungerar så att din bokföring inte behöver gissa.</p>
+        </details>
+        <details class="fq" data-reveal>
+          <summary><span data-i18n="p2q3f">Vem sköter shoppen sen?</span></summary>
+          <p data-i18n="p2q3s">Du, om du vill — det är hela poängen med hur jag bygger. Vill du hellre slippa finns löpande drift som egen tjänst.</p>
+        </details>
+    </div>
+  </div>
+</section>
+
+<section class="sektion vidare">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal><span data-i18n="andraTjanster">Andra tjänster</span></p>
+    <div class="vidare__rad" data-reveal>
+        <a class="vidare__i" href="../hemsidor/index.html"><span>Hemsidor</span><svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="vidare__i" href="../seo-innehall/index.html"><span>SEO & innehåll</span><svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="vidare__i" href="../annonsering-analys/index.html"><span>Annonsering</span><svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="vidare__i" href="../automation-ai/index.html"><span>Automation & AI</span><svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="vidare__i" href="../webbhotell-drift/index.html"><span>Webbhotell & drift</span><svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="subslut">
+  <div class="wrap subslut__in" data-reveal>
+    <h2 class="h2" data-i18n="subSlutTitel">Beskriv läget så säger jag vad jag skulle göra först.</h2>
+    <p data-i18n="subSlutText">Det kostar ingenting och binder dig inte till något. Oftast räcker ett par meningar om vad du säljer och vad som skaver.</p>
+    <a class="btn btn--gold btn--lg" href="../../index.html#kontakt" data-magnetic>
+      <span data-i18n="subSlutCta">Ta kontakt</span>
+      <svg class="btn__arw" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <a class="brand" href="../../index.html" aria-label="Blomstrande">
+      <img class="brand__mark" src="../../assets/logo-mark.png" alt="" width="200" height="191" aria-hidden="true">
+      <span class="brand__txt"><b>Blomstrande</b><i data-i18n="footTag">Digitalt innehåll som blomstrar</i></span>
+    </a>
+    <p class="foot__mail"><a href="mailto:Calle@blomstrande.net">Calle@blomstrande.net</a></p>
+    <p class="foot__ort">Eskilstuna · SE &amp; FI</p>
+  </div>
+</footer>
+
+<script src="../../i18n.js"></script>
+<script src="../../assets/i18n-tjanster.js"></script>
+<script src="../../app.js"></script>
+</body>
+</html>

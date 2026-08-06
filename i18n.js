@@ -221,7 +221,7 @@
   };
 
   var DICT = { sv: SV, en: EN };
-  var HTML_KEYS = /^(c6title|c7title|c8title|heroL2)$/;  // dessa innehåller taggar
+  var HTML_KEYS = /^(c6title|c7title|c8title|heroL2)$/;  /* skrivs om av extend() */  // dessa innehåller taggar
 
   function apply(lang) {
     var d = DICT[lang] || DICT.sv;
@@ -241,9 +241,25 @@
     var cur = document.getElementById('langCur');
     if (cur) cur.textContent = lang.toUpperCase();
 
-    document.title = lang === 'en'
+    /* Undersidor sätter sina egna titlar via data-title-sv / data-title-en
+       på <html>. Utan detta skrev språkbytet över dem med startsidans. */
+    var egen = document.documentElement.getAttribute('data-title-' + lang);
+    document.title = egen || (lang === 'en'
       ? 'Carl-Johan Blomstrand — Digital content producer'
-      : 'Carl-Johan Blomstrand — Digital innehållsproducent';
+      : 'Carl-Johan Blomstrand — Digital innehållsproducent');
+  }
+
+  /* Undersidorna har egna ordlistor. De läggs på efter att den här filen
+     laddat, och applicerar sig själva direkt. */
+  function extend(sv, en, htmlKeys) {
+    var k;
+    for (k in sv) if (Object.prototype.hasOwnProperty.call(sv, k)) SV[k] = sv[k];
+    for (k in en) if (Object.prototype.hasOwnProperty.call(en, k)) EN[k] = en[k];
+    if (htmlKeys && htmlKeys.length) {
+      HTML_KEYS = new RegExp('^(' + HTML_KEYS.source.replace(/^\^\(|\)\$$/g, '') +
+                             '|' + htmlKeys.join('|') + ')$');
+    }
+    apply(document.documentElement.lang || 'sv');
   }
 
   function set(lang) {
@@ -262,5 +278,5 @@
     if (cur) cur.textContent = 'SV';
   }
 
-  window.BL_I18N = { set: set, apply: apply, current: function () { return document.documentElement.lang; } };
+  window.BL_I18N = { set: set, apply: apply, extend: extend, current: function () { return document.documentElement.lang; } };
 })();

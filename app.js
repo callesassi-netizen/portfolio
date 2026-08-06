@@ -640,8 +640,11 @@
        en gradd bar over det morka fotot ser ut som ett fel. */
     if (nav) {
       var slapp = 24;
+      /* Undersidorna har en mork subhero i stallet for sekvensen — samma
+         regel galler dar: navigeringen far inte bli gradd over morkt foto. */
       var hs = document.getElementById('heroStage');
-      if (hs && root.classList.contains('heroseq')) {
+      if (!(hs && root.classList.contains('heroseq'))) hs = document.querySelector('.subhero');
+      if (hs) {
         var hr = hs.getBoundingClientRect();
         slapp = scrollY + hr.bottom - nav.offsetHeight;
       }

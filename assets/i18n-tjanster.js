@@ -5,7 +5,7 @@
     {
       "p1eyebrow": "Tjänst 01",
       "p1h1": "Hemsidor som håller i flera år.",
-      "p1lead": "Nya sajter och omgörningar av gamla — mestadels WordPress, handbyggt i kod när det passar bättre. Du ska kunna ändra texten själv utan att ringa mig.",
+      "p1lead": "Nya sajter, och ny design på gamla — mestadels WordPress, handbyggt i kod när det passar bättre. Du ska kunna ändra texten själv utan att ringa mig.",
       "p1p0": "De flesta hör av sig med samma mening: sidan känns gammal. Ibland stämmer det bokstavligt, ibland handlar det om att den aldrig riktigt sa vad företaget gör. Jag börjar därför inte i utseendet utan i vad besökaren ska förstå på tio sekunder, och vad hen ska göra på tjugo.",
       "p1p1": "Sedan bygger jag. WordPress när du vill kunna ändra saker själv, ren kod när sidan mest ska vara snabb och stabil. Oavsett vilket får du en struktur som går att växa i — nya sidor, nya språk, ny tjänst — utan att någon behöver bygga om från början.",
       "p1p2": "Jag jobbar mot både svensk och finsk marknad, så flerspråkigt är inget påhäng utan något jag räknar med från start. Det märks i strukturen: menyer, adresser och innehåll som inte målar in sig i ett hörn så fort ett andra språk ska in.",
@@ -175,7 +175,7 @@
     {
       "p1eyebrow": "Service 01",
       "p1h1": "Websites built to last for years.",
-      "p1lead": "New sites and rebuilds of old ones — mostly WordPress, hand-coded when that fits better. You should be able to change the text yourself without calling me.",
+      "p1lead": "New sites, and a new design for old ones — mostly WordPress, hand-coded when that fits better. You should be able to change the text yourself without calling me.",
       "p1p0": "Most people get in touch with the same sentence: the site feels old. Sometimes that is literally true, sometimes it means the site never quite said what the company does. So I do not start with the looks. I start with what a visitor should understand in ten seconds, and what they should do in twenty.",
       "p1p1": "Then I build. WordPress when you want to change things yourself, plain code when the site mainly needs to be fast and stable. Either way you get a structure you can grow into — new pages, new languages, a new service — without anyone rebuilding from scratch.",
       "p1p2": "I work with both the Swedish and Finnish markets, so multilingual is not an afterthought — I plan for it from the start. You see it in the structure: menus, URLs and content that do not paint themselves into a corner the moment a second language arrives.",

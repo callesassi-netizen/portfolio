@@ -88,7 +88,7 @@
 
 <main id="innehall">
 
-<section class="subhero" data-spotlight>
+<section class="subhero" id="toppen" data-spotlight>
   <div class="subhero__media" aria-hidden="true">
     <img src="../../assets/sub-ehandel.jpg" alt="" width="1920" height="1080" fetchpriority="high">
   </div>
@@ -238,14 +238,65 @@
 
 </main>
 
+<!-- Samma sidfot som startsidan. Klasserna måste matcha styles.css exakt —
+     en egen, förenklad sidfot här hamnade helt ostylad, eftersom
+     .foot__in / .foot__mail / .foot__ort aldrig funnits i stilmallen. -->
 <footer class="foot">
-  <div class="wrap foot__in">
-    <a class="brand" href="../../index.html" aria-label="Blomstrande">
-      <img class="brand__mark" src="../../assets/logo-mark.png" alt="" width="200" height="191" aria-hidden="true">
-      <span class="brand__txt"><b>Blomstrande</b><i data-i18n="footTag">Digitalt innehåll som blomstrar</i></span>
-    </a>
-    <p class="foot__mail"><a href="mailto:Calle@blomstrande.net">Calle@blomstrande.net</a></p>
-    <p class="foot__ort">Eskilstuna · SE &amp; FI</p>
+  <div class="wrap">
+
+    <div class="foot__top">
+      <div class="foot__brand">
+        <img class="foot__logo" src="../../assets/logo-light.png" alt="Blomstrande Digitalt Innehåll" width="621" height="169">
+        <p data-i18n="footBlurb">Hemsidor, e-handel, innehåll och automation för företag i Sverige och Finland. Från idé till drift — samma person hela vägen.</p>
+        <a class="btn btn--gold" href="../../index.html#kontakt" data-magnetic>
+          <span data-i18n="footCta">Begär offert</span>
+          <svg class="btn__arw" viewBox="0 0 14 14" width="13" height="13" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <nav class="foot__cols" aria-label="Sidfot">
+        <div>
+          <h4 data-i18n="footServices">Tjänster</h4>
+          <ul>
+            <li><a href="../../tjanster/hemsidor/index.html" data-i18n="v1t">Hemsidor</a></li>
+            <li><a href="../../tjanster/e-handel/index.html" data-i18n="v2t">E-handel</a></li>
+            <li><a href="../../tjanster/seo-innehall/index.html" data-i18n="v3t">SEO, innehåll &amp; kommunikation</a></li>
+            <li><a href="../../tjanster/annonsering-analys/index.html" data-i18n="v4t">Annonsering &amp; analys</a></li>
+            <li><a href="../../tjanster/automation-ai/index.html" data-i18n="v5t">Automation &amp; AI</a></li>
+            <li><a href="../../tjanster/webbhotell-drift/index.html" data-i18n="v6t">Webbhotell &amp; drift</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footNav">Genvägar</h4>
+          <ul>
+            <li><a href="../../index.html#tjanster" data-i18n="navServices">tjänster</a></li>
+            <li><a href="../../index.html#marknader" data-i18n="splitEyebrow">Tre språkområden</a></li>
+            <li><a href="../../index.html#case" data-i18n="navWork">case</a></li>
+            <li><a href="../../index.html#om" data-i18n="navAbout">om</a></li>
+            <li><a href="../../index.html#kontakt" data-i18n="navContact">kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footContact">Kontakt</h4>
+          <ul>
+            <li><a href="mailto:Calle@blomstrande.net">Calle@blomstrande.net</a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+            <li><a href="https://blomstrande.net" target="_blank" rel="noopener">blomstrande.net ↗</a></li>
+            <li class="foot__place">Eskilstuna · Sverige</li>
+            <li class="foot__place" data-i18n="footLangs">Svenska · Finska · Engelska</li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="foot__word" aria-hidden="true"><span>BLOMSTRANDE</span></div>
+
+    <div class="foot__bar">
+      <span>© 2026 · Carl-Johan Blomstrand</span>
+      <span data-i18n="footTag">Digitalt innehåll som blomstrar</span>
+      <a href="#toppen" class="foot__toTop"><span data-i18n="footTop">Till toppen</span> <i>↑</i></a>
+    </div>
+
   </div>
 </footer>
 

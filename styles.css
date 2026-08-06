@@ -952,6 +952,8 @@ html.js.anim [data-reveal]{transition:opacity 1s var(--ease),transform 1s var(--
   .services__grid{grid-template-columns:1fr;}
   .foot__cols{grid-template-columns:1fr 1fr;gap:26px;}
   .foot__bar{justify-content:flex-start;}
+  /* Ordmärket ska sluta jäms med spaltkanten, inte klippas av .foot__word. */
+  .foot__word span{font-size:11.4vw;}
   .pstep{grid-template-columns:44px minmax(0,1fr);gap:16px;}
   .psteps::before,.psteps::after{left:22px;}
   .services__foot{flex-direction:column;align-items:flex-start;}
@@ -1073,13 +1075,6 @@ html.js.anim [data-reveal]{transition:opacity 1s var(--ease),transform 1s var(--
 .casebox__media img{transition:transform 1.2s var(--ease);}
 .casebox__media:hover img{transform:scale(1.035);}
 
-@media (max-width:900px){
-  .far li{grid-template-columns:1fr;gap:10px;align-items:start;}
-  .far li::after{top:calc(clamp(26px,2.7vw,40px) + .5em);}
-  .intro{grid-template-columns:1fr;}
-  .intro__bild{position:static;max-width:520px;}
-  .tband__track{height:150vh;}
-}
 .sub__aside .eyebrow{margin:0;position:sticky;top:calc(var(--nav-h) + 26px);}
 .sub__prose{display:grid;gap:clamp(20px,2vw,28px);}
 .sub__prose > p{font-size:clamp(17px,1.35vw,19.5px);line-height:1.72;color:var(--cream-2);max-width:66ch;}
@@ -1169,15 +1164,76 @@ html.js.anim [data-reveal]{transition:opacity 1s var(--ease),transform 1s var(--
 .subslut p{color:rgba(253,249,243,.7);max-width:56ch;}
 html[data-theme="dark"] .subslut p{color:rgba(42,43,42,.72);}
 
+/* --------------------------------------------------------------------------
+   UNDERSIDOR — mindre skärmar
+
+   Undantagen måste stå EFTER basreglerna ovan. Ett @media-block väger inte
+   tyngre än en vanlig regel; vid samma specificitet vinner den som står sist
+   i filen. Ett tidigare block här ovanför försökte göra .far enspaltig men
+   låg före .far:s basregel, så telefonen fick två spalter ändå.
+   -------------------------------------------------------------------------- */
 @media (max-width:900px){
   .sub__grid{grid-template-columns:1fr;}
   .sub__aside .eyebrow{position:static;}
   .casebox{grid-template-columns:1fr;}
+  .intro{grid-template-columns:1fr;gap:clamp(26px,4vw,44px);}
+  .intro__bild{position:static;}
+  .far li{grid-template-columns:1fr;gap:9px;align-items:start;}
+  .tband__track{height:150vh;}
 }
+
 @media (max-width:760px){
-  .subhero{min-height:auto;padding-top:calc(var(--nav-h) + 46px);padding-bottom:56px;}
-  .subhero__media img{object-position:70% 50%;}
+  .subhero{min-height:auto;padding-top:calc(var(--nav-h) + 40px);padding-bottom:52px;}
+  /* På en telefon hamnar rubriken mitt över bilden i stället för vid sidan
+     om den. Då konkurrerar text på skärmarna i motivet med rubriken, så
+     bilden mjukas upp någon pixel — den blir bakgrund, inte innehåll. */
+  .subhero__media img{object-position:70% 50%;height:106%;
+    transform:translate3d(var(--hx,0px),var(--hy,0px),0) scale(1.09);filter:blur(2.5px);}
+  /* På bredden finns ingen "tom vänsterkant" att lägga rubriken på, så
+     slöjan måste täcka hela ytan i stället för bara ena sidan. */
+  .subhero__scrim{background:
+    linear-gradient(180deg,rgba(10,11,13,.88) 0%,rgba(10,11,13,.62) 32%,rgba(10,11,13,.80) 70%,rgba(10,11,13,.94) 100%),
+    linear-gradient(100deg,rgba(10,11,13,.74),rgba(10,11,13,.28) 88%);}
+  .subhero__h1{font-size:clamp(31px,8.6vw,42px);letter-spacing:-.03em;margin-bottom:16px;}
+  .subhero__lead{font-size:16.5px;line-height:1.62;}
+  .subhero__cta{gap:10px;margin-top:26px;}
+  .subhero__cta .btn{flex:1 1 100%;justify-content:center;}
+  .tillbaka{margin-bottom:20px;}
+
+  /* Porträttbilden blir en liggande vinjett i stället för en halv skärm hög
+     kloss — annars trycks texten under vecket direkt. */
+  .intro__bild{aspect-ratio:4/3;}
+  .intro__bild img{height:100%;object-fit:cover;}
+  .intro__text > p:nth-of-type(2){font-size:clamp(20px,5.4vw,24px);line-height:1.34;}
+
+  /* Bandet: kortare sträcka och en mening som får plats på bredden. */
+  .tband__track{height:125vh;}
+  .tband__sticky{height:100svh;}
+  .tband .scrub{max-width:none;font-size:clamp(23px,6.6vw,30px);}
+  .tband .eyebrow{margin-bottom:18px;}
+  /* Meningen ligger mitt över bilden här, inte i en mörk vänsterspalt. */
+  .tband__pin::after{background:
+    linear-gradient(180deg,rgba(10,11,13,.84) 0%,rgba(10,11,13,.62) 40%,rgba(10,11,13,.88) 100%),
+    linear-gradient(100deg,rgba(10,11,13,.80),rgba(10,11,13,.56));}
+
+  /* .far bygger sin rytm på hover, som inte finns på en telefon. Där får
+     varje rad i stället en kort korallstreck som fast markör. */
+  .far li{padding:22px 0;}
+  .far li::before{width:30px;}
+  .far li::after{display:none;}
+  .far li:hover{padding-left:0;background:none;}
+  .far h3{font-size:19px;}
+  .far p{font-size:15.5px;line-height:1.62;}
+
+  .casebox{gap:22px;}
+  .fq summary{padding-right:28px;font-size:18px;}
+  .fq > p{padding-right:4px;font-size:15.5px;}
+  .vidare__i{font-size:13.5px;padding:11px 16px;}
+  .subslut{padding:clamp(64px,12vw,90px) 0;}
 }
+
+/* Rubriker som nås via ankarlänk får inte hamna bakom den fasta menyn. */
+.sektion[id],.subhero[id]{scroll-margin-top:calc(var(--nav-h) + 18px);}
 
 /* Hela tjanstekortet ar klickbart. Lanken tacker kortet men ligger under
    pilen, sa hover-effekterna pa kortet fortsatter fungera. */

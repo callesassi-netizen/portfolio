@@ -1,0 +1,22 @@
+# Radslut bestäms här i stället för av varje dators inställningar.
+#
+# Utan den här filen gissar Git for Windows: den lagrar LF i repot men lägger
+# tillbaka CRLF i arbetskopian, och varnar om det vid varje commit. Värre är
+# att en fil som konverteras åt fel håll ser ut som att varje rad ändrats,
+# vilket gör historiken oläslig.
+#
+# LF överallt är rätt val för en sajt som körs på Linux.
+* text=auto eol=lf
+
+# Binära filer ska aldrig röras
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.webp binary
+*.gif  binary
+*.ico  binary
+*.mp4  binary
+*.webm binary
+*.woff binary
+*.woff2 binary
+*.zip  binary

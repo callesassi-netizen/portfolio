@@ -39,57 +39,6 @@
     })(t0);
   })();
 
-  /* ── Hero-video ───────────────────────────────────────────────────────
-     Fotot står still. Det enda som rör sig är skärmarna: monitorn scrollar
-     genom sajter som är byggda, laptopen genom koden bakom dem. Videons
-     första bildruta är identisk med stillbilden, så bytet syns inte.
-
-     Den laddas bara när det är befogat — bred skärm, inte reducerad rörelse,
-     inte sparläge — och pausar så fort hero lämnat vyn. */
-  (function heroVideo() {
-    var v = $('#heroVideo');
-    if (!v) return;
-
-    var conn = navigator.connection || {};
-    if (reduce || innerWidth < 900 || conn.saveData ||
-        /2g|slow-2g/.test(conn.effectiveType || '')) { v.remove(); return; }
-
-    [['assets/hero.webm', 'video/webm'], ['assets/hero.mp4', 'video/mp4']]
-      .forEach(function (s) {
-        if (!v.canPlayType(s[1])) return;
-        var el = document.createElement('source');
-        el.src = s[0]; el.type = s[1];
-        v.appendChild(el);
-      });
-    if (!v.firstChild) { v.remove(); return; }
-
-    var seen = true;
-    var play = function () {
-      if (!seen || !v.src && !v.currentSrc) return;
-      var p = v.play();
-      if (p && p.catch) p.catch(function () { /* autoplay nekad — bilden räcker */ });
-    };
-
-    v.addEventListener('canplay', function () { v.classList.add('is-on'); play(); });
-
-    /* Hämtas först när sidan i övrigt är klar. Annars konkurrerar drygt en
-       halv megabyte video med hero-bilden om samma uppkoppling, och det är
-       bilden besökaren ser först. */
-    var start = function () { v.preload = 'auto'; v.load(); };
-    if (document.readyState === 'complete') setTimeout(start, 300);
-    else addEventListener('load', function () { setTimeout(start, 300); });
-
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        es.forEach(function (e) { seen = e.isIntersecting; seen ? play() : v.pause(); });
-      }, { threshold: 0.05 }).observe(v);
-    }
-
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) v.pause(); else if (v.getBoundingClientRect().bottom > 0) play();
-    });
-  })();
-
   /* ── Magnetiska knappar ───────────────────────────────────────────────
      Dras mot pekaren inom sin egen radie och glider tillbaka på väg ut. */
   if (fine && !reduce) {
@@ -223,17 +172,349 @@
     });
   }
 
-  /* ── Ljuskägla i hero ─────────────────────────────────────────────────── */
-  (function heroGlow() {
+  /* ── Hero-sekvens ─────────────────────────────────────────────────────
+     Fotot forvandlas till en blomma i takt med scrollen. Det ar inte en video
+     som spelas — webblasare ar opalitliga pa att soka i video bildruta for
+     bildruta, sarskilt bakat. I stallet ligger 121 stillbilder och
+     scrollpositionen valjer vilken som ritas.
+
+     Bildruta 1 ar identisk med stillbilden under, sa inbytet syns inte.
+     Sekvensen hamtas forst efter att sidan i ovrigt ar klar, och bara pa
+     breda skarmar utan reducerad rorelse — pa mobil visas bara fotot.
+
+     VIKTIGT: canvasen far tandas forst nar en bildruta verkligen ar ritad.
+     Raknas laddade och misslyckade hamtningar i samma hog blir en tom svart
+     canvas liggande over fotot sa fort mappen saknas. */
+  (function heroSeq() {
+    var cv = $('#heroSeq'), track = $('#heroTrack'), stage = $('#heroStage');
+    var hero = $('#hero');
+    if (!cv || !track || !stage || !hero) return;
+
+    var conn = navigator.connection || {};
+    if (reduce || innerWidth < 1000 || conn.saveData ||
+        /2g|slow-2g/.test(conn.effectiveType || '')) { cv.remove(); return; }
+
+    var N = 121, POS_X = 0.90, POS_Y = 0.5;
+    /* Blommans tyngdpunkt i kallbilden, matt pa de sista bildrutorna.
+       Den star still dar genom hela slutet, sa en konstant racker. */
+    var SRC_W = 1280, SRC_H = 720, BLOM_X = 0.725, BLOM_Y = 0.445;
+    /* Forloppet ligger sent med flit: texten ska finnas kvar anda tills
+       hero borjar slappa och nasta sektion kommer underifran. */
+    var SUG_START = 0.74, SUG_SLUT = 1.0, SUG_STEG = 0.04;
+    /* Suget raknar pa en langre stracka an bildsekvensen: den fortsatter en
+       halv skarmhojd efter att hero slutat vara fastnalad. Da hinner texten
+       vara kvar genom hela forvandlingen och sugs in forst nar sektionen
+       borjar lamna och nasta kommer underifran. */
+    var SUG_EXTRA = 0.5;
+    var BOKST_SPRID = 0.42;   // hur mycket bokstaverna sprids i tid
+    var BOKST_DRAG = 6.4;     // hur langt de dras ut pa vagen in
+    var pad = function (n) { return n < 10 ? '00' + n : n < 100 ? '0' + n : '' + n; };
+
+    var bilder = new Array(N), duger = new Array(N);
+    var laddade = 0, trasiga = 0, igang = false, dod = false;
+    var ctx = cv.getContext('2d', { alpha: false });
+    var cw = 0, ch = 0, dpr = Math.min(devicePixelRatio || 1, 2);
+    var visad = -1, onskad = 0;
+
+    /* Ingen sekvens gick att hamta — lamna sidan precis som den var. */
+    function avbryt() {
+      if (dod) return;
+      dod = true;
+      root.classList.remove('heroseq');
+      hero.style.removeProperty('--hp');
+      if (cv.parentNode) cv.parentNode.removeChild(cv);
+    }
+
+    function matt() {
+      var r = cv.getBoundingClientRect();
+      if (!r.width || !r.height) return false;
+      var w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
+      if (w === cw && h === ch) return true;
+      cw = cv.width = w; ch = cv.height = h;
+      visad = -1;
+      return true;
+    }
+
+    /* Samma beskarning som object-fit:cover med object-position 90% 50% —
+       raknad har i stallet for i CSS, sa den beter sig likadant overallt. */
+    function rita(i) {
+      if (dod || !duger[i]) return false;
+      var im = bilder[i];
+      if (!im || !im.naturalWidth) return false;
+      if (!matt()) return false;
+      var iw = im.naturalWidth, ih = im.naturalHeight;
+      var skala = Math.max(cw / iw, ch / ih);
+      var sw = cw / skala, sh = ch / skala;
+      ctx.drawImage(im, (iw - sw) * POS_X, (ih - sh) * POS_Y, sw, sh, 0, 0, cw, ch);
+      visad = i;
+      if (!cv.classList.contains('is-on')) cv.classList.add('is-on');
+      return true;
+    }
+
+    function narmaste(i) {
+      if (duger[i]) return i;
+      for (var d = 1; d < N; d++) {
+        if (i - d >= 0 && duger[i - d]) return i - d;
+        if (i + d < N && duger[i + d]) return i + d;
+      }
+      return -1;
+    }
+
+    /* ── Texten sugs in i blomman ────────────────────────────────────
+       Blommans plats pa skarmen raknas med samma cover-matte som canvasen
+       ritar med, sa riktningen stammer i alla fonsterformat. Elementens
+       utgangslagen lases av med offsetLeft/offsetTop, som ar layoutvarden
+       och alltsa oberoende av de transformer vi sjalva satter. */
+    var inn = $('.hero__in', stage);
+    var barn = inn ? $$(':scope > *', inn) : [];
+    var bas = [], sugAktiv = false;
+    var h1 = $('.hero__h1', stage);
+    var tecken = [], teckenBas = [];
+
+    /* Rubriken delas i bokstaver sa de kan dras ut var for sig. Elementbarn
+       (den korallfargade punkten) lamnas hela — bara textnoder delas. */
+    function delaTecken() {
+      if (!h1) return;
+      tecken = []; teckenBas = [];
+      $$('.line > span', h1).forEach(function (rad) {
+        if (rad.dataset.delad === '1') return;
+        var noder = Array.prototype.slice.call(rad.childNodes);
+        rad.textContent = '';
+        noder.forEach(function (n) {
+          if (n.nodeType === 3) {
+            n.nodeValue.split('').forEach(function (c) {
+              /* span, inte i — <i> ar kursivt som standard och lutade hela
+                 rubriken. */
+              var i = document.createElement('span');
+              i.className = 'ch';
+              if (c === ' ') { i.className = 'ch ch--mellan'; i.innerHTML = '&nbsp;'; }
+              else i.textContent = c;
+              rad.appendChild(i);
+            });
+          } else {
+            var w = document.createElement('span');
+            w.className = 'ch';
+            w.appendChild(n);
+            rad.appendChild(w);
+          }
+        });
+        rad.dataset.delad = '1';
+      });
+      tecken = $$('.ch', h1);
+    }
+
+    var teckenRank = [];
+    function matTecken() {
+      if (!inn) return;
+      teckenBas = tecken.map(function (el) {
+        return {
+          x: inn.offsetLeft + el.offsetLeft + el.offsetWidth / 2,
+          y: inn.offsetTop + el.offsetTop + el.offsetHeight / 2
+        };
+      });
+      /* Rangordna efter avstand till blomman: narmast ger sig ivag forst. */
+      var b = blompunkt() || { x: 0, y: 0 };
+      var ordn = teckenBas.map(function (p, i) {
+        return { i: i, d: Math.hypot(b.x - p.x, b.y - p.y) };
+      }).sort(function (a2, b2) { return a2.d - b2.d; });
+      teckenRank = new Array(teckenBas.length);
+      ordn.forEach(function (o, r) {
+        teckenRank[o.i] = ordn.length > 1 ? r / (ordn.length - 1) : 0;
+      });
+    }
+
+    function matBas() {
+      if (!inn) return;
+      matTecken();
+      bas = barn.map(function (el) {
+        return {
+          x: inn.offsetLeft + el.offsetLeft + el.offsetWidth / 2,
+          y: inn.offsetTop + el.offsetTop + el.offsetHeight / 2
+        };
+      });
+    }
+
+    function blompunkt() {
+      var w = cv.offsetWidth, h = cv.offsetHeight;
+      if (!w || !h) return null;
+      var s = Math.max(w / SRC_W, h / SRC_H);
+      var sw = w / s, sh = h / s;
+      var ox = (SRC_W - sw) * POS_X, oy = (SRC_H - sh) * POS_Y;
+      var x = (BLOM_X * SRC_W - ox) * s;
+      var y = (BLOM_Y * SRC_H - oy) * s;
+      /* canvasen ar dessutom uppskalad 1.065 kring sin egen mitt */
+      return { x: w / 2 + (x - w / 2) * 1.065, y: h / 2 + (y - h / 2) * 1.065 };
+    }
+
+    function sug(p) {
+      if (!inn || !barn.length) return;
+      var t = clamp((p - SUG_START) / (SUG_SLUT - SUG_START));
+      if (t <= 0 && !sugAktiv) return;
+      if (!bas.length) matBas();
+      var b = blompunkt();
+      if (!b) return;
+
+      if (t > 0 && !sugAktiv) { sugAktiv = true; inn.classList.add('is-suck'); }
+      if (t <= 0 && sugAktiv) { sugAktiv = false; inn.classList.remove('is-suck'); }
+
+      var fonster = 1 - SUG_STEG * (barn.length - 1);
+      barn.forEach(function (el, i) {
+        if (el === h1) return;                 // rubriken hanteras bokstav for bokstav
+        var ti = clamp((t - SUG_STEG * i) / fonster);
+        if (ti <= 0) { el.style.transform = ''; el.style.opacity = ''; el.style.filter = ''; return; }
+        var e = ti * ti * (3 - 2 * ti) * ti;   // mjuk start, drar ivag pa slutet
+        el.style.transform = 'translate(' + ((b.x - bas[i].x) * e).toFixed(1) + 'px,' +
+                             ((b.y - bas[i].y) * e).toFixed(1) + 'px) scale(' + (1 - 0.82 * e).toFixed(3) + ')';
+        el.style.opacity = (1 - e).toFixed(3);
+        el.style.filter = e > 0.05 ? 'blur(' + (e * 3.5).toFixed(1) + 'px)' : '';
+      });
+
+      /* Bokstaverna: de som star narmast blomman ger sig ivag forst, sa ordet
+         tojs ut mot den i stallet for att flyttas i klump. Uttojningen sker
+         langs fardriktningen — rotera dit, skala i x, rotera tillbaka — och
+         den vaxer pa vagen for att sedan klappa ihop nar bokstaven ar framme. */
+      if (tecken.length && teckenBas.length === tecken.length) {
+        var fonsterB = 1 - BOKST_SPRID;
+        for (var k = 0; k < tecken.length; k++) {
+          var el2 = tecken[k], bb = teckenBas[k];
+          var ddx = b.x - bb.x, ddy = b.y - bb.y;
+          var avst = Math.sqrt(ddx * ddx + ddy * ddy);
+          var rank = teckenRank[k];
+          var tk = clamp((t - BOKST_SPRID * rank) / fonsterB);
+          if (tk <= 0) { el2.style.transform = ''; el2.style.opacity = ''; continue; }
+          var ek = tk * tk * (3 - 2 * tk) * tk;
+          var drag = 1 + BOKST_DRAG * ek * (1 - ek);      // toppar mitt i farden
+          var vinkel = Math.atan2(ddy, ddx) * 180 / Math.PI;
+          var kryp = 1 - 0.9 * ek;
+          el2.style.transform =
+            'translate(' + (ddx * ek).toFixed(1) + 'px,' + (ddy * ek).toFixed(1) + 'px)' +
+            ' rotate(' + vinkel.toFixed(1) + 'deg)' +
+            ' scale(' + (kryp * drag).toFixed(3) + ',' + (kryp / Math.sqrt(drag)).toFixed(3) + ')' +
+            ' rotate(' + (-vinkel).toFixed(1) + 'deg)';
+          el2.style.opacity = (1 - ek * ek).toFixed(3);
+          if (avst < 0) el2.style.opacity = 0;
+        }
+      }
+
+      inn.style.pointerEvents = t > 0.45 ? 'none' : '';
+    }
+
+    function progress() {
+      var stracka = track.offsetHeight - stage.offsetHeight;
+      if (stracka <= 0) return 0;
+      return clamp(-track.getBoundingClientRect().top / stracka);
+    }
+
+    function progressSug() {
+      var tot = track.offsetHeight - stage.offsetHeight + stage.offsetHeight * SUG_EXTRA;
+      if (tot <= 0) return 0;
+      return clamp(-track.getBoundingClientRect().top / tot);
+    }
+
+    var kor = false;
+    function tick() {
+      kor = false;
+      if (dod) return;
+      var p = progress();
+      hero.style.setProperty('--hp', p.toFixed(4));
+      sug(progressSug());
+      onskad = Math.round(p * (N - 1));
+      if (!igang) return;
+      var i = narmaste(onskad);
+      if (i >= 0 && i !== visad) rita(i);
+    }
+    function begar() { if (!kor && !dod) { kor = true; requestAnimationFrame(tick); } }
+
+    function hamta(i, sedan) {
+      if (dod || bilder[i]) { if (sedan) sedan(); return; }
+      var im = new Image();
+      im.decoding = 'async';
+      im.onload = function () {
+        duger[i] = true; laddade++;
+        /* Tracken blir hog forst nar det finns nagot att visa i den. */
+        if (!igang && laddade >= 6) { igang = true; root.classList.add('heroseq'); }
+        begar();
+        if (sedan) sedan();
+      };
+      im.onerror = function () {
+        trasiga++;
+        if (laddade === 0 && trasiga >= 5) { avbryt(); return; }
+        if (sedan) sedan();
+      };
+      bilder[i] = im;
+      im.src = 'assets/hero-seq/' + pad(i + 1) + '.webp';
+    }
+
+    /* Tva svep: forst var femte bildruta sa hela forloppet gar att scrolla
+       igenom nastan direkt, sedan resten som fyller igen luckorna. */
+    function svep() {
+      var grovt = [], rest = [], i;
+      for (i = 0; i < N; i++) (i % 5 === 0 ? grovt : rest).push(i);
+      var k = 0;
+      (function nasta() {
+        if (dod) return;
+        if (k < grovt.length) return hamta(grovt[k++], nasta);
+        var j = 0;
+        (function fyll() {
+          if (dod || j >= rest.length) return;
+          var tre = 0;
+          while (tre < 3 && j < rest.length) { hamta(rest[j++]); tre++; }
+          setTimeout(fyll, 60);
+        })();
+      })();
+    }
+
+    delaTecken();
+    matBas();
+    /* Sprakbytet skriver om rubriken, sa bokstaverna maste delas pa nytt.
+       Handelsen skickas pa document och bubblar inte — den maste lyssnas
+       av dar, inte pa window. */
+    document.addEventListener('bl:lang', function () {
+      if (!h1) return;
+      $$('.line > span', h1).forEach(function (r) { delete r.dataset.delad; });
+      delaTecken(); bas = []; matBas(); visad = -1; begar();
+    });
+
+    if (document.readyState === 'complete') setTimeout(svep, 350);
+    else addEventListener('load', function () { setTimeout(svep, 350); });
+
+    addEventListener('scroll', begar, { passive: true });
+    addEventListener('resize', function () { visad = -1; bas = []; begar(); }, { passive: true });
+  })();
+
+  /* ── Kameradrift i hero ───────────────────────────────────────────────
+     Fotot föreställer ett skrivbord med en lampa. En lysande cirkel som
+     följer pekaren blir en andra lampa, och den läser som en effekt.
+     I stället får bilden röra sig — några pixlar bort från pekaren, mjukt
+     eftersläpande, som att luta på huvudet i ett rum. Man ser den inte.
+     Man känner djupet. */
+  (function heroDrift() {
     var hero = $('[data-spotlight]');
     if (!hero || !fine || reduce) return;
+    var media = $('.hero__media', hero);
+    if (!media) return;
+
+    var AMP_X = 16, AMP_Y = 10;
+    var tx = 0, ty = 0, cx = 0, cy = 0, aktiv = false;
+
     hero.addEventListener('mousemove', function (e) {
       var r = hero.getBoundingClientRect();
-      hero.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(2) + '%');
-      hero.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(2) + '%');
-      hero.classList.add('is-lit');
-    });
-    hero.addEventListener('mouseleave', function () { hero.classList.remove('is-lit'); });
+      tx = ((e.clientX - r.left) / r.width - 0.5) * -AMP_X;
+      ty = ((e.clientY - r.top) / r.height - 0.5) * -AMP_Y;
+      aktiv = true;
+    }, { passive: true });
+
+    hero.addEventListener('mouseleave', function () { tx = 0; ty = 0; });
+
+    (function ride() {
+      if (aktiv || Math.abs(cx) > 0.05 || Math.abs(cy) > 0.05) {
+        cx = lerp(cx, tx, 0.05);
+        cy = lerp(cy, ty, 0.05);
+        media.style.setProperty('--hx', cx.toFixed(2) + 'px');
+        media.style.setProperty('--hy', cy.toFixed(2) + 'px');
+      }
+      requestAnimationFrame(ride);
+    })();
   })();
 
   /* ── Sifferuppräkning ─────────────────────────────────────────────────── */
@@ -346,7 +627,18 @@
 
     if (procUpdate) procUpdate();
 
-    if (nav) nav.classList.toggle('is-stuck', scrollY > 24);
+    /* Navigeringens ljusa lage horde ihop med att hero var en skarmhog.
+       Nu ar hero en scrollsträcka, sa den far byta forst nar hero slappt —
+       en gradd bar over det morka fotot ser ut som ett fel. */
+    if (nav) {
+      var slapp = 24;
+      var hs = document.getElementById('heroStage');
+      if (hs && root.classList.contains('heroseq')) {
+        var hr = hs.getBoundingClientRect();
+        slapp = scrollY + hr.bottom - nav.offsetHeight;
+      }
+      nav.classList.toggle('is-stuck', scrollY > slapp);
+    }
 
     if (progress) {
       var h = document.documentElement.scrollHeight - vh;

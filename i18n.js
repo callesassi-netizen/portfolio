@@ -27,7 +27,7 @@
     sp2t: 'Byggt för att skötas själv', sp2b: 'Du ska kunna byta en text eller lägga in en produkt utan att ringa mig.',
     sp3t: 'Teknik som håller', sp3b: 'Ren kod, snabba sidor och drift som inte kräver att du förstår DNS.',
     navServices: 'tjänster', navWork: 'case',
-    heroL1: 'Digitalt innehåll', heroL2: 'som blomstrar',
+    heroL1: 'Digitalt innehåll', heroL2: 'som blomstrar<em>.</em>',
     svcEyebrow: 'Tjänster',
     svcTitle: 'Det jag hjälper företag med.',
     svcLead: 'Sex områden som går in i varandra. De flesta kunder börjar med ett och lägger till fler när det första sitter.',
@@ -133,7 +133,7 @@
     sp2t: 'Built to run yourself', sp2b: 'You should be able to change a text or add a product without calling me.',
     sp3t: 'Technology that holds', sp3b: 'Clean code, fast pages and hosting that does not require you to understand DNS.',
     navServices: 'services', navWork: 'work',
-    heroL1: 'Digital content', heroL2: 'that flourishes',
+    heroL1: 'Digital content', heroL2: 'that flourishes<em>.</em>',
     svcEyebrow: 'Services',
     svcTitle: 'What I help companies with.',
     svcLead: 'Six areas that feed into each other. Most clients start with one and add more once the first is running.',
@@ -221,7 +221,7 @@
   };
 
   var DICT = { sv: SV, en: EN };
-  var HTML_KEYS = /^(c6title|c7title|c8title)$/;   // dessa innehåller <i>
+  var HTML_KEYS = /^(c6title|c7title|c8title|heroL2)$/;  // dessa innehåller taggar
 
   function apply(lang) {
     var d = DICT[lang] || DICT.sv;

@@ -1,7 +1,14 @@
+# Arbetsfiler som inte hör hemma på webben
+_backup/
+_to_delete/
+ARBETSLOGG.md
+LAS-MIG.md
+*.ps1
+*.zip
+
+# Systemskräp
 .DS_Store
 Thumbs.db
 desktop.ini
-*.log
-.vscode/
-.idea/
 node_modules/
+.netlify/

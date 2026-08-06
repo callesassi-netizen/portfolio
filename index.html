@@ -1,373 +1,632 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Carl-Johan Blomstrand · Portfölj 2026</title>
-  <meta name="description" content="Carl-Johan ”Calle” Blomstrand — digital innehållsproducent. Webb, kommunikation, e-handel & AI. Blomstrande Digitalt Innehåll." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,ital,wght@9..144,0,300..700;9..144,1,300..700&family=Instrument+Serif:ital@0;1&family=Caveat:wght@400..700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Blomstrande — Digitalt innehåll, webb &amp; e-handel i Eskilstuna</title>
+<meta name="description" content="Blomstrande Digitalt Innehåll bygger hemsidor i WordPress, driver e-handel, sköter innehåll, annonsering och automation — för företag i Sverige och Finland.">
+<meta name="theme-color" content="#FDF9F3">
+<link rel="canonical" href="https://blomstrande.net/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blomstrande — Digitalt innehåll som blomstrar">
+<meta property="og:description" content="Hemsidor, e-handel, innehåll, annonsering och automation. Från idé till resultat — på svenska, finska och engelska.">
+<meta property="og:url" content="https://blomstrande.net/">
+<meta property="og:image" content="https://blomstrande.net/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Blomstrande — digitalt innehåll, webb och e-handel.">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:site_name" content="Blomstrande">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blomstrande.net/assets/og.jpg">
+
+<link rel="icon" href="assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+
+<script>
+  /* Sätts före första målningen: CSS som döljer innehåll inför animationer
+     får bara gälla när JavaScript faktiskt kör. Utan detta blir sidan tom
+     om skriptet blockeras. */
+  document.documentElement.className += ' js';
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.className += ' reduce';
+  }
+  try {
+    var l = localStorage.getItem('bl-lang');
+    if (l === 'en' || l === 'sv') document.documentElement.lang = l;
+  } catch (e) {}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Blomstrande Digitalt Innehåll",
+  "description": "Hemsidor i WordPress, e-handel, innehåll och kommunikation, annonsering, automation och webbhotellsdrift.",
+  "url": "https://blomstrande.net/",
+  "email": "Calle@blomstrande.net",
+  "image": "https://blomstrande.net/assets/logo.png",
+  "address": { "@type": "PostalAddress", "addressLocality": "Eskilstuna", "addressCountry": "SE" },
+  "areaServed": [{ "@type": "Country", "name": "Sverige" }, { "@type": "Country", "name": "Finland" }],
+  "availableLanguage": ["sv", "fi", "en"],
+  "founder": { "@type": "Person", "name": "Carl-Johan Blomstrand", "jobTitle": "Digital innehållsproducent" },
+  "knowsAbout": ["WordPress", "E-handel", "Digital kommunikation", "Webbanalys", "Meta Ads", "AI-automation", "cPanel"]
+}
+</script>
 </head>
+
 <body>
 
-  <!-- ============ NAV ============ -->
-  <nav class="nav" aria-label="huvudnavigation">
-    <a class="nav-brand" href="#hero" aria-label="Blomstrande Digitalt Innehåll — hem">
-      <img class="brand-logo" src="assets/logo.png" alt="Blomstrande Digitalt Innehåll" />
+<!-- ══ Laddning ═══════════════════════════════════════════════════════════ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <img class="loader__logo" src="assets/logo-mark.png" alt="" width="200" height="191">
+    <span class="loader__count" id="loaderCount">0</span>
+  </div>
+  <div class="loader__bar"><i id="loaderBar"></i></div>
+</div>
+
+<!-- ══ Muspekare (endast precisionspekare) ═══════════════════════════════ -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <i class="cursor__x"></i>
+  <i class="cursor__y"></i>
+  <div class="cursor__frame" id="cursorFrame">
+    <b></b><b></b><b></b><b></b>
+    <span class="cursor__label" id="cursorLabel"></span>
+  </div>
+  <div class="cursor__dot" id="cursorDot"></div>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<a class="skip" href="#hero" data-i18n="skip">Hoppa till innehållet</a>
+
+<!-- ══ Navigation ════════════════════════════════════════════════════════ -->
+<header class="nav" id="nav">
+  <div class="nav__in wrap">
+    <a class="brand" href="#hero" aria-label="Blomstrande — Digitalt innehåll">
+      <img class="brand__mark" src="assets/logo-mark.png" alt="" width="200" height="191" aria-hidden="true">
+      <span class="brand__txt">
+        <b>Blomstrande</b>
+        <i data-i18n="brandSub">Digitalt innehåll</i>
+      </span>
     </a>
-    <ul class="nav-list">
-      <li><a href="#hero" data-nav data-section="hero">hero</a></li>
-      <li><a href="#projekt" data-nav data-section="projekt">projekt</a></li>
-      <li><a href="#om" data-nav data-section="om">om</a></li>
-      <li><a href="#kontakt" data-nav data-section="kontakt">kontakt</a></li>
-    </ul>
-  </nav>
 
-  <!-- ============ HERO · scrubbed video pattern ============ -->
-  <!--
-    Hero använder scrubbed media-tekniken: hero-wrap är 250vh hög;
-    hero-sticky sitter "klistrad" i viewporten. Videons currentTime
-    (eller canvasens scrub-progress) drivs av scroll-progress 0..1.
+    <nav class="nav__links" aria-label="Huvudmeny">
+      <a href="#tjanster" data-nav-link><span data-i18n="navServices">tjänster</span></a>
+      <a href="#case" data-nav-link><span data-i18n="navWork">case</span></a>
+      <a href="#om" data-nav-link><span data-i18n="navAbout">om</span></a>
+      <a href="#kontakt" data-nav-link><span data-i18n="navContact">kontakt</span></a>
+    </nav>
 
-    När produktionsvideon finns: ta bort `hidden` på <video>, lägg in
-    <source>-taggar (mp4 + webm), och canvas blir automatiskt en fallback
-    (gömd när videon laddat metadata). Se app.js → heroScrub().
-  -->
-  <section id="hero" class="section section-hero" data-section>
-    <div class="hero-wrap">
-      <div class="hero-sticky">
-        <!-- Scrubbed video — test-källa inkopplad -->
-        <video class="hero-media" id="heroVideo"
-               muted playsinline preload="auto" hidden>
-          <source src="assets/nylaptop.mp4" type="video/mp4">
-        </video>
-
-        <!-- Canvas-placeholder: scrubbas mellan natt → gryning → soluppgång -->
-        <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
-
-        <!-- Atmosfär-overlay ovanpå media -->
-        <div class="hero-vignette" aria-hidden="true"></div>
-        <div class="grain hero-grain" aria-hidden="true"></div>
-
-        <div class="hero-content">
-          <!-- 3 panels — varje pannels innehåll fadar in/ut baserat på scroll-progress 0..1.
-               data-from/data-to definierar intervallet då panelen är aktiv.
-               Överlapp = crossfade. -->
-          <div class="hero-panels">
-            <div class="hero-panel is-active" data-from="0" data-to="0.52">
-              <p class="eyebrow eyebrow-on-dark">portfölj · 2026</p>
-              <h1 class="display display-on-dark">Carl-Johan.</h1>
-              <p class="lede lede-on-dark"><em>Digital innehållsproducent</em> med hjärtat i kommunikation. Bygger webb, driver e-handel &amp; vrider rätt på ai.</p>
-            </div>
-
-            <div class="hero-panel" data-from="0.46" data-to="1.0">
-              <p class="eyebrow eyebrow-on-dark">vad jag gör</p>
-              <h1 class="display display-on-dark">Digitalt innehåll som <em>blomstrar</em>.</h1>
-              <p class="lede lede-on-dark">Webbutveckling, kommunikation, analys och AI-flöden. från idé till<br>resultat - på svenska, finska och engelska</p>
-              <div class="cta-group">
-                <a href="#projekt" class="btn btn-primary btn-on-dark">se case <span aria-hidden="true">↓</span></a>
-                <a href="#kontakt" class="btn btn-secondary btn-ghost-light">kontakt</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="scroll-hint" aria-hidden="true">
-          <span class="scroll-hint-text">scrolla för att spela</span>
-          <span class="scroll-hint-line"></span>
-        </div>
-
-        <!-- Progress-indikator (subtil, nere till vänster) -->
-        <div class="hero-progress" aria-hidden="true">
-          <span class="hero-progress-track"><span class="hero-progress-fill" id="heroProgressFill"></span></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CASE · scroll-scrubbad filmstrip ============ -->
-  <!--
-    Horisontell remsa: .ps__wrap är hög, .ps__pin fastnar (sticky) i 100vh och
-    scroll-läget översätts till en horisontell förskjutning av .ps__track.
-    Parallax på .ps__media-inner. Drivs av filmstrip-modulen i app.js.
-  -->
-  <section id="projekt" class="section section-cases ps" data-section aria-label="Projekt">
-    <div class="ps__wrap" data-ps-wrap>
-      <div class="ps__pin" data-ps-pin>
-        <div class="ps__atmos" aria-hidden="true"></div>
-
-        <header class="ps__head">
-          <h2 class="h2 h2-serif cases-typewriter">Projekt jag <em>pysslat</em> med</h2>
-        </header>
-
-        <div class="ps__stage" data-ps-track>
-
-          <a class="ps__card" href="https://axer.blomstrande.net/" target="_blank" rel="noopener">
-            <div class="ps__media">
-              <div class="ps__media-inner">
-                <img class="ps__img" src="assets/axer-case.png" alt="Axer.fi — ledande inom skogsmaskiner" loading="lazy" decoding="async" />
-              </div>            </div>
-            <div class="ps__meta">
-              <div class="ps__meta-top">
-                <h3 class="ps__title">Axer.fi — <em>skogsmaskiner</em></h3>
-                <span class="ps__tag">live ↗</span>
-              </div>
-              <p class="ps__desc">Komplett WordPress-hemsida för ledande företag inom skogsmaskiner — översatt till fem språk.</p>
-            </div>
-          </a>
-
-          <a class="ps__card" href="https://mt-electric.blomstrande.net" target="_blank" rel="noopener">
-            <div class="ps__media">
-              <div class="ps__media-inner">
-                <img class="ps__img" src="assets/mt-electric-case.png" alt="MT-Electric Oy — elfirma i Tampere & Hämeenlinna" loading="lazy" decoding="async" />
-              </div>
-            </div>
-            <div class="ps__meta">
-              <div class="ps__meta-top">
-                <h3 class="ps__title">MT-Electric — <em>elektriker</em></h3>
-                <span class="ps__tag">live ↗</span>
-              </div>
-              <p class="ps__desc">WordPress-webbplats för elfirman MT-Electric Oy i Tampere &amp; Hämeenlinna — tydlig presentation av tjänster och kontakt.</p>
-            </div>
-          </a>
-
-          <a class="ps__card" href="https://tatueringssida.netlify.app/" target="_blank" rel="noopener">
-            <div class="ps__media">
-              <div class="ps__media-inner">
-                <img class="ps__img" src="assets/tatuering-case.png" alt="Tatuoijat.fi — katalog över Finlands tatuerare och studior" loading="lazy" decoding="async" />
-              </div>
-            </div>
-            <div class="ps__meta">
-              <div class="ps__meta-top">
-                <h3 class="ps__title">Tatuoijat.fi — <em>tatueringsguide</em></h3>
-                <span class="ps__tag">live ↗</span>
-              </div>
-              <p class="ps__desc">Snabb, statisk sajt byggd i HTML &amp; Astro — en katalog som samlar Finlands tatuerare och studior, där besökaren bläddrar portfolios och filtrerar på stil, stad och pris.</p>
-            </div>
-          </a>
-
-          <a class="ps__card" href="https://purrfect.se" target="_blank" rel="noopener">
-            <div class="ps__media">
-              <div class="ps__media-inner">
-                <img class="ps__img" src="assets/purrfect-case.png" alt="Purrfect — kattprodukter med donationsfunktion" loading="lazy" decoding="async" />
-              </div>            </div>
-            <div class="ps__meta">
-              <div class="ps__meta-top">
-                <h3 class="ps__title">Purrfect, <em>med Livbojen</em></h3>
-                <span class="ps__tag">live ↗</span>
-              </div>
-              <p class="ps__desc">Webbshop för kattleksaker och foder i samarbete med kattorganisationen Livbojen som räddar hemlösa katter — med inbyggd donationsfunktion.</p>
-            </div>
-          </a>
-
-          <a class="ps__card" href="https://billackering.eu" target="_blank" rel="noopener">
-            <div class="ps__media">
-              <div class="ps__media-inner">
-                <img class="ps__img" src="assets/billackering-case.png" alt="Billackering.eu — e-handel inom billack & vård" loading="lazy" decoding="async" />
-              </div>            </div>
-            <div class="ps__meta">
-              <div class="ps__meta-top">
-                <h3 class="ps__title">Billackering.eu — <em>kommunikatör</em></h3>
-                <span class="ps__tag">pågående</span>
-              </div>
-              <p class="ps__desc">Marknads- och kommunikationsansvar för e-handel inom billack och vårdprodukter — för både den svenska och finska marknaden.</p>
-            </div>
-          </a>
-
-          <a class="ps__card" href="https://www.billackering.eu/" target="_blank" rel="noopener">
-            <div class="ps__media">
-              <div class="ps__media-inner">
-                <img class="ps__img" src="assets/meta-portfolio.png" alt="Strategisk marknadsföring via Meta" loading="lazy" decoding="async" />
-              </div>            </div>
-            <div class="ps__meta">
-              <div class="ps__meta-top">
-                <h3 class="ps__title">Strategisk marknadsföring via <em>Meta</em></h3>
-                <span class="ps__tag">pågående</span>
-              </div>
-              <p class="ps__desc">Annonser och kampanjer via Meta för svenska och finska marknaden — strategi, målgrupper och analys.</p>
-            </div>
-          </a>
-
-          <article class="ps__card">
-            <div class="ps__media">
-              <div class="ps__media-inner">
-                <img class="ps__img" src="assets/ai-automation-case.png" alt="Automation & AI — n8n, Zapier, custom GPT" loading="lazy" decoding="async" />
-              </div>            </div>
-            <div class="ps__meta">
-              <div class="ps__meta-top">
-                <h3 class="ps__title">Automation &amp; <em>AI-flöden</em></h3>
-                <span class="ps__tag">2025</span>
-              </div>
-              <p class="ps__desc">Automationsflöden i n8n och Zapier, samt bygger AI-agenter och andra AI-baserade verktyg.</p>
-            </div>
-          </article>
-
-          <article class="ps__card">
-            <div class="ps__media">
-              <div class="ps__media-inner">
-                <img class="ps__img" src="assets/cpanel-case.png" alt="Webbhotell & cPanel — drift och konfiguration" loading="lazy" decoding="async" />
-              </div>
-            </div>
-            <div class="ps__meta">
-              <div class="ps__meta-top">
-                <h3 class="ps__title">Webbhotell &amp; <em>cPanel</em></h3>
-                <span class="ps__tag">drift</span>
-              </div>
-              <p class="ps__desc">Har jobbat i cPanel via ett webbhotell i Finland — justerat inställningar som DNS, e-post, SSL, databaser och PHP samt uppdaterat och felsökt flera hemsidor.</p>
-            </div>
-          </article>
-
-        </div>
-
-        <div class="ps__rail"><div class="ps__rail-fill" data-ps-fill></div></div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ § 03 OM · Terminal ============ -->
-  <section class="section om" id="om" data-section data-screen-label="03 Om · Terminal">
-    <div class="om__fade-top" aria-hidden="true"></div>
-    <div class="section__inner">
-
-      <header class="om__header">
-        <h2 class="display om-typewriter">Hej, jag är <em>Calle</em>.</h2>
-      </header>
-
-      <div class="om__grid">
-        <aside class="om__bio reveal-group">
-          <p class="reveal">Carl-Johan i grunden — <strong>Calle</strong> till vardags. Jag skapar, strukturerar och förbättrar <em>digitalt innehåll</em> för webb, kommunikation och e-handel.</p>
-          <p class="reveal">Till vardags jobbar jag brett med det digitala — webb, e-handel, innehåll, kampanjer, kommunikation, analys och digital utveckling, på både svensk och finsk marknad. Jag trivs med att röra mig mellan olika delar och få helheten att hänga ihop.</p>
-          <p class="reveal">Vid sidan av bygger jag hemsidor åt olika kunder, främst i <em>WordPress</em>. Jag hjälper till med struktur, text, innehåll, funktionell och stilren UI- och UX-design och att få sidan att kännas både tydlig och levande. Jag har även jobbat i <em>cPanel</em> via ett webbhotell i Finland — justerat inställningar som DNS, e-post och SSL och uppdaterat flera hemsidor.</p>
-          <p class="reveal">Jag driver också egna digitala projekt, bland annat <em>Purrfect</em>. Det är ett exempel på hur jag gillar att jobba: ta en idé, forma innehållet, bygga strukturen och få tekniken att hänga ihop.</p>
-          <p class="reveal">Jag trivs bäst där text, teknik och affär möts. Gärna med WordPress, e-handel, Canva, analysverktyg och AI-lösningar som Claude Code, ChatGPT, Hermes, Zapier och n8n nära till hands.</p>
-          <p class="reveal">Strukturerad, lösningsorienterad och lite för intresserad av nya verktyg. Men framför allt: jag gillar att göra saker begripliga, användbara och färdiga.</p>
-          <p class="verktyg-label reveal">// alltid nyfiken på nästa smarta lösning <span class="om-arrow" aria-hidden="true">→</span></p>
-          <img class="om__avatar reveal" src="assets/calle-animerad.png" alt="Illustrerad Calle" loading="lazy" decoding="async" />
-        </aside>
-
-        <div class="terminal-wrap">
-
-          <div class="terminal" role="presentation" aria-label="Terminal med information om Calle">
-            <div class="terminal__bar">
-              <div class="terminal__dots">
-                <span class="terminal__dot" data-c="r"></span>
-                <span class="terminal__dot" data-c="y"></span>
-                <span class="terminal__dot" data-c="g"></span>
-              </div>
-              <div class="terminal__title">calle@blomstrande:~</div>
-              <div class="terminal__meta">bash · 80×24</div>
-            </div>
-            <div class="terminal__body" id="terminal-body" aria-live="polite">
-              <!-- typed in by sections.js -->
-            </div>
-          </div>
-
-          <figure class="polaroid" aria-hidden="true">
-            <div class="polaroid__tape"></div>
-            <div class="polaroid__img">
-              <img src="assets/calle-portrait.png" alt="" loading="lazy" />
-            </div>
-            <figcaption class="polaroid__caption">./calle.png</figcaption>
-          </figure>
-
-        </div>
-      </div>
-
-    </div>
-    <div class="om__fade-bottom" aria-hidden="true"></div>
-  </section>
-
-  <!-- ============ § 04 KONTAKT · Brevkort ============ -->
-  <section class="section kontakt" id="kontakt" data-section data-screen-label="04 Kontakt · Brevkort">
-    <div class="kontakt__fade-top" aria-hidden="true"></div>
-    <div class="section__inner">
-
-      <header class="kontakt__header">
-        <h2 class="display">Skicka ett <em>brevkort</em>.</h2>
-        <p class="kontakt__sub">Har du en idé, en hemsida som behöver lyftas eller ett digitalt flöde som borde bli smartare? Hör av dig, så tittar vi på det. Normalt svar inom 1–2 arbetsdagar.</p>
-      </header>
-
-      <div class="postcard-wrap">
-        <form class="postcard" id="postcard-form" novalidate>
-
-          <!-- LEFT side: message -->
-          <div class="postcard__left">
-            <p class="postcard__label">meddelande</p>
-            <div class="postcard__message">
-              <textarea
-                name="message"
-                placeholder="Hej Calle — vi behöver hjälp med…"
-                aria-label="Ditt meddelande"
-              ></textarea>
-            </div>
-          </div>
-
-          <div class="postcard__divider" aria-hidden="true"></div>
-
-          <!-- RIGHT side: address + stamp + sender -->
-          <div class="postcard__right">
-
-            <!-- Stamp (decorative, branded) -->
-            <div class="stamp" aria-hidden="true">
-              <div class="stamp__inner">
-                <span class="stamp__letter">B</span>
-                <span class="stamp__text">BLOMSTR.</span>
-                <span class="stamp__year">2026 · SE</span>
-              </div>
-            </div>
-
-            <!-- Postmark (overlaps stamp via mix-blend-mode) -->
-            <div class="postmark" aria-hidden="true">
-              <span>ESKIL-</span>
-              <span>STUNA</span>
-              <span>26·05</span>
-            </div>
-
-            <p class="postcard__to-label">till</p>
-            <h3 class="postcard__to">Calle<br/>Blomstrand</h3>
-            <p class="postcard__to-addr">calle.sassi@gmail.com</p>
-
-            <!-- Sender fields -->
-            <div class="sender">
-              <div>
-                <label class="sender__label" for="pc-name">avsändare</label>
-                <input id="pc-name" name="name" type="text" placeholder="ditt namn" autocomplete="name" required />
-              </div>
-              <div>
-                <label class="sender__label" for="pc-email">e-postadress</label>
-                <input id="pc-email" name="email" type="email" placeholder="du@företaget.se" autocomplete="email" required />
-              </div>
-            </div>
-
-          </div>
-        </form>
-      </div>
-
-      <div class="kontakt__actions">
-        <button type="submit" form="postcard-form" class="btn-frank">
-          <span>frankera &amp; skicka</span>
-          <span aria-hidden="true">→</span>
+    <div class="nav__side">
+      <div class="lang" id="lang">
+        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" id="langBtn">
+          <span id="langCur">SV</span>
+          <svg viewBox="0 0 10 10" width="9" height="9" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
         </button>
-        <a class="kontakt__alt" href="mailto:calle.sassi@gmail.com">eller mejla direkt ↗</a>
+        <div class="lang__menu" role="menu">
+          <button type="button" data-lang="sv" role="menuitem"><b>SV</b> Svenska</button>
+          <button type="button" data-lang="en" role="menuitem"><b>EN</b> English</button>
+        </div>
       </div>
 
-      <ul class="social">
-        <li><a href="https://blomstrande.net" target="_blank" rel="noopener">blomstrande.net ↗</a></li>
-        <li><a href="#" target="_blank" rel="noopener">linkedin ↗</a></li>
-      </ul>
+      <a class="btn btn--gold" href="#kontakt" data-magnetic>
+        <span data-i18n="navCta">Begär offert</span>
+        <svg class="btn__arw" viewBox="0 0 14 14" width="13" height="13" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
 
-      <footer class="kontakt__footer">
-        <span>© 2026 · Carl-Johan Blomstrand · Blomstrande Digitalt Innehåll</span>
-        <span>postage paid · porto betalt</span>
-      </footer>
+      <button class="burger" id="burger" type="button" aria-label="Meny" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile" id="mobile">
+  <nav class="mobile__nav">
+    <a href="#tjanster"><em>01</em> <span data-i18n="navServices">tjänster</span></a>
+    <a href="#case"><em>02</em> <span data-i18n="navWork">case</span></a>
+    <a href="#om"><em>03</em> <span data-i18n="navAbout">om</span></a>
+    <a href="#kontakt"><em>04</em> <span data-i18n="navContact">kontakt</span></a>
+  </nav>
+  <div class="mobile__foot">
+    <a href="mailto:Calle@blomstrande.net">Calle@blomstrande.net</a>
+    <span>Eskilstuna · SE</span>
+  </div>
+</div>
+
+<main>
+
+<!-- ══ Hero ══════════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero" data-spotlight>
+  <div class="hero__media" aria-hidden="true" data-parallax>
+    <img src="assets/hero.jpg"
+         srcset="assets/hero-1200.jpg 1200w, assets/hero.jpg 1920w"
+         sizes="100vw" alt="" width="1920" height="823" fetchpriority="high">
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="hero__glow" aria-hidden="true"></div>
+
+  <div class="wrap hero__in">
+    <p class="eyebrow" data-reveal><span data-i18n="heroEyebrow">Digitalt innehåll</span> · Eskilstuna · SE &amp; FI</p>
+
+    <h1 class="hero__h1">
+      <span class="line"><span data-i18n="heroL1">Digitalt innehåll</span></span>
+      <span class="line"><span data-i18n="heroL2">som blomstrar<em>.</em></span></span>
+    </h1>
+
+    <p class="hero__lead" data-reveal>
+      <span data-i18n="heroLead">Jag bygger hemsidor, driver e-handel och får innehåll, annonser och teknik att hänga ihop — för företag i Sverige och Finland.</span>
+    </p>
+
+    <div class="hero__cta" data-reveal>
+      <a class="btn btn--gold btn--lg" href="#tjanster" data-magnetic>
+        <span data-i18n="heroCta1">Se tjänster</span>
+        <svg class="btn__arw" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn--ghost btn--lg" href="#case" data-magnetic><span data-i18n="heroCta2">Se case</span></a>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span data-i18n="scrollCue">scrolla</span>
+    <i></i>
+  </div>
+</section>
+
+
+
+<!-- ══ Tjänster ══════════════════════════════════════════════════════════ -->
+<section class="services" id="tjanster">
+  <div class="wrap">
+    <div class="services__head">
+      <div>
+        <p class="eyebrow" data-reveal><span data-i18n="svcEyebrow">Tjänster</span></p>
+        <h2 class="h2" data-reveal data-i18n="svcTitle">Det jag hjälper företag med.</h2>
+      </div>
+      <p class="lead" data-reveal data-i18n="svcLead">Sex områden som går in i varandra. De flesta kunder börjar med ett och lägger till fler när det första sitter.</p>
+    </div>
+
+    <div class="services__grid" data-reveal-group>
+
+      <article class="svc" data-reveal>
+        <figure class="svc__media"><img src="assets/svc-webb.jpg" alt="Webbplats byggd åt kund" loading="lazy" width="880" height="550"></figure>
+        <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="M2.5 9h19M6 6.5h.01M8.5 6.5h.01"/></svg></span>
+        <h3 data-i18n="v1t">Hemsidor</h3>
+        <p data-i18n="v1b">Nya sajter och omgörningar av gamla — mestadels i WordPress, men handbyggt i kod när det passar bättre. Struktur, texter, bilder och det tekniska bakom, så att sidan blir lika begriplig för besökaren som för Google.</p>
+        <ul class="chips"><li>WordPress</li><li>Astro</li><li data-i18n="chipStruct">Struktur</li><li data-i18n="chipPerf">Prestanda</li></ul>
+      <span class="svc__go" aria-hidden="true"><svg viewBox="0 0 14 14" width="13" height="13" fill="none"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </article>
+
+      <article class="svc" data-reveal>
+        <figure class="svc__media"><img src="assets/svc-ehandel.jpg" alt="Webbshop" loading="lazy" width="880" height="550"></figure>
+        <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1.2 11.2a2 2 0 0 1-2 1.8H7.2a2 2 0 0 1-2-1.8L4 8Z"/><path d="M8.5 8V6a3.5 3.5 0 0 1 7 0v2"/></svg></span>
+        <h3 data-i18n="v2t">E-handel</h3>
+        <p data-i18n="v2b">Webbshoppar som går att sköta själv. Produkter, kategorier, betalning och frakt — plus texterna som gör att kunden vågar trycka på köp.</p>
+        <ul class="chips"><li data-i18n="chipShop">Webbshop</li><li data-i18n="chipProducts">Produktflöden</li><li>WooCommerce</li></ul>
+        <span class="svc__go" aria-hidden="true"><svg viewBox="0 0 14 14" width="13" height="13" fill="none"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </article>
+
+      <article class="svc" data-reveal>
+        <figure class="svc__media"><img src="assets/svc-innehall.jpg" alt="Innehålls- och SEO-arbete" loading="lazy" width="880" height="550"></figure>
+        <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16M4 10h11M4 14.5h16M4 19h9"/></svg></span>
+        <h3 data-i18n="v3t">SEO, innehåll &amp; kommunikation</h3>
+        <p data-i18n="v3b">Texter, produktbeskrivningar, nyhetsbrev och kundkommunikation på svenska, finska och engelska — skrivet både för läsaren och för sökmotorn. Samma budskap, rätt tonfall i varje land.</p>
+        <ul class="chips"><li>SEO</li><li>Copy sv/fi/en</li><li>Content</li><li data-i18n="chipCustomer">Kunddialog</li></ul>
+      <span class="svc__go" aria-hidden="true"><svg viewBox="0 0 14 14" width="13" height="13" fill="none"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </article>
+
+      <article class="svc" data-reveal>
+        <figure class="svc__media"><img src="assets/svc-analys.jpg" alt="Kampanj för Ember Roasters — annonser, e-post och resultat" loading="lazy" width="880" height="550"></figure>
+        <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V10M9.3 19V5M14.7 19v-6M20 19V8"/></svg></span>
+        <h3 data-i18n="v4t">Annonsering &amp; analys</h3>
+        <p data-i18n="v4b">Kampanjer via Meta för svensk och finsk marknad, med målgrupper och uppföljning. Du får veta vad pengarna gick till, inte bara att de gick åt.</p>
+        <ul class="chips"><li>Meta Ads</li><li data-i18n="chipAudience">Målgrupper</li><li data-i18n="chipReporting">Rapportering</li></ul>
+      <span class="svc__go" aria-hidden="true"><svg viewBox="0 0 14 14" width="13" height="13" fill="none"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </article>
+
+      <article class="svc" data-reveal>
+        <figure class="svc__media"><img src="assets/svc-automation.jpg" alt="Automationsflöden och serverövervakning" loading="lazy" width="880" height="550"></figure>
+        <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="12" r="2.4"/><circle cx="7" cy="18" r="2.4"/><path d="M8.2 7.1l7.6 3.7M15.9 13.4l-7 3.5"/></svg></span>
+        <h3 data-i18n="v5t">Automation &amp; AI</h3>
+        <p data-i18n="v5b">Flöden i n8n och Zapier och egna AI-verktyg som tar hand om det repetitiva. Offertsvar, produktdata, rapporter — sånt som annars äter en förmiddag i veckan.</p>
+        <ul class="chips"><li>n8n</li><li>Zapier</li><li data-i18n="chipAgents">AI-agenter</li></ul>
+      <span class="svc__go" aria-hidden="true"><svg viewBox="0 0 14 14" width="13" height="13" fill="none"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </article>
+
+      <article class="svc" data-reveal>
+        <figure class="svc__media"><img src="assets/svc-drift.jpg" alt="Kontrollpanel för webbhotell" loading="lazy" width="880" height="550"></figure>
+        <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="5.5" rx="1.8"/><rect x="3" y="14.5" width="18" height="5.5" rx="1.8"/><path d="M6.7 6.75h.01M6.7 17.25h.01"/></svg></span>
+        <h3 data-i18n="v6t">Webbhotell &amp; drift</h3>
+        <p data-i18n="v6b">DNS, e-post, SSL, databaser och uppdateringar i cPanel. Sajten hålls uppdaterad och säker, och när något krånglar felsöker jag i stället för att hänvisa vidare.</p>
+        <ul class="chips"><li>cPanel</li><li>DNS &amp; SSL</li><li data-i18n="chipMaint">Underhåll</li></ul>
+      <span class="svc__go" aria-hidden="true"><svg viewBox="0 0 14 14" width="13" height="13" fill="none"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </article>
 
     </div>
-    <div class="kontakt__fade-bottom" aria-hidden="true"></div>
-  </section>
 
-  <script src="app.js"></script>
+    <div class="services__foot" data-reveal>
+      <p data-i18n="svcFoot">Vet du inte riktigt vad du behöver? Det är den vanligaste utgångspunkten. Beskriv läget så säger jag vad jag skulle göra först.</p>
+      <a class="btn btn--gold" href="#kontakt" data-magnetic>
+        <span data-i18n="svcCta">Begär offert</span>
+        <svg class="btn__arw" viewBox="0 0 14 14" width="13" height="13" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ Marknader: bild + text ════════════════════════════════════════════ -->
+<section class="split" id="marknader">
+  <div class="wrap split__grid">
+    <div class="split__media" data-reveal>
+      <figure class="split__main" data-parallax>
+        <img src="assets/split-ehandel.jpg" alt="Kund som handlar i en webbshop" loading="lazy" width="1400" height="934">
+      </figure>
+      <figure class="split__inset" data-reveal>
+        <img src="assets/split-kod.jpg" alt="Kod i en editor" loading="lazy" width="900" height="1313">
+      </figure>
+    </div>
+
+    <div class="split__copy" data-reveal-group>
+      <p class="eyebrow" data-reveal><span data-i18n="splitEyebrow">Tre språkområden</span></p>
+      <h2 class="h2" data-reveal data-i18n="splitTitle">Samma sajt, tre språkområden.</h2>
+      <p class="lead" data-reveal data-i18n="splitLead">Jag arbetar på svenska, finska och engelska, mot både svensk och finsk marknad. Det betyder inte bara översatt text — det betyder rätt tonfall, rätt betalsätt och kampanjer som är byggda för respektive land.</p>
+      <ul class="split__list" data-reveal>
+        <li><b data-i18n="sp1t">Innehåll på tre språk</b><span data-i18n="sp1b">Svenska, finska och engelska, skrivet för att fungera i sitt sammanhang.</span></li>
+        <li><b data-i18n="sp2t">Byggt för att skötas själv</b><span data-i18n="sp2b">Du ska kunna byta en text eller lägga in en produkt utan att ringa mig.</span></li>
+        <li><b data-i18n="sp3t">Teknik som håller</b><span data-i18n="sp3b">Ren kod, snabba sidor och drift som inte kräver att du förstår DNS.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Så går det till ═══════════════════════════════════════════════════ -->
+<section class="process" id="process">
+  <div class="process__glow" aria-hidden="true"></div>
+  <div class="wrap process__grid">
+
+    <div class="process__aside">
+      <div class="process__pin">
+        <p class="eyebrow" data-reveal><span data-i18n="procEyebrow">Så går det till</span></p>
+        <h2 class="h2" data-reveal data-i18n="procTitle">Fyra steg, inga överraskningar.</h2>
+        <p class="process__lead" data-reveal data-i18n="procLead">Du ska aldrig behöva undra var projektet står eller vad nästa faktura landar på. Så här ser vägen ut, från första samtalet till att sajten är i drift.</p>
+        <div class="process__counter" aria-hidden="true">
+          <span id="procCount">01</span><i>/ 04</i>
+        </div>
+      </div>
+    </div>
+
+    <ol class="psteps">
+      <li class="pstep" data-step>
+        <span class="pstep__num" aria-hidden="true">01</span>
+        <div class="pstep__body">
+          <h3 data-i18n="p1t">Vi pratar</h3>
+          <p data-i18n="p1b">Ett samtal om vad du gör, vem du säljer till och vad som skaver idag. Kostar ingenting och binder inte.</p>
+          <span class="pstep__meta" data-i18n="p1m">Kostar ingenting</span>
+        </div>
+      </li>
+      <li class="pstep" data-step>
+        <span class="pstep__num" aria-hidden="true">02</span>
+        <div class="pstep__body">
+          <h3 data-i18n="p2t">Förslag och pris</h3>
+          <p data-i18n="p2b">Du får ett upplägg med omfattning, tidsplan och fast pris innan något börjar byggas.</p>
+          <span class="pstep__meta" data-i18n="p2m">Fast pris i förväg</span>
+        </div>
+      </li>
+      <li class="pstep" data-step>
+        <span class="pstep__num" aria-hidden="true">03</span>
+        <div class="pstep__body">
+          <h3 data-i18n="p3t">Jag bygger</h3>
+          <p data-i18n="p3b">Du ser sajten växa fram och kan tycka till längs vägen — inte först på slutet.</p>
+          <span class="pstep__meta" data-i18n="p3m">Du tycker till längs vägen</span>
+        </div>
+      </li>
+      <li class="pstep" data-step>
+        <span class="pstep__num" aria-hidden="true">04</span>
+        <div class="pstep__body">
+          <h3 data-i18n="p4t">Drift efteråt</h3>
+          <p data-i18n="p4b">Uppdateringar, säkerhet och småfix. Du behöver inte lära dig cPanel för att äga en hemsida.</p>
+          <span class="pstep__meta" data-i18n="p4m">Löpande</span>
+        </div>
+      </li>
+    </ol>
+
+  </div>
+</section>
+
+<!-- ══ Manifest (scroll-scrub) ═══════════════════════════════════════════ -->
+<section class="manifest">
+  <div class="manifest__bg" aria-hidden="true">
+    <div class="manifest__bgPin">
+      <img src="assets/band-skiss.jpg" alt="" loading="lazy" width="1672" height="941">
+    </div>
+  </div>
+  <div class="manifest__track" data-scrub-track>
+    <div class="manifest__sticky">
+      <div class="wrap manifest__grid">
+        <p class="scrub" data-scrub-text data-i18n="manifest">Webbutveckling, kommunikation, analys och AI-flöden. Från idé till resultat — på svenska, finska och engelska.</p>
+        <aside class="mpanel">
+          <p class="eyebrow eyebrow--light"><span data-i18n="mpEyebrow">Arbetssätt</span></p>
+          <p class="mpanel__lead" data-i18n="manifestMeta">Jag trivs bäst där text, teknik och affär möts. Strukturerad, lösningsorienterad och lite för intresserad av nya verktyg.</p>
+          <ul class="mpanel__list">
+            <li data-scrub-item><b data-i18n="mp1">Ett samtal innan något byggs</b></li>
+            <li data-scrub-item><b data-i18n="mp2">Fast pris, inga överraskningar</b></li>
+            <li data-scrub-item><b data-i18n="mp3">Samma person hela vägen</b></li>
+          </ul>
+          <p class="mpanel__sign"><span data-i18n="mpSign">Carl-Johan Blomstrand</span></p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Projekt: horisontellt galleri ═════════════════════════════════════ -->
+<section class="work" id="case">
+  <div class="wrap work__head">
+    <p class="eyebrow" data-reveal><span data-i18n="workEyebrow">Case</span></p>
+    <h2 class="h2" data-reveal data-i18n="workTitle">Byggt, lanserat och i drift.</h2>
+    <p class="work__hint" data-reveal><span data-i18n="workHint">Håll musen över för att pausa</span> <i>→</i></p>
+  </div>
+
+  <div class="work__marquee" data-marquee>
+    <div class="work__rail" id="workRail">
+        <article class="case" data-tilt>
+          <a class="case__link" href="https://axer.blomstrande.net/" target="_blank" rel="noopener" data-cursor="öppna">
+            <div class="case__media"><img src="assets/axer-case.jpg" alt="Axer.fi — ledande inom skogsmaskiner" loading="lazy" width="1200" height="800"></div>
+            <div class="case__body">
+              <div class="case__top"><em class="case__no">01</em><span class="tag tag--live" data-i18n="badgeLive">live</span></div>
+              <h3>Axer.fi <i>— <span data-i18n="c1sub">skogsmaskiner</span></i></h3>
+              <p data-i18n="c1">Komplett WordPress-hemsida för ledande företag inom skogsmaskiner — översatt till fem språk.</p>
+              <ul class="chips"><li>WordPress</li><li data-i18n="chipMulti">5 språk</li><li>SEO</li></ul>
+            </div>
+          </a>
+        </article>
+
+        <article class="case" data-tilt>
+          <a class="case__link" href="https://mt-electric.blomstrande.net" target="_blank" rel="noopener" data-cursor="öppna">
+            <div class="case__media"><img src="assets/mt-electric-case.jpg" alt="MT-Electric Oy — elfirma i Tampere och Hämeenlinna" loading="lazy" width="1200" height="800"></div>
+            <div class="case__body">
+              <div class="case__top"><em class="case__no">02</em><span class="tag tag--live" data-i18n="badgeLive">live</span></div>
+              <h3>MT-Electric <i>— <span data-i18n="c2sub">elektriker</span></i></h3>
+              <p data-i18n="c2">WordPress-webbplats för elfirman MT-Electric Oy i Tampere &amp; Hämeenlinna — tydlig presentation av tjänster och kontakt.</p>
+              <ul class="chips"><li>WordPress</li><li data-i18n="chipStruct">Struktur</li><li>Copy</li></ul>
+            </div>
+          </a>
+        </article>
+
+        <article class="case" data-tilt>
+          <a class="case__link" href="https://tatueringssida.netlify.app/" target="_blank" rel="noopener" data-cursor="öppna">
+            <div class="case__media"><img src="assets/tatuering-case.jpg" alt="Tatuoijat.fi — katalog över Finlands tatuerare" loading="lazy" width="1200" height="800"></div>
+            <div class="case__body">
+              <div class="case__top"><em class="case__no">03</em><span class="tag tag--live" data-i18n="badgeLive">live</span></div>
+              <h3>Tatuoijat.fi <i>— <span data-i18n="c3sub">tatueringsguide</span></i></h3>
+              <p data-i18n="c3">Snabb, statisk sajt byggd i HTML &amp; Astro — en katalog som samlar Finlands tatuerare och studior, där besökaren bläddrar portfolios och filtrerar på stil, stad och pris.</p>
+              <ul class="chips"><li>Astro</li><li data-i18n="chipFilter">Filtrering</li><li>Netlify</li></ul>
+            </div>
+          </a>
+        </article>
+
+        <article class="case" data-tilt>
+          <a class="case__link" href="https://purrfect.se" target="_blank" rel="noopener" data-cursor="öppna">
+            <div class="case__media"><img src="assets/purrfect-case.jpg" alt="Purrfect — kattprodukter med donationsfunktion" loading="lazy" width="1200" height="800"></div>
+            <div class="case__body">
+              <div class="case__top"><em class="case__no">04</em><span class="tag tag--live" data-i18n="badgeLive">live</span></div>
+              <h3>Purrfect <i>— <span data-i18n="c4sub">med Livbojen</span></i></h3>
+              <p data-i18n="c4">Webbshop för kattleksaker och foder i samarbete med kattorganisationen Livbojen som räddar hemlösa katter — med inbyggd donationsfunktion.</p>
+              <ul class="chips"><li data-i18n="chipShop">Webbshop</li><li data-i18n="chipDonation">Donation</li><li data-i18n="chipOwn">Eget projekt</li></ul>
+            </div>
+          </a>
+        </article>
+
+        <article class="case" data-tilt>
+          <a class="case__link" href="https://www.billackering.eu/" target="_blank" rel="noopener" data-cursor="öppna">
+            <div class="case__media"><img src="assets/billackering-case.jpg" alt="Billackering.eu — e-handel inom billack och vårdprodukter" loading="lazy" width="1200" height="800"></div>
+            <div class="case__body">
+              <div class="case__top"><em class="case__no">05</em><span class="tag tag--live" data-i18n="badgeOngoing">pågående</span></div>
+              <h3>Billackering.eu <i>— <span data-i18n="c5sub">kommunikatör</span></i></h3>
+              <p data-i18n="c5">Marknads- och kommunikationsansvar för e-handel inom billack och vårdprodukter — för både den svenska och finska marknaden.</p>
+              <ul class="chips"><li data-i18n="chipComm">Kommunikation</li><li>SE + FI</li><li data-i18n="chipEcom">E-handel</li></ul>
+            </div>
+          </a>
+        </article>
+
+        <article class="case" data-tilt>
+          <div class="case__link" data-cursor="">
+            <div class="case__media"><img src="assets/meta-portfolio.jpg" alt="Strategisk marknadsföring via Meta" loading="lazy" width="1200" height="800"></div>
+            <div class="case__body">
+              <div class="case__top"><em class="case__no">06</em><span class="tag tag--work" data-i18n="badgeOngoing">pågående</span></div>
+              <h3 data-i18n="c6title">Strategisk marknadsföring <i>— via Meta</i></h3>
+              <p data-i18n="c6">Annonser och kampanjer via Meta för svenska och finska marknaden — strategi, målgrupper och analys.</p>
+              <ul class="chips"><li>Meta Ads</li><li data-i18n="chipAudience">Målgrupper</li><li data-i18n="chipAnalysis">Analys</li></ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="case" data-tilt>
+          <div class="case__link" data-cursor="">
+            <div class="case__media"><img src="assets/ai-automation-case.jpg" alt="Automation och AI — n8n, Zapier och egna GPT-verktyg" loading="lazy" width="1200" height="800"></div>
+            <div class="case__body">
+              <div class="case__top"><em class="case__no">07</em><span class="tag">2025</span></div>
+              <h3 data-i18n="c7title">Automation <i>&amp; AI-flöden</i></h3>
+              <p data-i18n="c7">Automationsflöden i n8n och Zapier, samt bygger AI-agenter och andra AI-baserade verktyg.</p>
+              <ul class="chips"><li>n8n</li><li>Zapier</li><li data-i18n="chipAgents">AI-agenter</li></ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="case" data-tilt>
+          <div class="case__link" data-cursor="">
+            <div class="case__media"><img src="assets/cpanel-case.jpg" alt="Webbhotell och cPanel — drift och konfiguration" loading="lazy" width="1200" height="800"></div>
+            <div class="case__body">
+              <div class="case__top"><em class="case__no">08</em><span class="tag" data-i18n="badgeOps">drift</span></div>
+              <h3 data-i18n="c8title">Webbhotell <i>&amp; cPanel</i></h3>
+              <p data-i18n="c8">Har jobbat i cPanel via ett webbhotell i Finland — justerat inställningar som DNS, e-post, SSL, databaser och PHP samt uppdaterat och felsökt flera hemsidor.</p>
+              <ul class="chips"><li>DNS</li><li>SSL</li><li>PHP</li></ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="case case--end">
+          <a class="case__link" href="#kontakt" data-cursor="">
+            <div class="case__body case__body--end">
+              <em class="case__no">→</em>
+              <h3 data-i18n="endTitle">Nästa projekt är ditt.</h3>
+              <p data-i18n="endBody">Har du en idé, en hemsida som behöver lyftas eller ett flöde som borde bli smartare? Hör av dig så tittar vi på det.</p>
+              <span class="btn btn--gold" data-i18n="endCta">Skicka ett meddelande</span>
+            </div>
+          </a>
+        </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ Om ════════════════════════════════════════════════════════════════ -->
+<section class="about" id="om">
+  <div class="wrap about__grid">
+    <div class="about__media" data-reveal>
+      <div class="about__frame" data-parallax>
+        <img src="assets/calle-portrait.jpg" alt="Carl-Johan Blomstrand" loading="lazy" width="900" height="1125">
+      </div>
+      <p class="about__cap"><span data-i18n="aboutCap">Calle · Eskilstuna</span></p>
+    </div>
+
+    <div class="about__copy" data-reveal-group>
+      <p class="eyebrow" data-reveal><span data-i18n="aboutEyebrow">Om företaget</span></p>
+      <h2 class="h2" data-reveal data-i18n="aboutTitle">Personen bakom Blomstrande.</h2>
+
+      <p class="lead" data-reveal data-i18n="about1">Carl-Johan i grunden — Calle till vardags. Jag skapar, strukturerar och förbättrar digitalt innehåll för webb, kommunikation och e-handel.</p>
+      <p data-reveal data-i18n="about2">Till vardags jobbar jag brett med det digitala — webb, e-handel, innehåll, kampanjer, kommunikation, analys och digital utveckling, på både svensk och finsk marknad. Jag trivs med att röra mig mellan olika delar och få helheten att hänga ihop.</p>
+      <p data-reveal data-i18n="about3">Vid sidan av bygger jag hemsidor åt olika kunder, främst i WordPress. Jag hjälper till med struktur, text, innehåll, funktion och det tekniska som gör att sidan känns både tydlig och levande. Jag har även jobbat i cPanel via ett webbhotell i Finland — justerat inställningar som DNS, e-post och SSL och uppdaterat flera hemsidor.</p>
+      <p data-reveal data-i18n="about4">Jag driver också egna digitala projekt, bland annat Purrfect. Det är ett exempel på hur jag gillar att jobba: ta en idé, forma innehållet, bygga strukturen och få tekniken att hänga ihop.</p>
+
+      <blockquote class="pull" data-reveal>
+        <p data-i18n="pull">Jag gillar att göra saker begripliga, användbara och färdiga.</p>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Kontakt ═══════════════════════════════════════════════════════════ -->
+<section class="contact" id="kontakt">
+  <div class="contact__bg" aria-hidden="true">
+    <img src="assets/band-kod.jpg" alt="" loading="lazy" width="1919" height="806">
+  </div>
+  <div class="contact__glow" aria-hidden="true"></div>
+  <div class="wrap contact__grid">
+
+    <div class="contact__copy" data-reveal-group>
+      <p class="eyebrow" data-reveal><span data-i18n="contactEyebrow">Kontakt</span></p>
+      <h2 class="h2 h2--xl" data-reveal data-i18n="contactTitle">Berätta vad ditt företag behöver.</h2>
+      <p class="lead" data-reveal data-i18n="contactLead">Har du en idé, en hemsida som behöver lyftas eller ett digitalt flöde som borde bli smartare? Hör av dig, så tittar vi på det. Normalt svar inom 1–2 arbetsdagar.</p>
+
+      <div class="contact__direct" data-reveal>
+        <a href="mailto:Calle@blomstrande.net" data-cursor="">Calle@blomstrande.net</a>
+        <div class="contact__links">
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://blomstrande.net" target="_blank" rel="noopener">blomstrande.net ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <form class="form" id="form" data-reveal novalidate>
+      <div class="form__row">
+        <div class="field">
+          <label for="f-name" data-i18n="fName">Namn</label>
+          <input id="f-name" name="namn" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-mail" data-i18n="fMail">E-post</label>
+          <input id="f-mail" name="epost" type="email" autocomplete="email" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-sub" data-i18n="fSubject">Företag</label>
+        <input id="f-sub" name="amne" type="text">
+      </div>
+      <div class="field">
+        <label for="f-msg" data-i18n="fMsg">Meddelande</label>
+        <textarea id="f-msg" name="meddelande" rows="5"></textarea>
+      </div>
+      <button class="btn btn--gold btn--lg btn--full" type="submit" data-magnetic>
+        <span data-i18n="fSend">Skicka förfrågan</span>
+        <svg class="btn__arw" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p class="form__note" id="formNote" data-i18n="fNote">Din e-postklient öppnas med meddelandet färdigskrivet.</p>
+    </form>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ══ Sidfot ════════════════════════════════════════════════════════════ -->
+<footer class="foot">
+  <div class="wrap">
+
+    <div class="foot__top">
+      <div class="foot__brand">
+        <img class="foot__logo" src="assets/logo-light.png" alt="Blomstrande Digitalt Innehåll" width="621" height="169">
+        <p data-i18n="footBlurb">Hemsidor, e-handel, innehåll och automation för företag i Sverige och Finland. Från idé till drift — samma person hela vägen.</p>
+        <a class="btn btn--gold" href="#kontakt" data-magnetic>
+          <span data-i18n="footCta">Begär offert</span>
+          <svg class="btn__arw" viewBox="0 0 14 14" width="13" height="13" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <nav class="foot__cols" aria-label="Sidfot">
+        <div>
+          <h4 data-i18n="footServices">Tjänster</h4>
+          <ul>
+            <li><a href="#tjanster" data-i18n="v1t">Hemsidor</a></li>
+            <li><a href="#tjanster" data-i18n="v2t">E-handel</a></li>
+            <li><a href="#tjanster" data-i18n="v3t">SEO, innehåll &amp; kommunikation</a></li>
+            <li><a href="#tjanster" data-i18n="v4t">Annonsering &amp; analys</a></li>
+            <li><a href="#tjanster" data-i18n="v5t">Automation &amp; AI</a></li>
+            <li><a href="#tjanster" data-i18n="v6t">Webbhotell &amp; drift</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footNav">Genvägar</h4>
+          <ul>
+            <li><a href="#tjanster" data-i18n="navServices">tjänster</a></li>
+            <li><a href="#marknader" data-i18n="splitEyebrow">Tre språkområden</a></li>
+            <li><a href="#case" data-i18n="navWork">case</a></li>
+            <li><a href="#om" data-i18n="navAbout">om</a></li>
+            <li><a href="#kontakt" data-i18n="navContact">kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footContact">Kontakt</h4>
+          <ul>
+            <li><a href="mailto:Calle@blomstrande.net">Calle@blomstrande.net</a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+            <li><a href="https://blomstrande.net" target="_blank" rel="noopener">blomstrande.net ↗</a></li>
+            <li class="foot__place">Eskilstuna · Sverige</li>
+            <li class="foot__place" data-i18n="footLangs">Svenska · Finska · Engelska</li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="foot__word" aria-hidden="true"><span>BLOMSTRANDE</span></div>
+
+    <div class="foot__bar">
+      <span>© 2026 · Carl-Johan Blomstrand</span>
+      <span data-i18n="footTag">Digitalt innehåll som blomstrar</span>
+      <a href="#hero" class="foot__toTop" data-cursor=""><span data-i18n="footTop">Till toppen</span> <i>↑</i></a>
+    </div>
+
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

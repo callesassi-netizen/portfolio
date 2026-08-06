@@ -71,17 +71,6 @@
   <div class="loader__bar"><i id="loaderBar"></i></div>
 </div>
 
-<!-- ══ Muspekare (endast precisionspekare) ═══════════════════════════════ -->
-<div class="cursor" id="cursor" aria-hidden="true">
-  <i class="cursor__x"></i>
-  <i class="cursor__y"></i>
-  <div class="cursor__frame" id="cursorFrame">
-    <b></b><b></b><b></b><b></b>
-    <span class="cursor__label" id="cursorLabel"></span>
-  </div>
-  <div class="cursor__dot" id="cursorDot"></div>
-</div>
-
 <div class="grain" aria-hidden="true"></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 
@@ -148,6 +137,11 @@
     <img src="assets/hero.jpg"
          srcset="assets/hero-1200.jpg 1200w, assets/hero.jpg 1920w"
          sizes="100vw" alt="" width="1920" height="823" fetchpriority="high">
+    <!-- Källorna sätts av app.js först när skärmen är bred nog och besökaren
+         inte bett om mindre rörelse. Utan JS laddas inte en enda byte. -->
+    <video class="hero__video" id="heroVideo" width="1920" height="822"
+           poster="assets/hero.jpg" muted loop playsinline preload="none"
+           tabindex="-1"></video>
   </div>
   <div class="hero__scrim" aria-hidden="true"></div>
   <div class="hero__glow" aria-hidden="true"></div>
@@ -377,7 +371,7 @@
   <div class="work__marquee" data-marquee>
     <div class="work__rail" id="workRail">
         <article class="case" data-tilt>
-          <a class="case__link" href="https://axer.blomstrande.net/" target="_blank" rel="noopener" data-cursor="öppna">
+          <a class="case__link" href="https://axer.blomstrande.net/" target="_blank" rel="noopener">
             <div class="case__media"><img src="assets/axer-case.jpg" alt="Axer.fi — ledande inom skogsmaskiner" loading="lazy" width="1200" height="800"></div>
             <div class="case__body">
               <div class="case__top"><em class="case__no">01</em><span class="tag tag--live" data-i18n="badgeLive">live</span></div>
@@ -389,7 +383,7 @@
         </article>
 
         <article class="case" data-tilt>
-          <a class="case__link" href="https://mt-electric.blomstrande.net" target="_blank" rel="noopener" data-cursor="öppna">
+          <a class="case__link" href="https://mt-electric.blomstrande.net" target="_blank" rel="noopener">
             <div class="case__media"><img src="assets/mt-electric-case.jpg" alt="MT-Electric Oy — elfirma i Tampere och Hämeenlinna" loading="lazy" width="1200" height="800"></div>
             <div class="case__body">
               <div class="case__top"><em class="case__no">02</em><span class="tag tag--live" data-i18n="badgeLive">live</span></div>
@@ -401,7 +395,7 @@
         </article>
 
         <article class="case" data-tilt>
-          <a class="case__link" href="https://tatueringssida.netlify.app/" target="_blank" rel="noopener" data-cursor="öppna">
+          <a class="case__link" href="https://tatueringssida.netlify.app/" target="_blank" rel="noopener">
             <div class="case__media"><img src="assets/tatuering-case.jpg" alt="Tatuoijat.fi — katalog över Finlands tatuerare" loading="lazy" width="1200" height="800"></div>
             <div class="case__body">
               <div class="case__top"><em class="case__no">03</em><span class="tag tag--live" data-i18n="badgeLive">live</span></div>
@@ -413,7 +407,7 @@
         </article>
 
         <article class="case" data-tilt>
-          <a class="case__link" href="https://purrfect.se" target="_blank" rel="noopener" data-cursor="öppna">
+          <a class="case__link" href="https://purrfect.se" target="_blank" rel="noopener">
             <div class="case__media"><img src="assets/purrfect-case.jpg" alt="Purrfect — kattprodukter med donationsfunktion" loading="lazy" width="1200" height="800"></div>
             <div class="case__body">
               <div class="case__top"><em class="case__no">04</em><span class="tag tag--live" data-i18n="badgeLive">live</span></div>
@@ -425,7 +419,7 @@
         </article>
 
         <article class="case" data-tilt>
-          <a class="case__link" href="https://www.billackering.eu/" target="_blank" rel="noopener" data-cursor="öppna">
+          <a class="case__link" href="https://www.billackering.eu/" target="_blank" rel="noopener">
             <div class="case__media"><img src="assets/billackering-case.jpg" alt="Billackering.eu — e-handel inom billack och vårdprodukter" loading="lazy" width="1200" height="800"></div>
             <div class="case__body">
               <div class="case__top"><em class="case__no">05</em><span class="tag tag--live" data-i18n="badgeOngoing">pågående</span></div>
@@ -437,7 +431,7 @@
         </article>
 
         <article class="case" data-tilt>
-          <div class="case__link" data-cursor="">
+          <div class="case__link">
             <div class="case__media"><img src="assets/meta-portfolio.jpg" alt="Strategisk marknadsföring via Meta" loading="lazy" width="1200" height="800"></div>
             <div class="case__body">
               <div class="case__top"><em class="case__no">06</em><span class="tag tag--work" data-i18n="badgeOngoing">pågående</span></div>
@@ -449,7 +443,7 @@
         </article>
 
         <article class="case" data-tilt>
-          <div class="case__link" data-cursor="">
+          <div class="case__link">
             <div class="case__media"><img src="assets/ai-automation-case.jpg" alt="Automation och AI — n8n, Zapier och egna GPT-verktyg" loading="lazy" width="1200" height="800"></div>
             <div class="case__body">
               <div class="case__top"><em class="case__no">07</em><span class="tag">2025</span></div>
@@ -461,7 +455,7 @@
         </article>
 
         <article class="case" data-tilt>
-          <div class="case__link" data-cursor="">
+          <div class="case__link">
             <div class="case__media"><img src="assets/cpanel-case.jpg" alt="Webbhotell och cPanel — drift och konfiguration" loading="lazy" width="1200" height="800"></div>
             <div class="case__body">
               <div class="case__top"><em class="case__no">08</em><span class="tag" data-i18n="badgeOps">drift</span></div>
@@ -473,7 +467,7 @@
         </article>
 
         <article class="case case--end">
-          <a class="case__link" href="#kontakt" data-cursor="">
+          <a class="case__link" href="#kontakt">
             <div class="case__body case__body--end">
               <em class="case__no">→</em>
               <h3 data-i18n="endTitle">Nästa projekt är ditt.</h3>
@@ -527,7 +521,7 @@
       <p class="lead" data-reveal data-i18n="contactLead">Har du en idé, en hemsida som behöver lyftas eller ett digitalt flöde som borde bli smartare? Hör av dig, så tittar vi på det. Normalt svar inom 1–2 arbetsdagar.</p>
 
       <div class="contact__direct" data-reveal>
-        <a href="mailto:Calle@blomstrande.net" data-cursor="">Calle@blomstrande.net</a>
+        <a href="mailto:Calle@blomstrande.net">Calle@blomstrande.net</a>
         <div class="contact__links">
           <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
           <a href="https://blomstrande.net" target="_blank" rel="noopener">blomstrande.net ↗</a>
@@ -620,7 +614,7 @@
     <div class="foot__bar">
       <span>© 2026 · Carl-Johan Blomstrand</span>
       <span data-i18n="footTag">Digitalt innehåll som blomstrar</span>
-      <a href="#hero" class="foot__toTop" data-cursor=""><span data-i18n="footTop">Till toppen</span> <i>↑</i></a>
+      <a href="#hero" class="foot__toTop"><span data-i18n="footTop">Till toppen</span> <i>↑</i></a>
     </div>
 
   </div>

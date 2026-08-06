@@ -39,73 +39,55 @@
     })(t0);
   })();
 
-  /* ── Muspekare ────────────────────────────────────────────────────────
-     Två siktlinjer följer pekaren exakt, medan hörnvinklarna lerpar mot
-     ett mål: antingen en liten ruta kring pekaren, eller det element man
-     hovrar. Att ramen glider dit i stället för att hoppa är hela känslan —
-     men bara ramen får släpa, aldrig linjerna, annars känns pekaren trög.
+  /* ── Hero-video ───────────────────────────────────────────────────────
+     Fotot står still. Det enda som rör sig är skärmarna: monitorn scrollar
+     genom sajter som är byggda, laptopen genom koden bakom dem. Videons
+     första bildruta är identisk med stillbilden, så bytet syns inte.
 
-     Väldigt stora element hoppas över; en ram runt halva skärmen läser
-     inte som en markering utan som ett fel. */
-  (function cursor() {
-    var el = $('#cursor');
-    if (!el || !fine || reduce) { if (el) el.remove(); return; }
-    root.classList.add('has-cursor');
+     Den laddas bara när det är befogat — bred skärm, inte reducerad rörelse,
+     inte sparläge — och pausar så fort hero lämnat vyn. */
+  (function heroVideo() {
+    var v = $('#heroVideo');
+    if (!v) return;
 
-    var lineX = $('.cursor__x', el), lineY = $('.cursor__y', el);
-    var dot = $('#cursorDot'), frame = $('#cursorFrame'), label = $('#cursorLabel');
+    var conn = navigator.connection || {};
+    if (reduce || innerWidth < 900 || conn.saveData ||
+        /2g|slow-2g/.test(conn.effectiveType || '')) { v.remove(); return; }
 
-    var mx = innerWidth / 2, my = innerHeight / 2;
-    var IDLE = 26, PAD = 9;
-    var box = { x: mx - IDLE / 2, y: my - IDLE / 2, w: IDLE, h: IDLE };
-    var target = null;          // DOMRect när något är snäppt, annars null
-    var live = false;
+    [['assets/hero.webm', 'video/webm'], ['assets/hero.mp4', 'video/mp4']]
+      .forEach(function (s) {
+        if (!v.canPlayType(s[1])) return;
+        var el = document.createElement('source');
+        el.src = s[0]; el.type = s[1];
+        v.appendChild(el);
+      });
+    if (!v.firstChild) { v.remove(); return; }
 
-    addEventListener('mousemove', function (e) {
-      mx = e.clientX; my = e.clientY;
-      if (!live) { live = true; el.classList.add('is-live'); }
-      lineX.style.top = my + 'px';
-      lineY.style.left = mx + 'px';
-      dot.style.transform = 'translate(' + mx + 'px,' + my + 'px) translate(-50%,-50%)';
-    }, { passive: true });
+    var seen = true;
+    var play = function () {
+      if (!seen || !v.src && !v.currentSrc) return;
+      var p = v.play();
+      if (p && p.catch) p.catch(function () { /* autoplay nekad — bilden räcker */ });
+    };
 
-    document.addEventListener('mouseover', function (e) {
-      var hit = e.target.closest('a,button,input,textarea,[data-magnetic],[data-cursor],.svc');
-      var text = '';
-      if (hit) {
-        var holder = e.target.closest('[data-cursor]');
-        text = (holder && holder.getAttribute('data-cursor')) || '';
-        var r = hit.getBoundingClientRect();
-        // för stort för att läsa som en markering
-        if (r.width > innerWidth * 0.8 || r.height > innerHeight * 0.92) hit = null;
-      }
-      target = hit;
-      el.classList.toggle('is-snap', !!hit);
-      el.classList.toggle('is-label', !!text);
-      if (label) label.textContent = text;
+    v.addEventListener('canplay', function () { v.classList.add('is-on'); play(); });
+
+    /* Hämtas först när sidan i övrigt är klar. Annars konkurrerar drygt en
+       halv megabyte video med hero-bilden om samma uppkoppling, och det är
+       bilden besökaren ser först. */
+    var start = function () { v.preload = 'auto'; v.load(); };
+    if (document.readyState === 'complete') setTimeout(start, 300);
+    else addEventListener('load', function () { setTimeout(start, 300); });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { seen = e.isIntersecting; seen ? play() : v.pause(); });
+      }, { threshold: 0.05 }).observe(v);
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) v.pause(); else if (v.getBoundingClientRect().bottom > 0) play();
     });
-    document.addEventListener('mouseout', function (e) {
-      if (!e.relatedTarget) { target = null; el.classList.remove('is-snap', 'is-label', 'is-live'); live = false; }
-    });
-
-    (function ride() {
-      var want;
-      if (target && document.contains(target)) {
-        var r = target.getBoundingClientRect();
-        want = { x: r.left - PAD, y: r.top - PAD, w: r.width + PAD * 2, h: r.height + PAD * 2 };
-      } else {
-        want = { x: mx - IDLE / 2, y: my - IDLE / 2, w: IDLE, h: IDLE };
-      }
-      var k = target ? 0.22 : 0.30;
-      box.x = lerp(box.x, want.x, k);
-      box.y = lerp(box.y, want.y, k);
-      box.w = lerp(box.w, want.w, k);
-      box.h = lerp(box.h, want.h, k);
-      frame.style.transform = 'translate3d(' + box.x.toFixed(1) + 'px,' + box.y.toFixed(1) + 'px,0)';
-      frame.style.width = box.w.toFixed(1) + 'px';
-      frame.style.height = box.h.toFixed(1) + 'px';
-      requestAnimationFrame(ride);
-    })();
   })();
 
   /* ── Magnetiska knappar ───────────────────────────────────────────────

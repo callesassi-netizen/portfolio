@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Språk — svenska (original) och engelska.
+   Språk - svenska (original) och engelska.
    Svenska texten står i HTML:en; den här filen håller bara engelskan plus
    de svenska strängarna som behövs för att kunna växla tillbaka.
    Valet sparas i webbläsaren och sätts på <html lang> innan sidan målas
@@ -12,7 +12,7 @@
     chipPerf: 'Prestanda',
     procLead: 'Du ska aldrig behöva undra var projektet står eller vad nästa faktura landar på. Så här ser vägen ut, från första samtalet till att sajten är i drift.',
     p1m: 'Kostar ingenting', p2m: 'Fast pris i förväg', p3m: 'Du tycker till längs vägen', p4m: 'Löpande',
-    footBlurb: 'Hemsidor, e-handel, innehåll och automation för företag i Sverige och Finland. Från idé till drift — samma person hela vägen.',
+    footBlurb: 'Hemsidor, e-handel, innehåll och automation för företag i Sverige och Finland. Från idé till drift - samma person hela vägen.',
     footCta: 'Begär offert', footServices: 'Tjänster', footNav: 'Genvägar', footContact: 'Kontakt',
     footLangs: 'Svenska · Finska · Engelska',
     mpEyebrow: 'Arbetssätt',
@@ -22,26 +22,26 @@
     mpSign: 'Carl-Johan Blomstrand',
     splitEyebrow: 'Tre språkområden',
     splitTitle: 'Samma sajt, tre språkområden.',
-    splitLead: 'Jag arbetar på svenska, finska och engelska, mot både svensk och finsk marknad. Det betyder inte bara översatt text — det betyder rätt tonfall, rätt betalsätt och kampanjer som är byggda för respektive land.',
+    splitLead: 'Jag arbetar på svenska, finska och engelska, mot både svensk och finsk marknad. Det betyder inte bara översatt text - det betyder rätt tonfall, rätt betalsätt och kampanjer som är byggda för respektive land.',
     sp1t: 'Innehåll på tre språk', sp1b: 'Svenska, finska och engelska, skrivet för att fungera i sitt sammanhang.',
-    sp2t: 'Byggt för att skötas själv', sp2b: 'Du ska kunna byta en text eller lägga in en produkt utan att ringa mig.',
+    sp2t: 'Uppdateras löpande', sp2b: 'Nya texter, produkter och kampanjer läggs in efter hand, på alla tre språken.',
     sp3t: 'Teknik som håller', sp3b: 'Ren kod, snabba sidor och drift som inte kräver att du förstår DNS.',
-    sp4t: 'Eller så sköter jag det', sp4b: 'Löpande underhåll av sajt och system är lika självklart — vill du hellre slippa tar jag hand om det.',
+    sp4t: 'Jag sköter driften', sp4b: 'Uppdateringar, säkerhet och backuper är mitt bord, inte ditt.',
     navServices: 'tjänster', navWork: 'case',
     heroL1: 'Digitalt innehåll', heroL2: 'som blomstrar<em>.</em>',
     svcEyebrow: 'Tjänster',
     svcTitle: 'Det jag hjälper företag med.',
     svcLead: 'Sex områden som går in i varandra. De flesta kunder börjar med ett och lägger till fler när det första sitter.',
     v1t: 'Hemsidor',
-    v1b: 'Nya sajter, och ny design på gamla — mestadels i WordPress, men handbyggt i kod när det passar bättre. Struktur, texter, bilder och det tekniska bakom, så att sidan blir lika begriplig för besökaren som för Google.',
+    v1b: 'Nya sajter, och ny design på gamla - mestadels i WordPress, men handbyggt i kod när det passar bättre. Struktur, texter, bilder och det tekniska bakom, så att sidan blir lika begriplig för besökaren som för Google.',
     v2t: 'E-handel',
-    v2b: 'Webbshoppar som går att sköta själv. Produkter, kategorier, betalning och frakt — plus texterna som gör att kunden vågar trycka på köp.',
+    v2b: 'Webbshoppar som går att sköta själv. Produkter, kategorier, betalning och frakt - plus texterna som gör att kunden vågar trycka på köp.',
     v3t: 'SEO, innehåll & kommunikation',
-    v3b: 'Texter, produktbeskrivningar, nyhetsbrev och kundkommunikation på svenska, finska och engelska — skrivet både för läsaren och för sökmotorn. Samma budskap, rätt tonfall i varje land.',
+    v3b: 'Texter, produktbeskrivningar, nyhetsbrev och kundkommunikation på svenska, finska och engelska - skrivet både för läsaren och för sökmotorn. Samma budskap, rätt tonfall i varje land.',
     v4t: 'Annonsering & analys',
     v4b: 'Kampanjer via Meta för svensk och finsk marknad, med målgrupper och uppföljning. Du får veta vad pengarna gick till, inte bara att de gick åt.',
     v5t: 'Automation & AI',
-    v5b: 'Flöden i n8n och Zapier och egna AI-verktyg som tar hand om det repetitiva. Offertsvar, produktdata, rapporter — sånt som annars äter en förmiddag i veckan.',
+    v5b: 'Flöden i n8n och Zapier och egna AI-verktyg som tar hand om det repetitiva. Offertsvar, produktdata, rapporter - sånt som annars äter en förmiddag i veckan.',
     v6t: 'Webbhotell & drift',
     v6b: 'DNS, e-post, SSL, databaser och uppdateringar i cPanel. Sajten hålls uppdaterad och säker, och när något krånglar felsöker jag i stället för att hänvisa vidare.',
     svcFoot: 'Vet du inte riktigt vad du behöver? Det är den vanligaste utgångspunkten. Beskriv läget så säger jag vad jag skulle göra först.',
@@ -51,7 +51,7 @@
     procTitle: 'Fyra steg, inga överraskningar.',
     p1t: 'Vi pratar', p1b: 'Ett samtal om vad du gör, vem du säljer till och vad som skaver idag. Kostar ingenting och binder inte.',
     p2t: 'Förslag och pris', p2b: 'Du får ett upplägg med omfattning, tidsplan och fast pris innan något börjar byggas.',
-    p3t: 'Jag bygger', p3b: 'Du ser sajten växa fram och kan tycka till längs vägen — inte först på slutet.',
+    p3t: 'Jag bygger', p3b: 'Du ser sajten växa fram och kan tycka till längs vägen - inte först på slutet.',
     p4t: 'Drift efteråt', p4b: 'Uppdateringar, säkerhet och småfix. Du behöver inte lära dig cPanel för att äga en hemsida.',
     skip: 'Hoppa till innehållet',
     brandSub: 'Digitalt innehåll',
@@ -60,10 +60,10 @@
 
     heroEyebrow: 'Digitalt innehåll',
     heroRole: 'Digital innehållsproducent',
-    heroLead: 'Jag bygger hemsidor, driver e-handel och får innehåll, annonser och teknik att hänga ihop — för företag i Sverige och Finland.',
+    heroLead: 'Jag bygger hemsidor, driver e-handel och får innehåll, annonser och teknik att hänga ihop - för företag i Sverige och Finland.',
     heroCta1: 'Se tjänster', heroCta2: 'Se case', scrollCue: 'scrolla',
 
-    manifest: 'Webbutveckling, kommunikation, analys och AI-flöden. Från idé till resultat — på svenska, finska och engelska.',
+    manifest: 'Webbutveckling, kommunikation, analys och AI-flöden. Från idé till resultat - på svenska, finska och engelska.',
     manifestMeta: 'Jag trivs bäst där text, teknik och affär möts. Strukturerad, lösningsorienterad och lite för intresserad av nya verktyg.',
 
     workEyebrow: 'Case',
@@ -79,30 +79,30 @@
     chipWebAnalytics: 'Webbanalys', chipCampaignData: 'Kampanjdata', chipReporting: 'Rapportering',
 
     c1sub: 'skogsmaskiner',
-    c1: 'Komplett WordPress-hemsida för ledande företag inom skogsmaskiner — översatt till fem språk.',
+    c1: 'Komplett WordPress-hemsida för ledande företag inom skogsmaskiner - översatt till fem språk.',
     c2sub: 'elektriker',
-    c2: 'WordPress-webbplats för elfirman MT-Electric Oy i Tampere & Hämeenlinna — tydlig presentation av tjänster och kontakt.',
+    c2: 'WordPress-webbplats för elfirman MT-Electric Oy i Tampere & Hämeenlinna - tydlig presentation av tjänster och kontakt.',
     c3sub: 'tatueringsguide',
-    c3: 'Snabb, statisk sajt byggd i HTML & Astro — en katalog som samlar Finlands tatuerare och studior, där besökaren bläddrar portfolios och filtrerar på stil, stad och pris.',
+    c3: 'Snabb, statisk sajt byggd i HTML & Astro - en katalog som samlar Finlands tatuerare och studior, där besökaren bläddrar portfolios och filtrerar på stil, stad och pris.',
     c4sub: 'med Livbojen',
-    c4: 'Webbshop för kattleksaker och foder i samarbete med kattorganisationen Livbojen som räddar hemlösa katter — med inbyggd donationsfunktion.',
+    c4: 'Webbshop för kattleksaker och foder i samarbete med kattorganisationen Livbojen som räddar hemlösa katter - med inbyggd donationsfunktion.',
     c5sub: 'kommunikatör',
-    c5: 'Marknads- och kommunikationsansvar för e-handel inom billack och vårdprodukter — för både den svenska och finska marknaden.',
-    c6title: 'Strategisk marknadsföring <i>— via Meta</i>',
-    c6: 'Annonser och kampanjer via Meta för svenska och finska marknaden — strategi, målgrupper och analys.',
+    c5: 'Marknads- och kommunikationsansvar för e-handel inom billack och vårdprodukter - för både den svenska och finska marknaden.',
+    c6title: 'Strategisk marknadsföring <i>- via Meta</i>',
+    c6: 'Annonser och kampanjer via Meta för svenska och finska marknaden - strategi, målgrupper och analys.',
     c7title: 'Automation <i>& AI-flöden</i>',
     c7: 'Automationsflöden i n8n och Zapier, samt bygger AI-agenter och andra AI-baserade verktyg.',
     c8title: 'Webbhotell <i>& cPanel</i>',
-    c8: 'Har jobbat i cPanel via ett webbhotell i Finland — justerat inställningar som DNS, e-post, SSL, databaser och PHP samt uppdaterat och felsökt flera hemsidor.',
+    c8: 'Har jobbat i cPanel via ett webbhotell i Finland - justerat inställningar som DNS, e-post, SSL, databaser och PHP samt uppdaterat och felsökt flera hemsidor.',
 
     endTitle: 'Nästa projekt är ditt.',
     endBody: 'Har du en idé, en hemsida som behöver lyftas eller ett flöde som borde bli smartare? Hör av dig så tittar vi på det.',
     endCta: 'Skicka ett meddelande',
 
     aboutEyebrow: 'Om företaget', aboutTitle: 'Personen bakom Blomstrande.', aboutCap: 'Calle · Eskilstuna',
-    about1: 'Carl-Johan i grunden — Calle till vardags. Jag skapar, strukturerar och förbättrar digitalt innehåll för webb, kommunikation och e-handel.',
-    about2: 'Till vardags jobbar jag brett med det digitala — webb, e-handel, innehåll, kampanjer, kommunikation, analys och digital utveckling, på både svensk och finsk marknad. Jag trivs med att röra mig mellan olika delar och få helheten att hänga ihop.',
-    about3: 'Vid sidan av bygger jag hemsidor åt olika kunder, främst i WordPress. Jag hjälper till med struktur, text, innehåll, funktion och det tekniska som gör att sidan känns både tydlig och levande. Jag har även jobbat i cPanel via ett webbhotell i Finland — justerat inställningar som DNS, e-post och SSL och uppdaterat flera hemsidor.',
+    about1: 'Carl-Johan i grunden - Calle till vardags. Jag skapar, strukturerar och förbättrar digitalt innehåll för webb, kommunikation och e-handel.',
+    about2: 'Till vardags jobbar jag brett med det digitala - webb, e-handel, innehåll, kampanjer, kommunikation, analys och digital utveckling, på både svensk och finsk marknad. Jag trivs med att röra mig mellan olika delar och få helheten att hänga ihop.',
+    about3: 'Vid sidan av bygger jag hemsidor åt olika kunder, främst i WordPress. Jag hjälper till med struktur, text, innehåll, funktion och det tekniska som gör att sidan känns både tydlig och levande. Jag har även jobbat i cPanel via ett webbhotell i Finland - justerat inställningar som DNS, e-post och SSL och uppdaterat flera hemsidor.',
     about4: 'Jag driver också egna digitala projekt, bland annat Purrfect. Det är ett exempel på hur jag gillar att jobba: ta en idé, forma innehållet, bygga strukturen och få tekniken att hänga ihop.',
     pull: 'Jag gillar att göra saker begripliga, användbara och färdiga.',
 
@@ -119,7 +119,7 @@
     chipPerf: 'Performance',
     procLead: 'You should never have to wonder where the project stands or what the next invoice will say. This is the route, from the first conversation to the site being live.',
     p1m: 'Costs nothing', p2m: 'Fixed price up front', p3m: 'You weigh in as we go', p4m: 'Ongoing',
-    footBlurb: 'Websites, e-commerce, content and automation for companies in Sweden and Finland. From idea to operations — the same person throughout.',
+    footBlurb: 'Websites, e-commerce, content and automation for companies in Sweden and Finland. From idea to operations - the same person throughout.',
     footCta: 'Request a quote', footServices: 'Services', footNav: 'Shortcuts', footContact: 'Contact',
     footLangs: 'Swedish · Finnish · English',
     mpEyebrow: 'How I work',
@@ -129,26 +129,26 @@
     mpSign: 'Carl-Johan Blomstrand',
     splitEyebrow: 'Three languages',
     splitTitle: 'One site, three language areas.',
-    splitLead: 'I work in Swedish, Finnish and English, across both the Swedish and Finnish markets. That means more than translated text — it means the right tone, the right payment methods and campaigns built for each country.',
+    splitLead: 'I work in Swedish, Finnish and English, across both the Swedish and Finnish markets. That means more than translated text - it means the right tone, the right payment methods and campaigns built for each country.',
     sp1t: 'Content in three languages', sp1b: 'Swedish, Finnish and English, written to work in its own context.',
-    sp2t: 'Built to run yourself', sp2b: 'You should be able to change a text or add a product without calling me.',
+    sp2t: 'Kept up to date', sp2b: 'New copy, products and campaigns go in as you need them, in all three languages.',
     sp3t: 'Technology that holds', sp3b: 'Clean code, fast pages and hosting that does not require you to understand DNS.',
-    sp4t: 'Or I look after it', sp4b: 'Ongoing maintenance of site and systems is just as much an option — if you would rather not, I take care of it.',
+    sp4t: 'I look after the running of it', sp4b: 'Updates, security and backups are my job, not yours.',
     navServices: 'services', navWork: 'work',
     heroL1: 'Digital content', heroL2: 'that flourishes<em>.</em>',
     svcEyebrow: 'Services',
     svcTitle: 'What I help companies with.',
     svcLead: 'Six areas that feed into each other. Most clients start with one and add more once the first is running.',
     v1t: 'Websites',
-    v1b: 'New sites, and a new design for old ones — mostly WordPress, hand-coded when that fits better. Structure, copy, images and the technical side behind it, so the site makes as much sense to a visitor as it does to Google.',
+    v1b: 'New sites, and a new design for old ones - mostly WordPress, hand-coded when that fits better. Structure, copy, images and the technical side behind it, so the site makes as much sense to a visitor as it does to Google.',
     v2t: 'E-commerce',
-    v2b: 'Webshops you can actually run yourself. Products, categories, payment and shipping — plus the copy that makes a customer willing to press buy.',
+    v2b: 'Webshops you can actually run yourself. Products, categories, payment and shipping - plus the copy that makes a customer willing to press buy.',
     v3t: 'SEO, content & communication',
-    v3b: 'Copy, product descriptions, newsletters and customer communication in Swedish, Finnish and English — written for the reader and the search engine alike. Same message, right tone in each market.',
+    v3b: 'Copy, product descriptions, newsletters and customer communication in Swedish, Finnish and English - written for the reader and the search engine alike. Same message, right tone in each market.',
     v4t: 'Advertising & analytics',
     v4b: 'Meta campaigns for the Swedish and Finnish markets, with audiences and follow-up. You get to know where the money went, not just that it went.',
     v5t: 'Automation & AI',
-    v5b: 'Flows in n8n and Zapier and custom AI tools that take care of the repetitive parts. Quote replies, product data, reports — the things that otherwise eat a morning a week.',
+    v5b: 'Flows in n8n and Zapier and custom AI tools that take care of the repetitive parts. Quote replies, product data, reports - the things that otherwise eat a morning a week.',
     v6t: 'Hosting & operations',
     v6b: 'DNS, email, SSL, databases and updates in cPanel. The site stays current and secure, and when something breaks I debug it instead of passing you on.',
     svcFoot: 'Not sure what you need? That is the most common starting point. Describe the situation and I will tell you what I would do first.',
@@ -158,7 +158,7 @@
     procTitle: 'Four steps, no surprises.',
     p1t: 'We talk', p1b: 'A conversation about what you do, who you sell to and what is chafing today. Costs nothing and commits to nothing.',
     p2t: 'Proposal and price', p2b: 'You get a plan with scope, timeline and a fixed price before anything gets built.',
-    p3t: 'I build', p3b: 'You watch the site take shape and can weigh in along the way — not only at the end.',
+    p3t: 'I build', p3b: 'You watch the site take shape and can weigh in along the way - not only at the end.',
     p4t: 'Operations after', p4b: 'Updates, security and small fixes. You should not have to learn cPanel to own a website.',
     skip: 'Skip to content',
     brandSub: 'Digital content',
@@ -167,10 +167,10 @@
 
     heroEyebrow: 'Digital content',
     heroRole: 'Digital content producer',
-    heroLead: 'I build websites, run e-commerce and make content, ads and technology hold together — for companies in Sweden and Finland.',
+    heroLead: 'I build websites, run e-commerce and make content, ads and technology hold together - for companies in Sweden and Finland.',
     heroCta1: 'See services', heroCta2: 'See work', scrollCue: 'scroll',
 
-    manifest: 'Web development, communication, analytics and AI workflows. From idea to result — in Swedish, Finnish and English.',
+    manifest: 'Web development, communication, analytics and AI workflows. From idea to result - in Swedish, Finnish and English.',
     manifestMeta: 'I am at my best where copy, technology and business meet. Structured, solution-minded and slightly too interested in new tools.',
 
     workEyebrow: 'Work',
@@ -186,30 +186,30 @@
     chipWebAnalytics: 'Web analytics', chipCampaignData: 'Campaign data', chipReporting: 'Reporting',
 
     c1sub: 'forestry machines',
-    c1: 'Complete WordPress site for a leading forestry machinery company — translated into five languages.',
+    c1: 'Complete WordPress site for a leading forestry machinery company - translated into five languages.',
     c2sub: 'electricians',
-    c2: 'WordPress site for the electrical firm MT-Electric Oy in Tampere & Hämeenlinna — a clear presentation of services and contact details.',
+    c2: 'WordPress site for the electrical firm MT-Electric Oy in Tampere & Hämeenlinna - a clear presentation of services and contact details.',
     c3sub: 'tattoo guide',
-    c3: 'Fast static site built in HTML & Astro — a directory of Finland’s tattoo artists and studios where visitors browse portfolios and filter by style, city and price.',
+    c3: 'Fast static site built in HTML & Astro - a directory of Finland’s tattoo artists and studios where visitors browse portfolios and filter by style, city and price.',
     c4sub: 'with Livbojen',
-    c4: 'Webshop for cat toys and food together with the cat charity Livbojen, which rescues homeless cats — with a built-in donation feature.',
+    c4: 'Webshop for cat toys and food together with the cat charity Livbojen, which rescues homeless cats - with a built-in donation feature.',
     c5sub: 'communications lead',
-    c5: 'Marketing and communications lead for an e-commerce business in car paint and care products — for both the Swedish and Finnish markets.',
-    c6title: 'Strategic marketing <i>— via Meta</i>',
-    c6: 'Ads and campaigns on Meta for the Swedish and Finnish markets — strategy, audiences and analysis.',
+    c5: 'Marketing and communications lead for an e-commerce business in car paint and care products - for both the Swedish and Finnish markets.',
+    c6title: 'Strategic marketing <i>- via Meta</i>',
+    c6: 'Ads and campaigns on Meta for the Swedish and Finnish markets - strategy, audiences and analysis.',
     c7title: 'Automation <i>& AI workflows</i>',
     c7: 'Automation flows in n8n and Zapier, plus building AI agents and other AI-based tools.',
     c8title: 'Hosting <i>& cPanel</i>',
-    c8: 'Worked in cPanel through a Finnish hosting provider — adjusting DNS, email, SSL, databases and PHP, and updating and debugging several websites.',
+    c8: 'Worked in cPanel through a Finnish hosting provider - adjusting DNS, email, SSL, databases and PHP, and updating and debugging several websites.',
 
     endTitle: 'The next one could be yours.',
     endBody: 'Got an idea, a website that needs lifting or a workflow that ought to be smarter? Get in touch and we will take a look.',
     endCta: 'Send a message',
 
     aboutEyebrow: 'About', aboutTitle: 'The person behind Blomstrande.', aboutCap: 'Calle · Eskilstuna',
-    about1: 'Carl-Johan on paper — Calle in everyday life. I create, structure and improve digital content for web, communication and e-commerce.',
-    about2: 'Day to day I work broadly across digital — web, e-commerce, content, campaigns, communication, analytics and development, in both the Swedish and Finnish markets. I like moving between the parts and making the whole thing hold together.',
-    about3: 'Alongside that I build websites for clients, mostly in WordPress. I help with structure, copy, content, functionality and the technical side that makes a site feel both clear and alive. I have also worked in cPanel through a Finnish hosting provider — adjusting DNS, email and SSL, and updating several websites.',
+    about1: 'Carl-Johan on paper - Calle in everyday life. I create, structure and improve digital content for web, communication and e-commerce.',
+    about2: 'Day to day I work broadly across digital - web, e-commerce, content, campaigns, communication, analytics and development, in both the Swedish and Finnish markets. I like moving between the parts and making the whole thing hold together.',
+    about3: 'Alongside that I build websites for clients, mostly in WordPress. I help with structure, copy, content, functionality and the technical side that makes a site feel both clear and alive. I have also worked in cPanel through a Finnish hosting provider - adjusting DNS, email and SSL, and updating several websites.',
     about4: 'I also run my own digital projects, Purrfect among them. It is a good example of how I like to work: take an idea, shape the content, build the structure and make the technology hold together.',
     pull: 'Above all: I like making things understandable, useful and finished.',
 
@@ -247,8 +247,8 @@
        på <html>. Utan detta skrev språkbytet över dem med startsidans. */
     var egen = document.documentElement.getAttribute('data-title-' + lang);
     document.title = egen || (lang === 'en'
-      ? 'Carl-Johan Blomstrand — Digital content producer'
-      : 'Carl-Johan Blomstrand — Digital innehållsproducent');
+      ? 'Carl-Johan Blomstrand - Digital content producer'
+      : 'Carl-Johan Blomstrand - Digital innehållsproducent');
   }
 
   /* Undersidorna har egna ordlistor. De läggs på efter att den här filen
@@ -268,7 +268,7 @@
     if (!DICT[lang]) return;
     try { localStorage.setItem('bl-lang', lang); } catch (e) {}
     apply(lang);
-    // Scrub-texten är redan uppdelad i ord vid det här laget — bygg om den.
+    // Scrub-texten är redan uppdelad i ord vid det här laget - bygg om den.
     document.dispatchEvent(new CustomEvent('bl:lang', { detail: lang }));
   }
 

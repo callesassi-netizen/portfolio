@@ -67,7 +67,7 @@
     manifestMeta: 'Jag trivs bäst där text, teknik och affär möts. Strukturerad, lösningsorienterad och lite för intresserad av nya verktyg.',
 
     workEyebrow: 'Case',
-    workTitle: 'Byggt, lanserat och i drift.',
+    workTitle: 'Ett urval av case',
     workHint: 'Håll musen över för att pausa',
 
     badgeLive: 'live', badgeOngoing: 'pågående', badgeOps: 'drift',
@@ -110,7 +110,7 @@
     contactTitle: 'Berätta vad ditt företag behöver.',
     contactLead: 'Har du en idé, en hemsida som behöver lyftas eller ett digitalt flöde som borde bli smartare? Hör av dig, så tittar vi på det. Normalt svar inom 1–2 arbetsdagar.',
     fName: 'Namn', fMail: 'E-post', fSubject: 'Företag', fMsg: 'Meddelande', fSend: 'Skicka förfrågan',
-    fNote: 'Din e-postklient öppnas med meddelandet färdigskrivet.',
+    fNote: 'Meddelandet skickas direkt till Calle@blomstrande.net.',
 
     footTag: 'Digitalt innehåll som blomstrar', footTop: 'Till toppen'
   };
@@ -174,7 +174,7 @@
     manifestMeta: 'I am at my best where copy, technology and business meet. Structured, solution-minded and slightly too interested in new tools.',
 
     workEyebrow: 'Work',
-    workTitle: 'Built, launched and running.',
+    workTitle: 'A selection of work',
     workHint: 'Hover to pause',
 
     badgeLive: 'live', badgeOngoing: 'ongoing', badgeOps: 'ops',
@@ -217,7 +217,7 @@
     contactTitle: 'Tell me what your company needs.',
     contactLead: 'Got an idea, a website that needs lifting or a digital workflow that ought to be smarter? Get in touch and we will take a look. Normally a reply within 1–2 working days.',
     fName: 'Name', fMail: 'Email', fSubject: 'Company', fMsg: 'Message', fSend: 'Send enquiry',
-    fNote: 'Your email client opens with the message ready to go.',
+    fNote: 'Your message goes straight to Calle@blomstrande.net.',
 
     footTag: 'Digital content that flourishes', footTop: 'Back to top'
   };

@@ -848,6 +848,9 @@ html:not(.js) .about__frame{clip-path:none;}
 .field textarea{resize:vertical;min-height:112px;}
 .form__note{font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;color:var(--cream-4);text-align:center;}
 .form__note.is-ok{color:var(--gold);}
+.form__note.is-err{color:#ff8d6b;}
+/* Honungsfällan för spambottar. Aldrig synlig, aldrig i tab-ordningen. */
+.form__hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
 
 /* ==========================================================================
    SIDFOT

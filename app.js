@@ -700,25 +700,83 @@
   frame();
 
   /* ── Formulär ─────────────────────────────────────────────────────────
-     Öppnar e-postklienten med allt ifyllt. Fungerar utan backend och utan
-     plugin. Vill du ha riktig serverleverans: skapa en gratis nyckel på
-     web3forms.com och POSTa till https://api.web3forms.com/submit i
-     stället för raden nedan. */
+     Postas till Netlify Forms med fetch, så besökaren aldrig lämnar sidan.
+     Netlify tar emot inlägget och mejlar det vidare till Calle@blomstrande.net
+     (inställt under Forms → Notifications på sajten i Netlify).
+
+     Tre saker måste stämma för att Netlify ska känna igen formuläret:
+       1. <form name="kontakt" data-netlify="true"> i index.html,
+       2. det dolda fältet form-name med samma värde,
+       3. POST till "/" som application/x-www-form-urlencoded.
+     Fältet bot-field är en fälla: fylls det i är avsändaren en bot och
+     Netlify kastar inlägget. */
   (function form() {
     var f = $('#form');
     if (!f) return;
+
+    var note = $('#formNote');
+    var btn  = f.querySelector('button[type="submit"]');
+    var busy = false;
+
+    var TXT = {
+      sv: {
+        sending: 'Skickar …',
+        ok:      'Tack! Meddelandet är skickat. Svar kommer normalt inom 1–2 arbetsdagar.',
+        fail:    'Något gick fel. Mejla gärna direkt till Calle@blomstrande.net.',
+        req:     'Fyll i namn och en e-postadress jag kan svara på.'
+      },
+      en: {
+        sending: 'Sending …',
+        ok:      'Thank you! Your message has been sent. I normally reply within 1–2 working days.',
+        fail:    'Something went wrong. Please email Calle@blomstrande.net directly.',
+        req:     'Please add your name and an email address I can reply to.'
+      }
+    };
+    function t(k) { return (TXT[document.documentElement.lang] || TXT.sv)[k]; }
+
+    function say(msg, state) {
+      if (!note) return;
+      // Utan detta skriver språkbytet över statusraden med ordboksversionen.
+      note.removeAttribute('data-i18n');
+      note.textContent = msg;
+      note.classList.toggle('is-ok',  state === 'ok');
+      note.classList.toggle('is-err', state === 'err');
+    }
+
+    function slut() { busy = false; if (btn) btn.disabled = false; }
+
     f.addEventListener('submit', function (e) {
       e.preventDefault();
-      var d = new FormData(f);
-      var body =
-        (d.get('namn') ? 'Namn: ' + d.get('namn') + '\n' : '') +
-        (d.get('epost') ? 'E-post: ' + d.get('epost') + '\n' : '') +
-        '\n' + (d.get('meddelande') || '');
-      location.href = 'mailto:Calle@blomstrande.net'
-        + '?subject=' + encodeURIComponent(d.get('amne') || 'Hej Calle!')
-        + '&body=' + encodeURIComponent(body);
-      var note = $('#formNote');
-      if (note) note.classList.add('is-ok');
+      if (busy) return;
+
+      var namn  = (f.querySelector('#f-name') || {}).value || '';
+      var epost = (f.querySelector('#f-mail') || {}).value || '';
+      if (!namn.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(epost.trim())) {
+        say(t('req'), 'err');
+        return;
+      }
+
+      busy = true;
+      if (btn) btn.disabled = true;
+      say(t('sending'), '');
+
+      var d = new FormData(f), par = [];
+      d.forEach(function (v, k) {
+        par.push(encodeURIComponent(k) + '=' + encodeURIComponent(v));
+      });
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: par.join('&')
+      })
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        f.reset();
+        say(t('ok'), 'ok');
+        slut();
+      })
+      .catch(function () { say(t('fail'), 'err'); slut(); });
     });
   })();
 

@@ -376,7 +376,7 @@
 <section class="work" id="case">
   <div class="wrap work__head">
     <p class="eyebrow" data-reveal><span data-i18n="workEyebrow">Case</span></p>
-    <h2 class="h2" data-reveal data-i18n="workTitle">Byggt, lanserat och i drift.</h2>
+    <h2 class="h2" data-reveal data-i18n="workTitle">Ett urval av case</h2>
     <p class="work__hint" data-reveal><span data-i18n="workHint">Håll musen över för att pausa</span> <i>→</i></p>
   </div>
 
@@ -541,7 +541,12 @@
       </div>
     </div>
 
-    <form class="form" id="form" data-reveal novalidate>
+    <form class="form" id="form" name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-reveal novalidate>
+      <!-- Netlify Forms: form-name maste folja med nar vi postar via fetch. -->
+      <input type="hidden" name="form-name" value="kontakt">
+      <p class="form__hp" aria-hidden="true">
+        <label>Lamna det har faltet tomt <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+      </p>
       <div class="form__row">
         <div class="field">
           <label for="f-name" data-i18n="fName">Namn</label>
@@ -564,7 +569,7 @@
         <span data-i18n="fSend">Skicka förfrågan</span>
         <svg class="btn__arw" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <p class="form__note" id="formNote" data-i18n="fNote">Din e-postklient öppnas med meddelandet färdigskrivet.</p>
+      <p class="form__note" id="formNote" data-i18n="fNote" role="status" aria-live="polite">Meddelandet skickas direkt till Calle@blomstrande.net.</p>
     </form>
 
   </div>

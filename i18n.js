@@ -77,6 +77,7 @@
     chipAnalysis: 'Analys', chipAgents: 'AI-agenter', chipHosting: 'Webbhotell',
     chipCampaign: 'Kampanjer', chipCustomer: 'Kunddialog',
     chipWebAnalytics: 'Webbanalys', chipCampaignData: 'Kampanjdata', chipReporting: 'Rapportering',
+    chipOwnTheme: 'Eget tema', chipBooking: 'Bokning 24/7',
 
     c1sub: 'skogsmaskiner',
     c1: 'Komplett WordPress-hemsida för ledande företag inom skogsmaskiner - översatt till fem språk.',
@@ -94,6 +95,8 @@
     c7: 'Automationsflöden i n8n och Zapier, samt bygger AI-agenter och andra AI-baserade verktyg.',
     c8title: 'Webbhotell <i>& cPanel</i>',
     c8: 'Har jobbat i cPanel via ett webbhotell i Finland - justerat inställningar som DNS, e-post, SSL, databaser och PHP samt uppdaterat och felsökt flera hemsidor.',
+    c9sub: 'skönhetssalong',
+    c9: 'WordPress-sajt för Salos äldsta skönhetssalong - byggd på ett eget specialdesignat tema med behandlingskatalog, prislista, kampanjer och onlinebokning dygnet runt.',
 
     endTitle: 'Nästa projekt är ditt.',
     endBody: 'Har du en idé, en hemsida som behöver lyftas eller ett flöde som borde bli smartare? Hör av dig så tittar vi på det.',
@@ -184,6 +187,7 @@
     chipAnalysis: 'Analytics', chipAgents: 'AI agents', chipHosting: 'Hosting',
     chipCampaign: 'Campaigns', chipCustomer: 'Customer dialogue',
     chipWebAnalytics: 'Web analytics', chipCampaignData: 'Campaign data', chipReporting: 'Reporting',
+    chipOwnTheme: 'Custom theme', chipBooking: '24/7 booking',
 
     c1sub: 'forestry machines',
     c1: 'Complete WordPress site for a leading forestry machinery company - translated into five languages.',
@@ -201,6 +205,8 @@
     c7: 'Automation flows in n8n and Zapier, plus building AI agents and other AI-based tools.',
     c8title: 'Hosting <i>& cPanel</i>',
     c8: 'Worked in cPanel through a Finnish hosting provider - adjusting DNS, email, SSL, databases and PHP, and updating and debugging several websites.',
+    c9sub: 'beauty salon',
+    c9: 'WordPress site for the oldest beauty salon in Salo - built on a custom-designed theme with treatment catalogue, price list, campaigns and 24/7 online booking.',
 
     endTitle: 'The next one could be yours.',
     endBody: 'Got an idea, a website that needs lifting or a workflow that ought to be smarter? Get in touch and we will take a look.',

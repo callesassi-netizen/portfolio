@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="sv" data-title-sv="Tillgänglighetsgranskning för e-handel. - Blomstrande" data-title-en="Accessibility audit for Swedish e-commerce. - Blomstrande">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tillgänglighetsgranskning för e-handel. - Blomstrande</title>
+<meta name="description" content="Granskning av er e-handel mot tillgänglighetslagen, lag (2023:254). Samma tre delar som Post- och telestyrelsen granskar, med radnummer på varje fel. Från 2 900 kr.">
+<meta name="theme-color" content="#FDF9F3">
+<link rel="canonical" href="https://blomstrande.net/tjanster/tillganglighet/">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tillgänglighetsgranskning för e-handel. - Blomstrande">
+<meta property="og:description" content="Granskning av er e-handel mot tillgänglighetslagen, lag (2023:254). Samma tre delar som Post- och telestyrelsen granskar, med radnummer på varje fel. Från 2 900 kr.">
+<meta property="og:url" content="https://blomstrande.net/tjanster/tillganglighet/">
+<meta property="og:image" content="https://blomstrande.net/assets/sub-tillganglighet.jpg">
+<meta property="og:site_name" content="Blomstrande">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blomstrande.net/assets/sub-tillganglighet.jpg">
+
+<link rel="icon" href="../../assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../styles.css">
+
+<script>
+  document.documentElement.className += ' js';
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.className += ' reduce';
+  }
+  try {
+    var l = localStorage.getItem('bl-lang');
+    if (l === 'en' || l === 'sv') document.documentElement.lang = l;
+  } catch (e) {}
+</script>
+
+<style>
+/* Sidspecifikt for tillganglighetssidan. Bygger enbart pa sajtens egna
+   variabler: inga nya farger, inga nya typsnitt. Prefixet tg- finns for att
+   inget har ska kunna krocka med styles.css. */
+.tg-citat{margin:clamp(24px,3.4vw,40px) 0;padding-left:clamp(18px,2.6vw,30px);border-left:2px solid var(--gold);max-width:60ch}
+.tg-citat p{font-family:var(--f-display);font-weight:300;font-size:clamp(19px,2.1vw,25px);line-height:1.44;letter-spacing:-.012em;margin:0 0 14px}
+.tg-citat cite{display:block;font-style:normal;font-size:14px;color:var(--cream-3)}
+
+.tg-kod{background:var(--invert-bg);color:var(--invert-fg);border-radius:var(--r);
+  padding:clamp(20px,2.4vw,30px);font-family:var(--f-mono);font-size:13.5px;line-height:1.75;
+  overflow-x:auto;max-width:74ch;box-shadow:var(--shadow-soft)}
+.tg-kod__topp{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;padding-bottom:14px;
+  margin-bottom:16px;border-bottom:1px solid rgba(253,249,243,.14)}
+.tg-kod__krit{color:var(--gold-hi);font-weight:500}
+.tg-kod__niva{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:rgba(253,249,243,.52)}
+.tg-kod__txt{color:rgba(253,249,243,.84);font-family:var(--f-body);font-size:15px;line-height:1.62;margin:0 0 16px}
+.tg-kod__txt code{font-family:var(--f-mono);font-size:13px;color:var(--gold-hi)}
+.tg-kod__rad{color:rgba(253,249,243,.55)}
+.tg-kod__rad b{color:var(--gold-hi);font-weight:500}
+
+.tg-under{margin-top:clamp(20px,2.6vw,32px);max-width:62ch;color:var(--cream-2);font-size:16px;line-height:1.66}
+
+.tg-priser{display:grid;gap:clamp(18px,2.4vw,30px);grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+  margin-top:clamp(26px,3.2vw,44px)}
+.tg-pris{background:var(--ink-850);border:1px solid var(--line);border-radius:var(--r);
+  padding:clamp(24px,2.8vw,34px);display:flex;flex-direction:column}
+.tg-pris--stark{border-color:var(--gold);box-shadow:var(--shadow-soft)}
+.tg-pris__marke{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--gold-lo);margin-bottom:12px}
+.tg-pris h3{font-family:var(--f-display);font-weight:400;font-size:clamp(21px,2.3vw,27px);letter-spacing:-.015em;margin:0}
+.tg-pris__kr{font-family:var(--f-display);font-weight:300;font-size:clamp(32px,3.8vw,44px);letter-spacing:-.02em;line-height:1.1;margin:14px 0 4px}
+.tg-pris__moms{font-size:13.5px;color:var(--cream-3);margin:0 0 20px}
+.tg-pris ul{list-style:none;padding:0;margin:0 0 24px;flex:1}
+.tg-pris li{position:relative;padding-left:24px;margin-bottom:10px;font-size:15.5px;line-height:1.55;color:var(--cream-2)}
+.tg-pris li::before{content:"";position:absolute;left:3px;top:.62em;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--gold);opacity:.75}
+.tg-pris .btn{align-self:flex-start}
+
+.tg-arlig{background:var(--ink-850);border:1px solid var(--line);border-left:3px solid var(--gold);
+  border-radius:var(--r);padding:clamp(24px,3vw,40px);max-width:74ch}
+.tg-arlig h3,.tg-arlig .h3{margin:0 0 16px}
+.tg-arlig p{margin:0 0 14px;color:var(--cream-2);font-size:16px;line-height:1.68}
+.tg-arlig p:last-child{margin-bottom:0}
+
+.tg-slut{max-width:62ch}
+.tg-slut p{margin:0 0 20px;font-size:17px;line-height:1.66;color:var(--cream-2)}
+</style>
+</head>
+
+<body class="sub">
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<a class="skip" href="#innehall" data-i18n="skip">Hoppa till innehållet</a>
+
+<header class="nav" id="nav">
+  <div class="nav__in wrap">
+    <a class="brand" href="../../index.html" aria-label="Blomstrande - Digitalt innehåll">
+      <img class="brand__mark" src="../../assets/logo-mark.png" alt="" width="200" height="191" aria-hidden="true">
+      <span class="brand__txt"><b>Blomstrande</b><i data-i18n="brandSub">Digitalt innehåll</i></span>
+    </a>
+    <nav class="nav__links" aria-label="Huvudmeny">
+      <a href="../../index.html#tjanster"><span data-i18n="navServices">tjänster</span></a>
+      <a href="../../index.html#case"><span data-i18n="navWork">case</span></a>
+      <a href="../../index.html#om"><span data-i18n="navAbout">om</span></a>
+      <a href="../../index.html#kontakt"><span data-i18n="navContact">kontakt</span></a>
+    </nav>
+    <div class="nav__side">
+      <div class="lang" id="lang">
+        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" id="langBtn">
+          <span id="langCur">SV</span>
+          <svg viewBox="0 0 10 10" width="9" height="9" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="lang__menu" role="menu">
+          <button type="button" data-lang="sv" role="menuitem"><b>SV</b> Svenska</button>
+          <button type="button" data-lang="en" role="menuitem"><b>EN</b> English</button>
+        </div>
+      </div>
+      <a class="btn btn--gold" href="../../index.html#kontakt" data-magnetic>
+        <span data-i18n="navCta">Begär offert</span>
+        <svg class="btn__arw" viewBox="0 0 14 14" width="13" height="13" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="burger" id="burger" type="button" aria-label="Meny" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile" id="mobile">
+  <nav class="mobile__nav">
+    <a href="../../index.html#tjanster"><em>01</em> <span data-i18n="navServices">tjänster</span></a>
+    <a href="../../index.html#case"><em>02</em> <span data-i18n="navWork">case</span></a>
+    <a href="../../index.html#om"><em>03</em> <span data-i18n="navAbout">om</span></a>
+    <a href="../../index.html#kontakt"><em>04</em> <span data-i18n="navContact">kontakt</span></a>
+  </nav>
+  <div class="mobile__foot">
+    <a href="mailto:Calle@blomstrande.net">Calle@blomstrande.net</a>
+    <span>Eskilstuna · SE</span>
+  </div>
+</div>
+
+<main id="innehall">
+
+  <section class="subhero" id="toppen" data-spotlight>
+    <div class="subhero__media" aria-hidden="true">
+      <img src="../../assets/sub-tillganglighet.jpg" alt="" width="1920" height="1074" fetchpriority="high">
+    </div>
+    <div class="subhero__scrim" aria-hidden="true"></div>
+    <div class="wrap subhero__in">
+      <a class="tillbaka" href="../../index.html#tjanster">
+        <svg viewBox="0 0 14 14" width="12" height="12" fill="none" aria-hidden="true"><path d="M13 7H2M6.5 2.5 2 7l4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-i18n="allaTjanster">Alla tjänster</span>
+      </a>
+      <p class="eyebrow">Tjänst 07</p>
+      <h1 class="h1 subhero__h1">Er e-handel granskad mot tillgänglighetslagen.</h1>
+      <p class="subhero__lead">Samma tre delar som Post- och telestyrelsen granskar, med radnummer på
+        varje fel och en färdig sida ni kan publicera. Från 2 900 kronor.</p>
+      <div class="subhero__cta">
+        <a class="btn btn--gold btn--lg" href="#kontakt" data-magnetic><span>Få en kostnadsfri koll</span></a>
+        <a class="btn btn--ghost btn--lg" href="#far" data-magnetic><span>Vad du får</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion">
+    <div class="wrap intro">
+      <figure class="intro__bild" data-reveal>
+        <img src="../../assets/tillganglighet-rapport.jpg" alt="En utskriven granskningsrapport på ett skrivbord, med en rad markerad." loading="lazy" width="1200" height="671">
+      </figure>
+      <div class="intro__text">
+        <p class="eyebrow" data-reveal><span data-i18n="omTjansten">Om tjänsten</span></p>
+        <p data-reveal>Sedan den 28 juni 2025 gäller lag (2023:254) för e-handel som säljer till
+          konsumenter. Mikroföretag är undantagna, alltså färre än tio anställda <em>och</em> under två
+          miljoner euro i omsättning. Allt däröver omfattas.</p>
+        <p data-reveal>Post- och telestyrelsen har tillsyn över e-handel och har hittills öppnat 28
+          ärenden mot namngivna svenska e-handlare. Myndigheten skriver att granskningen fortsätter
+          under 2026, och att vilka företag som omfattas längre fram ännu inte är bestämt.</p>
+        <p data-reveal>Kravet är inte bara att sajten fungerar. Enligt 25 § ska varje tjänsteleverantör
+          ta fram information om hur tjänsten uppfyller tillgänglighetskraven, och se till att den följer
+          med tjänsten. Saknas den är det i sig ett åsidosättande som enligt 37 och 39 §§ kan mötas med
+          sanktionsavgift, lägst 10 000 och högst 10 000 000 kronor.</p>
+        <p data-reveal>Jag mäter er sajt utifrån, på samma tre delar som myndigheten granskar, och
+          levererar antingen den färdiga sidan eller hela listan med åtgärder. Ni behöver inte göra
+          någonting för att granskningen ska bli av.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tband">
+    <div class="tband__bg" aria-hidden="true">
+      <div class="tband__pin"><img src="../../assets/sub-tillganglighet-band.jpg" alt="" loading="lazy" width="2560" height="1097"></div>
+    </div>
+    <div class="tband__track" data-scrub-track>
+      <div class="tband__sticky">
+        <div class="wrap">
+          <p class="eyebrow eyebrow--light"><span>Tjänst 07</span></p>
+          <p class="scrub" data-scrub-text>Koden såg rätt ut. Länken var ändå namnlös.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion sektion--band" id="far">
+    <div class="wrap">
+      <div class="sub__head">
+        <p class="eyebrow" data-reveal><span data-i18n="duFar">Vad du får</span></p>
+        <h2 class="h2" data-reveal>Det här ingår.</h2>
+      </div>
+      <ol class="far" data-reveal-group>
+        <li data-reveal>
+          <h3>Startsidan</h3>
+          <p>Den mest putsade sidan på sajten, och den första myndigheten tittar på.</p>
+        </li>
+        <li data-reveal>
+          <h3>En produktsida</h3>
+          <p>Letas upp automatiskt i era länkar eller i er sajtkarta, även när listan byggs av JavaScript.</p>
+        </li>
+        <li data-reveal>
+          <h3>Sökfunktionen</h3>
+          <p>Pekas ut särskilt, med vilka av fynden som rör just den.</p>
+        </li>
+        <li data-reveal>
+          <h3>Radnummer på varje fel</h3>
+          <p>Sida, radnummer och den faktiska kodraden, så att ni kan kontrollera i stället för att tro.</p>
+        </li>
+        <li data-reveal>
+          <h3>Åtgärdsplan</h3>
+          <p>Sorterad efter vad som påverkar flest användare, inte efter vad som är lättast att fixa.</p>
+        </li>
+        <li data-reveal>
+          <h3>Redogörelsen enligt 25 §</h3>
+          <p>En färdig sida i er egen kod, klar att publicera samma dag ni får den.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sektion tg-fyndsektion">
+    <div class="wrap">
+      <div class="sub__head">
+        <p class="eyebrow" data-reveal><span>Ett verkligt fynd</span></p>
+        <h2 class="h2" data-reveal>Så här ser en avvikelse ut.</h2>
+      </div>
+
+      <blockquote class="tg-citat" data-reveal>
+        <p>Granskningen gäller endast företagens webbplatser, inte deras appar. Fokus ligger på tre
+          delar av webbplatsen: startsidan, en produktsida och sökfunktionen på just
+          e-handelstjänsten.</p>
+        <cite>Lisa Wellenius, jurist på enheten för tillgänglighetsregler, Post- och telestyrelsen,
+          15 oktober 2025</cite>
+      </blockquote>
+
+      <div class="tg-kod" data-reveal>
+        <div class="tg-kod__topp">
+          <span class="tg-kod__krit">2.4.4 Länkens syfte</span>
+          <span class="tg-kod__niva">Nivå A &middot; Allvarlig</span>
+        </div>
+        <p class="tg-kod__txt">Länken innehåller bara en bild och får därför sitt namn från bilden.
+          Alt-texten finns, men bilden är satt till <code>aria-hidden="true"</code>. Då räknas texten
+          bort och länken läses upp som bara "länk".</p>
+        <div class="tg-kod__rad">
+          Förekomst: / &nbsp;&middot;&nbsp; <b>rad 322</b><br>
+          &lt;a class="page-header__logo" href="/"&gt;
+        </div>
+      </div>
+
+      <p class="tg-under" data-reveal>Fyndet ovan kommer från en svensk e-handel med över en halv
+        miljard i omsättning. Felet hade överlevt eftersom koden ser korrekt ut vid en manuell
+        genomgång. Det är precis den sortens fel en maskin hittar och ett öga missar.</p>
+    </div>
+  </section>
+
+  <section class="sektion sektion--band" id="pris">
+    <div class="wrap">
+      <div class="sub__head">
+        <p class="eyebrow" data-reveal><span>Vad det kostar</span></p>
+        <h2 class="h2" data-reveal>Två sätt att komma igång.</h2>
+      </div>
+
+      <div class="tg-priser" data-reveal-group>
+        <article class="tg-pris tg-pris--stark" data-reveal>
+          <span class="tg-pris__marke">Börja här</span>
+          <h3>Redogörelsen</h3>
+          <p class="tg-pris__kr">2 900 kr</p>
+          <p class="tg-pris__moms">exklusive moms &middot; levereras på 2 arbetsdagar</p>
+          <ul>
+            <li>Färdig sida att publicera, i er egen kod</li>
+            <li>Uppfyller informationskravet i 25 §</li>
+            <li>Lista på de uppgifter ni själva måste fylla i</li>
+            <li>Granskning av startsidan ingår</li>
+          </ul>
+          <a class="btn btn--gold" href="#kontakt" data-magnetic><span>Beställ</span></a>
+        </article>
+
+        <article class="tg-pris" data-reveal>
+          <span class="tg-pris__marke">Hela bilden</span>
+          <h3>Granskningen</h3>
+          <p class="tg-pris__kr">9 900 kr</p>
+          <p class="tg-pris__moms">exklusive moms &middot; levereras på 5 arbetsdagar</p>
+          <ul>
+            <li>Alla tre delarna som PTS granskar</li>
+            <li>Upp till tre egna sidor därtill</li>
+            <li>Prioriterad åtgärdsplan</li>
+            <li>Redogörelsen ingår</li>
+          </ul>
+          <a class="btn btn--ghost" href="#kontakt" data-magnetic><span>Beställ</span></a>
+        </article>
+      </div>
+
+      <p class="tg-under" data-reveal>Faktura 10 dagar. Är ni inte nöjda skickar jag ingen faktura.
+        För webbyråer som vill granska en hel kundstock gäller andra priser, från 1 500 kr per sajt.</p>
+    </div>
+  </section>
+
+  <section class="sektion">
+    <div class="wrap">
+      <div class="tg-arlig" data-reveal>
+        <h2 class="h3">Vad en automatisk granskning inte klarar</h2>
+        <p>Ungefär en tredjedel av WCAG-kraven går att kontrollera maskinellt. Resten kräver att en
+          människa använder sajten. Post- och telestyrelsen skriver själva att automatiska testverktyg
+          rapporterar felaktiga resultat och har svårt att avgöra hur användbart något faktiskt är.</p>
+        <p>Därför bär varje fynd sida, radnummer och kodrad, så att ni kan kontrollera det i stället för
+          att tro på det. Och därför står det i rapporten vad mätningen inte täcker: om en alt-text
+          faktiskt beskriver bilden, om sidan går att använda med enbart tangentbord i praktiken, allt
+          som byggs av JavaScript, och allt bakom inloggning.</p>
+        <p><strong>Jag skriver aldrig att en sajt är helt förenlig med lagen.</strong> En automatisk
+          granskning kan visa att fel finns. Den kan aldrig visa att fel saknas, och en redogörelse är
+          ett underlag som kan hamna hos en tillsynsmyndighet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion sektion--band">
+    <div class="wrap sub__grid">
+      <div class="sub__aside">
+        <p class="eyebrow" data-reveal><span data-i18n="vanliga">Vanliga frågor</span></p>
+      </div>
+      <div class="sub__prose">
+        <details class="fq" data-reveal>
+          <summary><span>Omfattas vi över huvud taget?</span></summary>
+          <p>Om ni säljer till konsumenter online, ja, såvida ni inte är ett mikroföretag. Undantaget
+            kräver både färre än tio anställda och under två miljoner euro i omsättning, alltså ungefär
+            23 miljoner kronor. Uppfyller ni bara ett av villkoren omfattas ni. Undantaget gäller
+            dessutom tjänster, inte produkter.</p>
+        </details>
+        <details class="fq" data-reveal>
+          <summary><span>Vi kör redan Lighthouse och axe. Vad är skillnaden?</span></summary>
+          <p>De verktygen är bra på det de gör. Två skillnader spelar roll. De ger en teknisk lista utan
+            koppling till vilket lagkrav som berörs, och den kopplingen är hela poängen om PTS begär in
+            underlag enligt 26 §. Och ingen av dem tar fram informationen enligt 25 §, som är ett eget
+            krav. Det jag levererar är inte en bättre skanning, det är ett dokument som går att skicka
+            vidare.</p>
+        </details>
+        <details class="fq" data-reveal>
+          <summary><span>Hur vet vi att era fynd stämmer?</span></summary>
+          <p>Ni slår upp dem. Varje avvikelse anges med sida, radnummer och den faktiska kodraden, så att
+            det tar trettio sekunder att kontrollera ett fynd. Levereras er sajt minifierad hänvisar
+            rapporten till kodraden i stället, eftersom ett radnummer på en sida som ligger på två rader
+            är sant men obrukbart. Hittar ni ett fel i ett fynd rättar jag verktyget och gör om
+            granskningen utan kostnad.</p>
+        </details>
+        <details class="fq" data-reveal>
+          <summary><span>Blir vi klara med lagen om vi rättar allt i rapporten?</span></summary>
+          <p>Nej, och jag tänker inte påstå det. Rapporten mäter WCAG 2.1 nivå A och AA, som är en
+            delmängd av EN 301 549. Lagens krav är funktionella och går längre. För e-handel finns
+            dessutom två egna krav: att återge tillgänglighetsinformation om det ni säljer, och att
+            identifiering, signering, säkerhet och betalning går att använda tillgängligt, även när de
+            ligger hos någon annan. Inget av det går att avgöra maskinellt, så det ställs som frågor i
+            rapporten i stället.</p>
+        </details>
+        <details class="fq" data-reveal>
+          <summary><span>Hur lång tid tar det, och vad behöver vi göra?</span></summary>
+          <p>Redogörelsen tar två arbetsdagar, granskningen fem. Ni behöver inte göra någonting:
+            granskningen sker utifrån, på sidorna som de levereras, och belastar inte er sajt. Till
+            redogörelsen behöver jag företagsnamn, organisationsnummer och en adress dit brister kan
+            anmälas.</p>
+        </details>
+        <details class="fq" data-reveal>
+          <summary><span>Vad händer om vi inte gör någonting?</span></summary>
+          <p>Troligen ingenting på kort sikt. PTS började med de största aktörerna och har hittills
+            öppnat 28 ärenden. Vilka som står på tur är enligt myndigheten ännu inte bestämt. Det jag kan
+            säga är vad som står i lagen: tillsynsmyndigheten kan besluta om föreläggande, förena det med
+            vite, eller besluta om sanktionsavgift, som enligt 39 § bestäms till lägst 10 000 och högst
+            10 000 000 kronor. Jag säljer inte skydd mot en myndighet. Jag mäter er sajt och berättar vad
+            jag ser.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion" id="kontakt">
+    <div class="wrap">
+      <div class="sub__head">
+        <p class="eyebrow" data-reveal><span>Kostnadsfri koll</span></p>
+        <h2 class="h2" data-reveal>Skriv er adress, så mäter jag.</h2>
+      </div>
+      <div class="tg-slut" data-reveal>
+        <p>Ni får de tre allvarligaste fynden med radnummer, utan kostnad och utan motprestation. Ni får
+          resultatet oavsett om ni beställer något.</p>
+        <p><a class="btn btn--gold btn--lg" href="mailto:Calle@blomstrande.net?subject=Tillg%C3%A4nglighetskoll&amp;body=V%C3%A5r%20adress%3A%20" data-magnetic><span>Mejla adressen</span></a></p>
+        <p class="tg-under">Eller skriv direkt till
+          <a href="mailto:Calle@blomstrande.net">Calle@blomstrande.net</a>. Svar samma arbetsdag.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- Samma sidfot som startsidan. Klasserna måste matcha styles.css exakt -
+     en egen, förenklad sidfot här hamnade helt ostylad, eftersom
+     .foot__in / .foot__mail / .foot__ort aldrig funnits i stilmallen. -->
+<footer class="foot">
+  <div class="wrap">
+
+    <div class="foot__top">
+      <div class="foot__brand">
+        <img class="foot__logo" src="../../assets/logo-light.png" alt="Blomstrande Digitalt Innehåll" width="621" height="169">
+        <p data-i18n="footBlurb">Hemsidor, e-handel, innehåll och automation för företag i Sverige och Finland. Från idé till drift - samma person hela vägen.</p>
+        <a class="btn btn--gold" href="../../index.html#kontakt" data-magnetic>
+          <span data-i18n="footCta">Begär offert</span>
+          <svg class="btn__arw" viewBox="0 0 14 14" width="13" height="13" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <nav class="foot__cols" aria-label="Sidfot">
+        <div>
+          <h3 data-i18n="footServices">Tjänster</h3>
+          <ul>
+            <li><a href="../../tjanster/hemsidor/index.html" data-i18n="v1t">Hemsidor</a></li>
+            <li><a href="../../tjanster/e-handel/index.html" data-i18n="v2t">E-handel</a></li>
+            <li><a href="../../tjanster/seo-innehall/index.html" data-i18n="v3t">SEO, innehåll &amp; kommunikation</a></li>
+            <li><a href="../../tjanster/annonsering-analys/index.html" data-i18n="v4t">Annonsering &amp; analys</a></li>
+            <li><a href="../../tjanster/automation-ai/index.html" data-i18n="v5t">Automation &amp; AI</a></li>
+            <li><a href="../../tjanster/webbhotell-drift/index.html" data-i18n="v6t">Webbhotell &amp; drift</a></li>
+          <li><a href="../../tjanster/tillganglighet/index.html" data-i18n="v7t">Tillgänglighet &amp; lagkrav</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="footNav">Genvägar</h3>
+          <ul>
+            <li><a href="../../index.html#tjanster" data-i18n="navServices">tjänster</a></li>
+            <li><a href="../../index.html#marknader" data-i18n="splitEyebrow">Tre språkområden</a></li>
+            <li><a href="../../index.html#case" data-i18n="navWork">case</a></li>
+            <li><a href="../../index.html#om" data-i18n="navAbout">om</a></li>
+            <li><a href="../../index.html#kontakt" data-i18n="navContact">kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="footContact">Kontakt</h3>
+          <ul>
+            <li><a href="mailto:Calle@blomstrande.net">Calle@blomstrande.net</a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+            <li><a href="https://blomstrande.net" target="_blank" rel="noopener">blomstrande.net ↗</a></li>
+            <li class="foot__place">Eskilstuna · Sverige</li>
+            <li class="foot__place" data-i18n="footLangs">Svenska · Finska · Engelska</li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="foot__word" aria-hidden="true"><span>BLOMSTRANDE</span></div>
+
+    <div class="foot__bar">
+      <span>© 2026 · Carl-Johan Blomstrand</span>
+      <span data-i18n="footTag">Digitalt innehåll som blomstrar</span>
+      <a href="#toppen" class="foot__toTop"><span data-i18n="footTop">Till toppen</span> <i>↑</i></a>
+    </div>
+
+  </div>
+</footer>
+
+<script src="../../i18n.js"></script>
+<script src="../../assets/i18n-tjanster.js"></script>
+<script src="../../app.js"></script>
+</body>
+</html>

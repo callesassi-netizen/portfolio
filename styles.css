@@ -869,7 +869,7 @@ html:not(.js) .about__frame{clip-path:none;}
 .foot__brand p{max-width:38ch;font-size:15px;line-height:1.7;color:color-mix(in srgb,var(--invert-fg) 60%,transparent);}
 
 .foot__cols{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,3vw,48px);}
-.foot h4{
+.foot h3{
   font-family:var(--f-mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--gold);margin-bottom:16px;font-weight:500;
 }

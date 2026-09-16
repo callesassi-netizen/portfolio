@@ -104,6 +104,8 @@
     c11: 'Elprissajt för den finska marknaden, byggd i WordPress med eget tema och eget plugin. Hämtar spotpriser från ENTSO-E automatiskt och visar dagens pris, timmar, historik och en kalkylator för när det lönar sig att starta maskinerna.',
     c12sub: 'egen AI-agent',
     c12: 'Mitt eget AI-system som bryter ner uppdrag i avgränsade uppgifter, kör dem med specialiserade AI-arbetare och låter en fristående granskning kontrollera resultatet innan något levereras.',
+    c13sub: 'mini-CRM',
+    c13: 'Eget CRM för konsultverksamhet med kunder, projekt, tidrapportering, fakturaunderlag och bokföring enligt BAS-kontoplanen. Byggt i React och TypeScript med Supabase som databas, och går att köra i demoläge utan konto.',
 
     endTitle: 'Nästa projekt är ditt.',
     endBody: 'Har du en idé, en hemsida som behöver lyftas eller ett flöde som borde bli smartare? Hör av dig så tittar vi på det.',
@@ -221,6 +223,8 @@
     c11: 'Electricity price site for the Finnish market, built in WordPress with a custom theme and plugin. It fetches spot prices from ENTSO-E automatically and shows today\'s price, hourly prices, history and a calculator for when it pays to run your appliances.',
     c12sub: 'own AI agent',
     c12: 'My own AI system that breaks work into well-defined tasks, runs them with specialised AI workers and has an independent review check the result before anything is delivered.',
+    c13sub: 'mini CRM',
+    c13: 'My own CRM for consultancies with clients, projects, time tracking, invoice drafts and double-entry bookkeeping. Built in React and TypeScript with Supabase as the database, and it runs in demo mode without an account.',
 
     endTitle: 'The next one could be yours.',
     endBody: 'Got an idea, a website that needs lifting or a workflow that ought to be smarter? Get in touch and we will take a look.',

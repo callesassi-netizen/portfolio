@@ -81,10 +81,6 @@
     chipWebAnalytics: 'Webbanalys', chipCampaignData: 'Kampanjdata', chipReporting: 'Rapportering',
     chipOwnTheme: 'Eget tema', chipBooking: 'Bokning 24/7',
 
-    c1sub: 'skogsmaskiner',
-    c1: 'Komplett WordPress-hemsida för ledande företag inom skogsmaskiner - översatt till fem språk.',
-    c2sub: 'elektriker',
-    c2: 'WordPress-webbplats för elfirman MT-Electric Oy i Tampere & Hämeenlinna - tydlig presentation av tjänster och kontakt.',
     c3sub: 'tatueringsguide',
     c3: 'Snabb, statisk sajt byggd i HTML & Astro - en katalog som samlar Finlands tatuerare och studior, där besökaren bläddrar portfolios och filtrerar på stil, stad och pris.',
     c4sub: 'med Livbojen',
@@ -193,10 +189,6 @@
     chipWebAnalytics: 'Web analytics', chipCampaignData: 'Campaign data', chipReporting: 'Reporting',
     chipOwnTheme: 'Custom theme', chipBooking: '24/7 booking',
 
-    c1sub: 'forestry machines',
-    c1: 'Complete WordPress site for a leading forestry machinery company - translated into five languages.',
-    c2sub: 'electricians',
-    c2: 'WordPress site for the electrical firm MT-Electric Oy in Tampere & Hämeenlinna - a clear presentation of services and contact details.',
     c3sub: 'tattoo guide',
     c3: 'Fast static site built in HTML & Astro - a directory of Finland’s tattoo artists and studios where visitors browse portfolios and filter by style, city and price.',
     c4sub: 'with Livbojen',
